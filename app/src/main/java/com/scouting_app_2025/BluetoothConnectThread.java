@@ -28,12 +28,12 @@ public class BluetoothConnectThread {
 
     private void init() {
         BluetoothSocket tmp = null;
-        try {
-
-        }
-        catch (IOException e) {
-            Log.e(TAG, e.toString());
-        }
+//        try {
+//
+//        }
+//        catch (IOException e) {
+//            Log.e(TAG, e.toString());
+//        }
     }
 
     @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
@@ -41,7 +41,8 @@ public class BluetoothConnectThread {
         Optional<BluetoothDevice> connectCandidate;
         Set<BluetoothDevice> pairedDevices = adapter.getBondedDevices();
         for(BluetoothDevice device : pairedDevices) {
-            Log.i(TAG, "Local Device: ")
+            Log.i(TAG, "Local Device: ");
         }
+        return true;
     }
 }
