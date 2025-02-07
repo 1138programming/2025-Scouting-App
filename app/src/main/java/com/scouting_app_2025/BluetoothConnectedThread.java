@@ -12,6 +12,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.security.MessageDigest;
 
 public class BluetoothConnectedThread extends Thread {
     private final BluetoothSocket socket;
@@ -20,6 +21,7 @@ public class BluetoothConnectedThread extends Thread {
     private byte[] buffer;
     private final String ack = "ack";
     private final byte[] byteAck = ack.getBytes(StandardCharsets.UTF_8);
+    private MessageDigest messageDigest;
     /**
      * @Info:
      */
