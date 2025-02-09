@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.scouting_app_2025.BluetoothReceiver"
+        <receiver android:name="com.scouting_app_2025.Bluetooth.BluetoothReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

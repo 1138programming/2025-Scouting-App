@@ -1,4 +1,4 @@
-package com.scouting_app_2025;
+package com.scouting_app_2025.Bluetooth;
 
 /**
  * @Info: thrown when an error occurs in the middle of communication

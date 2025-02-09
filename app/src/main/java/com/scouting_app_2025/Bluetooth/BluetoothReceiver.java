@@ -1,4 +1,4 @@
-package com.scouting_app_2025;
+package com.scouting_app_2025.Bluetooth;
 
 import static com.scouting_app_2025.MainActivity.TAG;
 import static com.scouting_app_2025.MainActivity.MY_UUID;
@@ -13,12 +13,21 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.scouting_app_2025.MainActivity;
+import com.scouting_app_2025.PermissionManager;
+
 import java.io.IOException;
 import java.util.UUID;
 
 public class BluetoothReceiver extends BroadcastReceiver {
     BluetoothSocket socket;
     BluetoothConnectedThread connectedThread;
+    PermissionManager permissionManager;
+
+//    public BluetoothReceiver(PermissionManager manager) {
+//        super();
+//        this.permissionManager = manager;
+//    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -35,7 +44,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
         if (device != null) {
             deviceAddress = device.getAddress();
             //device isn't guaranteed to have a name, so we need to check
-            if (((MainActivity)context).checkPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
+            if (((MainActivity)context).permissionManager.checkPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
                 if(device.getName() != null) {
                     deviceName = device.getName();
                     deviceTitle = deviceAddress + " - (" + deviceName + ")";
@@ -58,7 +67,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
             Log.i(TAG, "Checking UUID(s) from device: " + deviceTitle);
 
             //stores all received UUIDs
-            Parcelable[] UUIDs = intent.getParcelableArrayExtra(BluetoothDevice.EXTRA_UUID, BluetoothDevice.class);
+            Parcelable[] UUIDs = intent.getParcelableArrayExtra(BluetoothDevice.EXTRA_UUID);
             if(UUIDs != null) {
                 //cycles through all UUIDs provided
                 for(Parcelable UUIDParcelable : UUIDs) {

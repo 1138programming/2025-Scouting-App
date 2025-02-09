@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.scouting_app_2025"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.scouting_app_2025"
-        minSdk = 34
-        targetSdk = 35
+        minSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

@@ -1,4 +1,4 @@
-package com.scouting_app_2025;
+package com.scouting_app_2025.Bluetooth;
 
 import static com.scouting_app_2025.MainActivity.TAG;
 
@@ -19,7 +19,7 @@ public class BluetoothConnectedThread extends Thread {
     private final InputStream inputStream;
     private final OutputStream outputStream;
     private byte[] buffer;
-    private final String ack = "ack";
+    private final String ack = "ACK";
     private final byte[] byteAck = ack.getBytes(StandardCharsets.UTF_8);
     private MessageDigest messageDigest;
     /**
@@ -52,6 +52,8 @@ public class BluetoothConnectedThread extends Thread {
         //sets actual variables to temp versions
         inputStream = tmpIn;
         outputStream = tmpOut;
+//        updateLists();
+//        Log.i(TAG, ByteBuffer.wrap(buffer).toString());
     }
 
     /**
@@ -120,7 +122,7 @@ public class BluetoothConnectedThread extends Thread {
         try {
             write(new byte[]{code});
             readAck();
-            write(ByteBuffer.allocate(4).putInt(bytes.length).array());
+            write(ByteBuffer.allocate(3).putInt(bytes.length).array());
             readAck();
             write(bytes);
         }
@@ -135,7 +137,7 @@ public class BluetoothConnectedThread extends Thread {
         int byteLength;
         try {
             write(new byte[]{3});
-            read(4);
+            read(3);
             byteLength = ByteBuffer.wrap(buffer).getInt();
             sendAck();
             read(byteLength);
@@ -153,16 +155,21 @@ public class BluetoothConnectedThread extends Thread {
         int byteLength;
         try {
             write(new byte[]{4});
-            read(4);
+            read(3);
             byteLength = ByteBuffer.wrap(buffer).getInt();
             sendAck();
             read(byteLength);
-
+            sendAck();
         }
         catch(CommErrorException e) {
             Log.e(TAG, "Communication exchange failed");
         }
     }
+
+    /**
+     * @Info: Used for testing TBA. Should not be used in practice.
+     */
+
 
     //used to flush stream and close socket
     public void cancel() {

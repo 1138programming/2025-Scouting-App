@@ -1,7 +1,9 @@
-package com.scouting_app_2025;
+package com.scouting_app_2025.UIElements;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Stack;
 
 public class UndoStack {
@@ -9,8 +11,8 @@ public class UndoStack {
     private final Stack<String> timestamps = new Stack<String>();
     private final Stack<Integer> redoStack = new Stack<Integer>();
     private final Stack<String> redoTimestamps = new Stack<String>();
-    private HashMap<Integer, Object> allElements = new HashMap<Integer, Object>();
-    private HashMap<Object, Integer> reverseElements = new HashMap<Object, Integer>();
+    private HashMap<Integer, Element> allElements = new HashMap<Integer, Element>();
+    private HashMap<Element, Integer> reverseElements = new HashMap<Element, Integer>();
 
     public UndoStack() {
 
@@ -20,11 +22,16 @@ public class UndoStack {
         allElements.put(allElements.size(), button);
         reverseElements.put(button, reverseElements.size());
     }
+
+    /**
+     * @Info: Java is stupid and does not know when {@code allElements.get()}
+     * is null, so it has to be checked.
+     */
     public void undo() {
         if(inputStack.isEmpty()) return;
-        inputStack.push(redoStack.pop());
-        timestamps.push(redoTimestamps.pop());
-
+        redoStack.push(inputStack.pop());
+        redoTimestamps.push(timestamps.pop());
+        Objects.requireNonNull(allElements.get(redoStack.peek())).undo();
     }
     public void redo() {
         if(redoStack.isEmpty()) return;
