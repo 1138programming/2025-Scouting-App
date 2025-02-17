@@ -9,8 +9,8 @@ public class UndoStack {
     private final Stack<String> timestamps = new Stack<String>();
     private final Stack<Integer> redoStack = new Stack<Integer>();
     private final Stack<String> redoTimestamps = new Stack<String>();
-    private final HashMap<Integer, Element> allElements = new HashMap<Integer, Element>();
-    private final HashMap<Element, Integer> reverseElements = new HashMap<Element, Integer>();
+    private final HashMap<Integer, UIElement> allElements = new HashMap<Integer, UIElement>();
+    private final HashMap<UIElement, Integer> reverseElements = new HashMap<UIElement, Integer>();
 
     public UndoStack() {
 
@@ -28,8 +28,9 @@ public class UndoStack {
     public void undo() {
         if(inputStack.isEmpty()) return;
         redoStack.push(inputStack.pop());
-        redoTimestamps.push(timestamps.pop());
-        Objects.requireNonNull(allElements.get(redoStack.peek())).undo();
+        if(Objects.requireNonNull(allElements.get(redoStack.peek())).undo()) {
+            redoTimestamps.push(timestamps.pop());
+        }
     }
     public void redo() {
         if(redoStack.isEmpty()) return;

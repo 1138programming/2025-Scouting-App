@@ -1,19 +1,21 @@
 package com.scouting_app_2025.UIElements;
 
-public class Element {
+public class UIElement {
     private final String elementName;
 
-    public Element(String elementName) {
+    public UIElement(String elementName) {
         this.elementName = elementName;
     }
 
     public String getName() {
         return elementName;
     }
-    public void undo() {
 
+    public boolean undo() {
+        return false;
     }
-    public void redo() {
 
+    public boolean redo() {
+        return false;
     }
 }
