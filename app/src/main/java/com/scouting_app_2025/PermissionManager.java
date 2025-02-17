@@ -22,6 +22,9 @@ public class PermissionManager {
 
     public PermissionManager(Context context) {
         this.context = context;
+        /* registers a permission request that automatically goes through all permissions
+         * and then calls createReceiverScan() if all permissions are granted.
+         */
         bluetoothPermissionRequest = ((MainActivity)context).registerForActivityResult(
                 new ActivityResultContracts.RequestMultiplePermissions(), isGranted -> {
                     if(!isGranted.containsValue(false)) {
@@ -30,6 +33,9 @@ public class PermissionManager {
                 });
     }
 
+    /**
+     * @Info:
+     */
     public void addPermission(String permission) {
         permissionTracker.put(permission, false);
     }
@@ -48,16 +54,16 @@ public class PermissionManager {
     public boolean checkPermission(String permission) {
         return ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
     }
-    public String getPermissionStatus() {
-        StringBuilder message = new StringBuilder();
-        for(String permission : permissionTracker.keySet()) {
-            message.append(permission)
-                    .append(": ")
-                    .append(permissionTracker.get(permission))
-                    .append("\n");
-        }
-        return message.subSequence(0,message.length()-1).toString();
-    }
+//    public String getPermissionStatus() {
+//        StringBuilder message = new StringBuilder();
+//        for(String permission : permissionTracker.keySet()) {
+//            message.append(permission)
+//                    .append(": ")
+//                    .append(permissionTracker.get(permission))
+//                    .append("\n");
+//        }
+//        return message.subSequence(0,message.length()-1).toString();
+//    }
     private String[] getNeededPermissions() {
         ArrayList<String> neededPermissions = new ArrayList<>();
         for(String permission : permissionTracker.keySet()) {

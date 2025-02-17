@@ -36,6 +36,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothReceiver receiver;
     private BluetoothAdapter adapter;
     public PermissionManager permissionManager = new PermissionManager(this);
+    private Calendar calendar;
     private boolean connectivity = false;
 
     /**
@@ -96,14 +98,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @Info: Called once at the start of the program to create the receivers
+     * and begin discovery.
+     */
     public void createReceiverScan() {
         createReceiver();
         startScan();
     }
 
+    /**
+     * @Info: Called when tablets initially connect and is used
+     * to easily detect when auton or teleop is incorrectly started.
+     */
+    public void setTime(int year, int month, int date, int hour, int min, int sec) {
+        calendar.clear();
+        calendar.set(year,month,date,hour,min,sec);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        calendar = Calendar.getInstance();
         permissionManager.addPermission(BLUETOOTH_CONNECT);
         permissionManager.addPermission(BLUETOOTH_SCAN);
         permissionManager.addPermission(ACCESS_FINE_LOCATION);
