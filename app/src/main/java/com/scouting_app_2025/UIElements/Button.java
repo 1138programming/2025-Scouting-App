@@ -1,50 +1,78 @@
 package com.scouting_app_2025.UIElements;
 
-import android.widget.ImageButton;
-
 public class Button extends UIElement {
-
-    private boolean dataTracking;
-    private android.widget.Button button;
-
-    public Button(String buttonName) {
-        super(buttonName);
-    }
-
-    public Button(String buttonName, android.widget.Button button) {
+    private final android.widget.Button button;
+    private final UndoStack undostack;
+    private int maxValue = 99;
+    private int minValue = 0;
+    public Button(String buttonName, android.widget.Button button, UndoStack undoStack) {
         super(buttonName);
         this.button = button;
+        this.undostack = undoStack;
+        button.setOnClickListener(view -> clicked());
     }
 
-    public boolean undo() {
-        decrementPickup();
-        return false;
-    }
-
-    public boolean redo() {
-        incrementPickup(true);
-        return false;
-    }
-
-    private boolean incrementPickup(boolean undo) {
-        String text = button.getText().toString().substring(8);
-        int num = Integer.parseInt(text);
-        num++;
-        if (num > 99) {
-            num = 99;
-            undo = false;
+    @Override
+    public void clicked() {
+        if(increment()) {
+            undostack.addTimestamp(this);
         }
-        text = button.getText().toString().substring(0,8)+String.valueOf(num);
-        button.setText(text);
-        return undo;
     }
-    private void decrementPickup() {
-        String text = button.getText().toString().substring(8);
+
+    /**
+     * @Info: Called by {@link UndoStack} to decrease the value displayed on the button.
+     */
+    @Override
+    public void undo() {
+        decrement();
+    }
+
+    /**
+     * @Info: Called by {@link UndoStack} to increase the value displayed on the button.
+     */
+    @Override
+    public void redo() {
+        increment();
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+    public void setMinValue(int minValue) {
+        this.minValue = minValue;
+    }
+
+    /**
+     * @Info: Called to increment value of the button. If the value exceeds a maximum
+     * value it remains at that value.
+     * @return Returns a {@code boolean} for whether or not the button's value
+     * was updated or not due to it being at max value.
+     */
+    private boolean increment() {
+        String text = button.getText().toString();
+        boolean updated = true;
         int num = Integer.parseInt(text);
-        if (num > 0) {
+        if (num < maxValue) {
+            num++;
+            updated = false;
+        }
+        text = String.valueOf(num);
+        button.setText(text);
+        return updated;
+    }
+
+    /**
+     * @Info: Called to decrement value of the button. If the value goes below a minimum value
+     * (zero by default), it remains at the minimum. This doesn't have a {@code boolean}
+     * to track if the decrement was successful because this is only used by {@link Button#undo()}
+     */
+    private void decrement() {
+        String text = button.getText().toString();
+        int num = Integer.parseInt(text);
+        if (num > minValue) {
             num--;
         }
-        text = button.getText().toString().substring(0,8)+String.valueOf(num);
+        text = String.valueOf(num);
         button.setText(text);
     }
 }

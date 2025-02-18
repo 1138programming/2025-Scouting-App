@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothReceiver receiver;
     private BluetoothAdapter adapter;
     public PermissionManager permissionManager = new PermissionManager(this);
-    private Calendar calendar;
+    public static Calendar calendar;
     private boolean connectivity = false;
 
     /**
@@ -128,5 +128,6 @@ public class MainActivity extends AppCompatActivity {
         permissionManager.addPermission(BLUETOOTH_ADVERTISE);
 
         permissionManager.requestPermissions();
+        calendar.getTimeInMillis();
     }
 }

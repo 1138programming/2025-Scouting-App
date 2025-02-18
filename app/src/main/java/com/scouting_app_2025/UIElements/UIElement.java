@@ -1,21 +1,24 @@
 package com.scouting_app_2025.UIElements;
 
 public class UIElement {
-    private final String elementName;
+    protected final int datapointID;
 
-    public UIElement(String elementName) {
-        this.elementName = elementName;
+    public UIElement(int datapointID) {
+        this.datapointID = datapointID;
     }
 
-    public String getName() {
-        return elementName;
+    public int getID() {
+        return datapointID;
     }
 
-    public boolean undo() {
-        return false;
+    public void clicked() {
+
+    }
+    public void undo() {
+
     }
 
-    public boolean redo() {
-        return false;
+    public void redo() {
+
     }
 }

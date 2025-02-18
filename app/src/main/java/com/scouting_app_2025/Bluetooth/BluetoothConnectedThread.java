@@ -166,11 +166,6 @@ public class BluetoothConnectedThread extends Thread {
         }
     }
 
-    /**
-     * @Info: Used for testing TBA. Should not be used in practice.
-     */
-
-
     //used to flush stream and close socket
     public void cancel() {
         try {
