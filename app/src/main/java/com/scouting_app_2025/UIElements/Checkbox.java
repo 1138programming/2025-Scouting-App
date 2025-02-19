@@ -1,11 +1,13 @@
 package com.scouting_app_2025.UIElements;
 
+import android.content.Context;
+
 public class Checkbox extends UIElement {
     private final android.widget.CheckBox checkbox;
     private final boolean locking;
     private final UndoStack undoStack;
-    public Checkbox(int datapointID, android.widget.CheckBox checkbox, boolean locking, UndoStack undoStack) {
-        super(datapointID);
+    public Checkbox(int datapointID, android.widget.CheckBox checkbox, boolean locking, Context context, UndoStack undoStack) {
+        super(datapointID, context);
         this.checkbox = checkbox;
         this.locking = locking;
         this.undoStack = undoStack;

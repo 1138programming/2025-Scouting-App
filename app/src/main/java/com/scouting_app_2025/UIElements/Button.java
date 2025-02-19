@@ -1,12 +1,14 @@
 package com.scouting_app_2025.UIElements;
 
+import android.content.Context;
+
 public class Button extends UIElement {
     private final android.widget.Button button;
     private final UndoStack undostack;
     private int maxValue = 99;
     private int minValue = 0;
-    public Button(String buttonName, android.widget.Button button, UndoStack undoStack) {
-        super(buttonName);
+    public Button(int datapointID, android.widget.Button button, Context context, UndoStack undoStack) {
+        super(datapointID, context);
         this.button = button;
         this.undostack = undoStack;
         button.setOnClickListener(view -> clicked());

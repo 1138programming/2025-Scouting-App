@@ -30,10 +30,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.scouting_app_2025.Bluetooth.BluetoothReceiver;
+import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothReceiver receiver;
     private BluetoothAdapter adapter;
     public PermissionManager permissionManager = new PermissionManager(this);
+    public GUIManager guiManager = new GUIManager(this);
     public static Calendar calendar;
     private boolean connectivity = false;
 
@@ -107,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
         startScan();
     }
 
+    public void updateTabletInformation() {
+        guiManager.getTabletInformation();
+    }
     /**
      * @Info: Called when tablets initially connect and is used
      * to easily detect when auton or teleop is incorrectly started.
