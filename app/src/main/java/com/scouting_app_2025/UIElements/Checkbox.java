@@ -16,25 +16,40 @@ public class Checkbox extends UIElement {
 
     @Override
     public void clicked() {
-        checkbox.setChecked(true);
-        if(locking) {
-            checkbox.setEnabled(false);
+        if (locking) {
+            if(!checkbox.isChecked()) {
+                checkbox.setChecked(true);
+                checkbox.setEnabled(false);
+            }
+        }
+        else {
+            undoStack.addTimestamp(this);
+            checkbox.setChecked(!checkbox.isChecked());
+        }
+    }
 
+    @Override
+    public String getValue() {
+        return Boolean.toString(checkbox.isChecked());
+    }
+
+    /**
+     * @Info: Called by both {@link Checkbox#undo()} and {@link Checkbox#redo()} functions
+     * to update the status of the checkbox
+     */
+    private void undoRedo() {
+        checkbox.setChecked(!checkbox.isChecked());
+        if(locking) {
+            checkbox.setEnabled(!checkbox.isEnabled());
         }
     }
     @Override
     public void undo() {
-        checkbox.setChecked(false);
-        if(locking) {
-            checkbox.setEnabled(true);
-        }
+        undoRedo();
     }
     @Override
     public void redo() {
-        checkbox.setChecked(true);
-        if(locking) {
-            checkbox.setEnabled(false);
-        }
+        undoRedo();
     }
 
 }

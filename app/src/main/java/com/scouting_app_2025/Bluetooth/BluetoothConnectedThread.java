@@ -52,8 +52,11 @@ public class BluetoothConnectedThread extends Thread {
         //sets actual variables to temp versions
         inputStream = tmpIn;
         outputStream = tmpOut;
-//        updateLists();
-//        Log.i(TAG, ByteBuffer.wrap(buffer).toString());
+    }
+
+    @Override
+    public void run() {
+
     }
 
     /**
@@ -110,17 +113,18 @@ public class BluetoothConnectedThread extends Thread {
 
     /**
      * @param code used to specify what information is going to be sent or received <p>
-     *      1 - send tablet information<p>
-     *      2 - send match data<p>
-     *      3 - check if lists of teams and matches are up to date <p>
-     *      4 - update lists of teams and matches <p>
-     *      {@code IMPORTANT:} numbers 3 and 4 shouldn't be used with this function.
-     *             Use {@code checkLists()} and {@code updateLists()} instead as needed
+     *     &nbsp;&nbsp;1 - send match data<p>
+     *     &nbsp;&nbsp;2 - send tablet information<p>
+     *     -1 - check if lists of teams and matches are up to date <p>
+     *     -2 - update lists of teams and matches <p>
+     *      {@code IMPORTANT} numbers -1 and -2 shouldn't be used with this function.
+     *             Use {@link BluetoothConnectedThread#checkLists()}  and {@link BluetoothConnectedThread#updateLists()} instead as needed
      * @Info: sends information
+     *
      */
-    public void sendInformation(byte[] bytes, byte code) {
+    public void sendInformation(byte[] bytes, int code) {
         try {
-            write(new byte[]{code});
+            write(new byte[]{(byte)code});
             readAck();
             write(ByteBuffer.allocate(3).putInt(bytes.length).array());
             readAck();

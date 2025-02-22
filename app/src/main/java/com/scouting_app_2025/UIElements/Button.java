@@ -5,13 +5,22 @@ import android.content.Context;
 public class Button extends UIElement {
     private final android.widget.Button button;
     private final UndoStack undostack;
+    private final boolean dataTracking;
     private int maxValue = 99;
     private int minValue = 0;
     public Button(int datapointID, android.widget.Button button, Context context, UndoStack undoStack) {
         super(datapointID, context);
         this.button = button;
         this.undostack = undoStack;
+        this.dataTracking = true;
         button.setOnClickListener(view -> clicked());
+    }
+
+    public Button(int datapointID, android.widget.Button button, Context context) {
+        super(datapointID, context);
+        this.button = button;
+        this.undostack = null;
+        this.dataTracking = false;
     }
 
     @Override
@@ -51,6 +60,7 @@ public class Button extends UIElement {
      * was updated or not due to it being at max value.
      */
     private boolean increment() {
+        if(!dataTracking) return false;
         String text = button.getText().toString();
         boolean updated = true;
         int num = Integer.parseInt(text);

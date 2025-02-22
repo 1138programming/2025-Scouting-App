@@ -30,6 +30,9 @@ public class UIElement {
     public int getID() {
         return datapointID;
     }
+    public String getValue() {
+        return "true";
+    }
 
     public void clicked() {
 

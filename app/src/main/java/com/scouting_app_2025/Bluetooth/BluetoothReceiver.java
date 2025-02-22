@@ -22,12 +22,12 @@ import java.util.UUID;
 public class BluetoothReceiver extends BroadcastReceiver {
     BluetoothSocket socket;
     BluetoothConnectedThread connectedThread;
-    PermissionManager permissionManager;
+    Context context;
 
-//    public BluetoothReceiver(PermissionManager manager) {
-//        super();
-//        this.permissionManager = manager;
-//    }
+    public BluetoothReceiver(Context context) {
+        super();
+        this.context = context;
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -83,6 +83,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
                                 socket = device.createRfcommSocketToServiceRecord(MY_UUID);
                                 socket.connect();
                                 connectedThread = new BluetoothConnectedThread(socket);
+                                ((MainActivity)context).setConnectedThread(connectedThread);
                                 break;
                             } catch (IOException e) {
                                 Log.e(TAG, "Failed to " + e);

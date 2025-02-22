@@ -1,6 +1,5 @@
 package com.scouting_app_2025;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.BLUETOOTH;
 import static android.Manifest.permission.BLUETOOTH_ADMIN;
@@ -13,33 +12,19 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
-import android.view.View;
 
-import androidx.core.app.ActivityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
+import com.scouting_app_2025.Bluetooth.BluetoothConnectedThread;
 import com.scouting_app_2025.Bluetooth.BluetoothReceiver;
 import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.databinding.ActivityMainBinding;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.UUID;
 
 
@@ -49,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private BluetoothReceiver receiver;
     private BluetoothAdapter adapter;
+    public BluetoothConnectedThread connectedThread;
     public PermissionManager permissionManager = new PermissionManager(this);
     public GUIManager guiManager = new GUIManager(this);
     public static Calendar calendar;
@@ -74,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
      * all the actions it should be listening for.
      */
     private void createReceiver() {
-        receiver = new BluetoothReceiver();
+        receiver = new BluetoothReceiver(this);
         IntentFilter filter = new IntentFilter();
         filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
         filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
@@ -109,9 +95,11 @@ public class MainActivity extends AppCompatActivity {
         createReceiver();
         startScan();
     }
-
+    public void setConnectedThread(BluetoothConnectedThread connectedThread) {
+        this.connectedThread = connectedThread;
+    }
     public void updateTabletInformation() {
-        guiManager.getTabletInformation();
+        connectedThread.sendInformation(guiManager.getTabletInformation().getBytes(StandardCharsets.UTF_8), 2);
     }
     /**
      * @Info: Called when tablets initially connect and is used

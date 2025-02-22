@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class Spinner extends UIElement {
     private final android.widget.Spinner spinner;
-    private String selectedItem = "";
     private final Context context;
     public Spinner(int datapointID, android.widget.Spinner spinner, Context context) {
         super(datapointID);
@@ -36,12 +35,17 @@ public class Spinner extends UIElement {
         ((MainActivity)context).updateTabletInformation();
     }
 
+    @Override
+    public String getValue() {
+        return spinner.getSelectedItem().toString();
+    }
+
     public void updateSpinnerList(ArrayList<CharSequence> providedList) {
-        ArrayList<CharSequence> spinnerList = new ArrayList<CharSequence>();
+        ArrayList<CharSequence> spinnerList = new ArrayList<>();
         spinnerList.add("Other");
         spinnerList.addAll(providedList);
         ArrayAdapter<CharSequence> listAdapter
-                = new ArrayAdapter<CharSequence>(context, R.layout.spinner_layout, spinnerList);
+                = new ArrayAdapter<>(context, R.layout.spinner_layout, spinnerList);
         listAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner.setAdapter(listAdapter);
     }

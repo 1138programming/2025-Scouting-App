@@ -1,8 +1,10 @@
 package com.scouting_app_2025.UIElements;
 
-import android.content.Context;
-
 import static com.scouting_app_2025.MainActivity.calendar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -34,6 +36,20 @@ public class UndoStack {
         }
         inputStack.add(reverseElements.get(element));
         timestamps.add(calendar.getTimeInMillis());
+    }
+
+    public JSONArray getTimestamps(JSONObject datapointTemplate) throws JSONException {
+        JSONArray jsonArr = new JSONArray();
+        JSONObject tempJson;
+
+        for(int i : inputStack) {
+            tempJson = datapointTemplate;
+            tempJson.put("datapointID", Objects.requireNonNull(allElements.get(i)).getID());
+            tempJson.put("DCValue", Objects.requireNonNull(allElements.get(i)).getValue());
+            tempJson.put("DCTimestamp", timestamps.pop());
+            jsonArr.put(tempJson);
+        }
+        return jsonArr;
     }
     /**
      * @Info:
