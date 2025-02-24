@@ -3,4 +3,21 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="off_white">#CCCCCC</color>
+    <color name="invisible">#00000000</color>
+    <color name="simple_light_grey">#777777</color>
+    <color name="background_default">#002347</color>
+    <color name="dark_green_default">#209940</color>
+    <color name="algae_blue_green">#47ba87</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="chaminade_orange"> #FFA500</color>
+    <color name="pressed_defense">#FF4D01</color>
+    <color name="red">#FF0000</color>
+    <color name="dark_red">#8b0000</color>
+    <color name="blue">#0000FF</color>
+    <color name="dark_blue">#00008b</color>
+    <color name="dark_gray">#242526</color>
 </resources>

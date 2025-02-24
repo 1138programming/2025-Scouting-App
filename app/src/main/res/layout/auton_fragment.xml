@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_default"
+    android:clickable="true"
+    tools:context=".Fragments.AutonFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auton_title"
+        android:textColor="@color/off_white"
+        android:textSize="96sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/undoButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/invisible"
+        android:contentDescription="@string/undo_button_description"
+        android:src="@drawable/undo_arrow_outline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/chaminade_orange"/>
+
+    <TextView
+        android:id="@+id/undo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/undo_title"
+        android:textColor="@color/chaminade_orange"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/undoButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/undoButton" />
+
+    <ImageButton
+        android:id="@+id/redoButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/invisible"
+        android:contentDescription="@string/redo_button_description"
+        android:cropToPadding="false"
+        android:src="@drawable/redo_arrow_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/chaminade_orange" />
+
+    <TextView
+        android:id="@+id/redo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/redo_title"
+        android:textColor="@color/chaminade_orange"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/redoButton"
+        app:layout_constraintTop_toBottomOf="@+id/redoButton" />
+
+    <ImageView
+        android:id="@+id/reef_image"
+        android:layout_width="120dp"
+        android:layout_height="473dp"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/reef_side_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
+
+    <Button
+        android:id="@+id/level_four_scored"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/button_counter_default"
+        android:textColor="@color/background_default"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reef_image"
+        app:layout_constraintTop_toTopOf="@+id/reef_image" />
+
+    <Button
+        android:id="@+id/level_three_scored"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/button_counter_default"
+        android:textColor="@color/background_default"
+        android:textSize="40sp"
+        app:layout_constraintVertical_bias="0.22"
+        app:layout_constraintBottom_toTopOf="@+id/level_two_scored"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reef_image"
+        app:layout_constraintTop_toBottomOf="@+id/level_four_scored" />
+
+    <Button
+        android:id="@+id/level_two_scored"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/button_counter_default"
+        android:textColor="@color/background_default"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/reef_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reef_image"/>
+
+    <Button
+        android:id="@+id/level_one_scored"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/button_counter_default"
+        android:textColor="@color/background_default"
+        android:textSize="40sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/level_two_scored"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reef_image"
+        app:layout_constraintTop_toBottomOf="@+id/level_three_scored" />
+
+    <TextView
+        android:id="@+id/coral_pickup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/coral_pickup_title"
+        android:textColor="@color/off_white"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/coral_pickup"
+        app:layout_constraintStart_toStartOf="@+id/undo_title"
+        app:layout_constraintTop_toTopOf="@+id/coral_pickup" />
+
+    <Button
+        android:id="@+id/coral_pickup"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/button_counter_default"
+        android:textColor="@color/background_default"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toStartOf="@+id/reef_image"
+        app:layout_constraintStart_toEndOf="@+id/coral_pickup_title"
+        app:layout_constraintTop_toTopOf="@+id/reef_image" />
+
+    <TextView
+        android:id="@+id/algae_removed"
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:text="@string/algae_removed_title"
+        android:textColor="@color/off_white"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/level_two_algae"
+        app:layout_constraintEnd_toEndOf="@+id/coral_pickup_title"
+        app:layout_constraintStart_toStartOf="@+id/undo_title"
+        app:layout_constraintTop_toTopOf="@+id/level_three_algae"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <Button
+        android:id="@+id/level_three_algae"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/algae_blue_green"
+        android:text="@string/button_counter_default"
+        android:textColor="@color/background_default"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/level_three_scored"
+        app:layout_constraintEnd_toStartOf="@+id/reef_image"
+        app:layout_constraintStart_toEndOf="@+id/algae_removed"
+        app:layout_constraintTop_toTopOf="@+id/level_three_scored" />
+
+    <Button
+        android:id="@+id/level_two_algae"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/algae_blue_green"
+        android:text="@string/button_counter_default"
+        android:textColor="@color/background_default"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/level_one_scored"
+        app:layout_constraintEnd_toStartOf="@+id/reef_image"
+        app:layout_constraintStart_toEndOf="@+id/algae_removed"
+        app:layout_constraintTop_toTopOf="@+id/level_one_scored" />
+
+    <Button
+        android:id="@+id/swap_scored_missed"
+        android:layout_width="300dp"
+        android:layout_height="110dp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/scored_button_title"
+        android:textColor="@color/background_default"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="@+id/level_two_scored"
+        app:layout_constraintEnd_toStartOf="@+id/reef_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/level_two_scored" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

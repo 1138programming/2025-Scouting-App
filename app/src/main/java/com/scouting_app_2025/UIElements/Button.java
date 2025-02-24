@@ -6,6 +6,7 @@ public class Button extends UIElement {
     private final android.widget.Button button;
     private final UndoStack undostack;
     private final boolean dataTracking;
+    private final int titleLength;
     private int maxValue = 99;
     private int minValue = 0;
     public Button(int datapointID, android.widget.Button button, Context context, UndoStack undoStack) {
@@ -13,6 +14,7 @@ public class Button extends UIElement {
         this.button = button;
         this.undostack = undoStack;
         this.dataTracking = true;
+        this.titleLength = button.getText().length()-1;
         button.setOnClickListener(view -> clicked());
     }
 
@@ -21,6 +23,7 @@ public class Button extends UIElement {
         this.button = button;
         this.undostack = null;
         this.dataTracking = false;
+        this.titleLength = 0;
     }
 
     @Override

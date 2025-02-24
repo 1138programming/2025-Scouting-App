@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-02-08T03:39:59.653857300Z">
+        <DropdownSelection timestamp="2025-02-24T00:50:09.852013300Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=R9PW10MLB5Y" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\eeuser\.android\avd\Samsung_Tab_A7_Lite_API_33.avd" />
             </handle>
           </Target>
         </DropdownSelection>

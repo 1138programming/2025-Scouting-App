@@ -1,11 +1,73 @@
 <resources>
+    <!-- App Name for App Icon -->
     <string name="app_name">1138 Scouting App</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
+    <!-- Empty String -->
+    <string name="empty"></string>
+
+    <!-- App Version -->
+    <string name="app_version">2.0.0</string>
+
+    <!-- Undo and Redo Buttons -->
+    <string name="undo_title">Undo</string>
+        <string name="undo_button_description">Undo last action</string>
+    <string name="redo_title">Redo</string>
+        <string name="redo_button_description">Redo last action undone</string>
+
+    <!-- Next, Back, and Submit Buttons -->
+    <string name="next_button_title">Next</string>
+    <string name="back_button_title">Back</string>
+
+    <!-- Pre-Auton Page TODO hints might need to be removed-->
+    <string name="pre_auton_title">Pre-Auton</string>
+    <string name="name_prompt_title">Name of scouter</string>
+    <string name="name_prompt_hint">Name</string>
+    <string name="match_number_title">Match Number</string>
+        <!-- Team Color Buttons -->
+        <string name="team_color_title">Team Color</string>
+        <string name="team_color_red">RED</string>
+        <string name="team_color_blue">BLUE</string>
+    <string name="team_prompt_title">Team Number</string>
+    <string name="team_prompt_hint">Team Number</string>
+        <!-- Starting Position Buttons -->
+        <string name="start_processor">Processor</string>
+        <string name="start_middle">Middle</string>
+        <string name="start_far">Far</string>
+    <string name="no_show_title">Team didn\'t show up</string>
+
+    <!-- Auton Popup -->
+    <string name="auton_start_prompt">Press when Auton starts</string>
+    <string name="back_button">Back</string>
+    <string name="start_button">Start</string>
+    <string name="coral_pickup_title">Coral Pickup:</string>
+    <string name="algae_removed_title">Algae Removed:</string>
+    <string name="scored_button_title">Scored</string>
+    <string name="missed_button_title">Missed</string>
+
+    <!-- Auton Page -->
+    <string name="auton_title">Auton</string>
+    <string name="button_counter_default">0</string>
+
+    <!-- Teleop Popup -->
+    <string name="teleop_title">Teleop</string>
+    <string name="teleop_start_prompt">Press when Teleop starts</string>
+
+    <!-- Teleop Page -->
+
+
+    <!-- Post Match Page -->
+    <string name="post_match_title">Post Match</string>
+
+    <!-- Submission Confirmation -->
+    <string name="confirm_submit_title">Are you sure you want to submit?</string>
+    <string name="submit_button_title">Submit</string>
+    <string name="cancel_button_title">Cancel</string>
+    <string name="confirm_reset_title">Are you sure you want to reset?</string>
+    <string name="confirm_reset_button">Reset</string>
+
+    <!-- Bluetooth -->
+    <string name="connection_status_title">Connected</string>
+    <string name="disconnected_status_title">Disconnected</string>
+    <string name="archive_title">Select a match to upload</string>
 
 </resources>
