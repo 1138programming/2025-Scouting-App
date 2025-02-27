@@ -75,15 +75,16 @@
         android:layout_height="473dp"
         android:layout_marginTop="35dp"
         android:src="@drawable/reef_side_profile"
+        android:contentDescription="@string/reef_image_desc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias=".67"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
 
     <Button
         android:id="@+id/level_four_scored"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/chaminade_orange"
         android:text="@string/button_counter_default"
         android:textColor="@color/background_default"
@@ -94,34 +95,34 @@
 
     <Button
         android:id="@+id/level_three_scored"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/chaminade_orange"
         android:text="@string/button_counter_default"
         android:textColor="@color/background_default"
         android:textSize="40sp"
-        app:layout_constraintVertical_bias="0.22"
         app:layout_constraintBottom_toTopOf="@+id/level_two_scored"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/reef_image"
-        app:layout_constraintTop_toBottomOf="@+id/level_four_scored" />
+        app:layout_constraintTop_toBottomOf="@+id/level_four_scored"
+        app:layout_constraintVertical_bias="0.22" />
 
     <Button
         android:id="@+id/level_two_scored"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/chaminade_orange"
         android:text="@string/button_counter_default"
         android:textColor="@color/background_default"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@+id/reef_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reef_image"/>
+        app:layout_constraintStart_toEndOf="@+id/reef_image" />
 
     <Button
         android:id="@+id/level_one_scored"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/chaminade_orange"
         android:text="@string/button_counter_default"
         android:textColor="@color/background_default"
@@ -145,8 +146,8 @@
 
     <Button
         android:id="@+id/coral_pickup"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/chaminade_orange"
         android:text="@string/button_counter_default"
         android:textColor="@color/background_default"
@@ -170,8 +171,8 @@
 
     <Button
         android:id="@+id/level_three_algae"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/algae_blue_green"
         android:text="@string/button_counter_default"
         android:textColor="@color/background_default"
@@ -183,8 +184,8 @@
 
     <Button
         android:id="@+id/level_two_algae"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
         android:backgroundTint="@color/algae_blue_green"
         android:text="@string/button_counter_default"
         android:textColor="@color/background_default"
@@ -196,16 +197,112 @@
 
     <Button
         android:id="@+id/swap_scored_missed"
-        android:layout_width="300dp"
-        android:layout_height="110dp"
+        android:layout_width="275dp"
+        android:layout_height="100dp"
         android:backgroundTint="@color/chaminade_orange"
         android:text="@string/scored_button_title"
         android:textColor="@color/background_default"
         android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="@+id/level_two_scored"
+        app:layout_constraintBottom_toBottomOf="@+id/reef_image"
         app:layout_constraintEnd_toStartOf="@+id/reef_image"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/processorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/processor_button_title"
+        android:textColor="@color/off_white"
+        android:textSize="42sp"
+        app:layout_constraintEnd_toEndOf="@+id/mainTitle"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/level_two_scored" />
+        app:layout_constraintTop_toBottomOf="@+id/reef_image" />
+
+    <Button
+        android:id="@+id/processorButton"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/button_counter_default"
+        android:textColor="@color/background_default"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="@+id/processorTitle"
+        app:layout_constraintStart_toStartOf="@+id/processorTitle"
+        app:layout_constraintTop_toBottomOf="@+id/processorTitle" />
+
+    <TextView
+        android:id="@+id/netTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/net_button_title"
+        android:textColor="@color/off_white"
+        android:textSize="42sp"
+        app:layout_constraintBottom_toBottomOf="@+id/processorTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="@+id/mainTitle"
+        app:layout_constraintTop_toTopOf="@+id/processorTitle" />
+
+    <Button
+        android:id="@+id/netButton"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/button_counter_default"
+        android:textColor="@color/background_default"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/processorButton"
+        app:layout_constraintEnd_toEndOf="@+id/netTitle"
+        app:layout_constraintStart_toStartOf="@+id/netTitle"
+        app:layout_constraintTop_toTopOf="@+id/processorButton" />
+
+    <TextView
+        android:id="@+id/leaveCheckboxTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/leave_checkbox_title"
+        android:textColor="@color/off_white"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
+        app:layout_constraintEnd_toEndOf="@+id/level_two_algae"
+        app:layout_constraintTop_toBottomOf="@+id/processorButton" />
+
+    <CheckBox
+        android:id="@+id/leaveQuestionCheckBox"
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
+        android:backgroundTint="@color/chaminade_orange"
+        android:button="@null"
+        android:checked="false"
+        app:layout_constraintBottom_toBottomOf="@+id/leaveCheckboxTitle"
+        app:layout_constraintStart_toStartOf="@+id/nextButton"
+        app:layout_constraintTop_toTopOf="@+id/leaveCheckboxTitle" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="240sp"
+        android:layout_height="120sp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/next_button_title"
+        android:textColor="@color/background_default"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="240sp"
+        android:layout_height="120sp"
+        android:backgroundTint="@color/chaminade_orange"
+        android:text="@string/back_button_title"
+        android:textColor="@color/background_default"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

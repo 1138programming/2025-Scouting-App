@@ -8,6 +8,7 @@ import android.widget.Toast;
 public class UIElement {
     protected final int datapointID;
     private final Context context;
+    private Runnable onClickFunction;
 
     /**
      * @Info: Base constructor for UI Elements that are going to be
@@ -35,7 +36,12 @@ public class UIElement {
     }
 
     public void clicked() {
-
+        if(onClickFunction != null) {
+            onClickFunction.run();
+        }
+    }
+    public void setOnClickFunction(Runnable onClickFunction) {
+        this.onClickFunction = onClickFunction;
     }
     public void undo() {
         Toast.makeText(context, "Undid " + datapointIDs.get(datapointID), Toast.LENGTH_SHORT).show();
