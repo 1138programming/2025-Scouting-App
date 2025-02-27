@@ -82,7 +82,7 @@ public class BluetoothConnectedThread extends Thread {
     private void readAck() throws CommErrorException {
         read(3);
 
-        byte[] sentAck = new byte[]{buffer[0],buffer[1],buffer[2],buffer[3]};
+        byte[] sentAck = new byte[]{buffer[0],buffer[1],buffer[2]};
 
         String message = new String(sentAck, StandardCharsets.UTF_8);
         if(!message.equals(ack)) {
@@ -126,7 +126,7 @@ public class BluetoothConnectedThread extends Thread {
         try {
             write(new byte[]{(byte)code});
             readAck();
-            write(ByteBuffer.allocate(3).putInt(bytes.length).array());
+            write(ByteBuffer.allocate(4).putInt(bytes.length).array());
             readAck();
             write(bytes);
         }
