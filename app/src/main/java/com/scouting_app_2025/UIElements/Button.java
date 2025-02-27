@@ -1,6 +1,7 @@
 package com.scouting_app_2025.UIElements;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 
 public class Button extends UIElement {
     private final android.widget.Button button;
@@ -28,9 +29,18 @@ public class Button extends UIElement {
 
     @Override
     public void clicked() {
+        super.clicked();
         if(increment()) {
             undostack.addTimestamp(this);
         }
+    }
+
+    public int getColor() {
+        return ((ColorDrawable)button.getBackground()).getColor();
+    }
+
+    public void setColor(int color) {
+        button.setBackgroundColor(color);
     }
 
     /**

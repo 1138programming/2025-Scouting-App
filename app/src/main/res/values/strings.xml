@@ -39,21 +39,28 @@
     <string name="auton_start_prompt">Press when Auton starts</string>
     <string name="back_button">Back</string>
     <string name="start_button">Start</string>
+
+    <string name=""></string>
+    <!-- -->
+
+    <!-- Auton Page -->
+    <string name="auton_title">Auton</string>
+    <string name="reef_image_desc">Side profile of reef.</string>
+    <string name="button_counter_default">0</string>
     <string name="coral_pickup_title">Coral Pickup:</string>
     <string name="algae_removed_title">Algae Removed:</string>
     <string name="scored_button_title">Scored</string>
     <string name="missed_button_title">Missed</string>
-
-    <!-- Auton Page -->
-    <string name="auton_title">Auton</string>
-    <string name="button_counter_default">0</string>
+    <string name="processor_button_title">Processor</string>
+    <string name="net_button_title">Net</string>
+    <string name="leave_checkbox_title">Leave (Taxi):</string>
 
     <!-- Teleop Popup -->
-    <string name="teleop_title">Teleop</string>
     <string name="teleop_start_prompt">Press when Teleop starts</string>
 
     <!-- Teleop Page -->
-
+    <string name="teleop_title">Teleop</string>
+    <string name="hang_started_title">Hang started:</string>
 
     <!-- Post Match Page -->
     <string name="post_match_title">Post Match</string>

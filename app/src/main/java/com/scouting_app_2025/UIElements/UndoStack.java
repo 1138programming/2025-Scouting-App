@@ -30,6 +30,10 @@ public class UndoStack {
         reverseElements.put(element, reverseElements.size());
     }
 
+    public UIElement getElement(int datapointID) {
+        return allElements.get(datapointID);
+    }
+
     public void addTimestamp(UIElement element) {
         if(!reverseElements.containsKey(element)) {
             addElement(element);
