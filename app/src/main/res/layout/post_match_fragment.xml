@@ -1,6 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_default"
+    android:foregroundTint="@color/black"
+    android:clickable="true"
+    tools:context="Fragments.PostMatchFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/mainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post_match_title"
+            android:textColor="@color/off_white"
+            android:textSize="96sp"
+            android:textStyle="normal|bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/trapScoredTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/hang_spinner_title"
+            android:textColor="@color/off_white"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
+
+        <TextView
+            android:id="@+id/parkTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hang_park_title"
+            android:textColor="@color/off_white"
+            android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="@+id/parkCheckbox"
+            app:layout_constraintStart_toStartOf="@+id/trapScoredTitle"
+            app:layout_constraintTop_toTopOf="@+id/parkCheckbox" />
+
+        <CheckBox
+            android:id="@+id/parkCheckbox"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="48dp"
+            android:background="?android:attr/listChoiceIndicatorMultiple"
+            android:backgroundTint="@color/chaminade_orange"
+            android:button="@null"
+            app:layout_constraintEnd_toEndOf="@+id/mainTitle"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/parkTitle"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+        <Button
+            android:id="@+id/returnToTeleop"
+            android:layout_width="300sp"
+            android:layout_height="120sp"
+            android:backgroundTint="@color/chaminade_orange"
+            android:text="@string/back_button"
+            android:textColor="@color/background_default"
+            android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="300sp"
+            android:layout_height="120sp"
+            android:backgroundTint="@color/chaminade_orange"
+            android:text="@string/submit_button_title"
+            android:textColor="@color/background_default"
+            android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:entries="Not Attended"
+            android:spinnerMode="dropdown"
+            android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="@+id/trapScoredTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/trapScoredTitle"
+            app:layout_constraintTop_toTopOf="@+id/trapScoredTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
