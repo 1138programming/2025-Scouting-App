@@ -20,21 +20,15 @@
 
     <!-- Pre-Auton Page TODO hints might need to be removed-->
     <string name="pre_auton_title">Pre-Auton</string>
-    <string name="name_prompt_title">Name of scouter</string>
-    <string name="name_prompt_hint">Name</string>
+    <string name="name_prompt_title">Name of Scouter</string>
     <string name="match_number_title">Match Number</string>
     <string name="bluetooth_disconnected_status">Disconnected</string>
-    <string name="start_amp">Amp</string>
-    <string name="start_amp_speaker">Amp- Speaker</string>
-    <string name="start_source_speaker">Source- Speaker</string>
-    <string name="start_source">Source</string>
-    <string name="plus_button">plus</string>
         <!-- Team Color Buttons -->
         <string name="team_color_title">Team Color</string>
         <string name="team_color_red">RED</string>
         <string name="team_color_blue">BLUE</string>
     <string name="team_prompt_title">Team Number</string>
-    <string name="team_prompt_hint">Team Number</string>
+    <string name="field_image_desc">Image of field from top down view.</string>
         <!-- Starting Position Buttons -->
         <string name="start_processor">Processor</string>
         <string name="start_middle">Middle</string>
@@ -46,12 +40,12 @@
     <string name="back_button">Back</string>
     <string name="start_button">Start</string>
 
-    <string name=""></string>
+<!--    <string name=""></string>-->
     <!-- -->
 
     <!-- Auton Page -->
     <string name="auton_title">Auton</string>
-    <string name="reef_image_desc">Side profile of reef.</string>
+    <string name="reef_image_desc">Side profile of the reef.</string>
     <string name="button_counter_default">0</string>
     <string name="coral_pickup_title">Coral Pickup:</string>
     <string name="algae_removed_title">Algae Removed:</string>

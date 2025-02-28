@@ -30,18 +30,18 @@ tools:context=".Fragments.PreAutonFragment">
             android:id="@+id/NameOfScouterTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="40dp"
             android:text="@string/name_prompt_title"
-            android:textColor="@color/white"
+            android:textColor="@color/off_white"
             android:textSize="45sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
 
         <Spinner
             android:id="@+id/nameOfScouterSpinner"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/NameOfScouterTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/NameOfScouterTitle"
@@ -53,7 +53,7 @@ tools:context=".Fragments.PreAutonFragment">
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:text="@string/match_number_title"
-            android:textColor="@color/white"
+            android:textColor="@color/off_white"
             android:textSize="45sp"
             app:layout_constraintStart_toStartOf="@+id/NameOfScouterTitle"
             app:layout_constraintTop_toTopOf="@+id/NameOfScouterTitle" />
@@ -61,7 +61,7 @@ tools:context=".Fragments.PreAutonFragment">
         <Spinner
             android:id="@+id/matchNumberSpinner"
             android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/MatchNumberTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/MatchNumberTitle"
@@ -161,9 +161,10 @@ tools:context=".Fragments.PreAutonFragment">
 
         <ImageView
             android:id="@+id/startingPosImage"
-            android:layout_width="430dp"
-            android:layout_height="330dp"
-            android:src="@drawable/frcfield2025red"
+            android:layout_width="465dp"
+            android:layout_height="450dp"
+            android:src="@drawable/frc_field_red"
+            android:contentDescription="@string/field_image_desc"
             app:layout_constraintBottom_toTopOf="@+id/nextButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -174,14 +175,11 @@ tools:context=".Fragments.PreAutonFragment">
             android:id="@+id/team_color_switch"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/toggle_background"
             android:checkedButton="@+id/team_red"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/teamColorTitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/teamColorTitle"
             app:layout_constraintTop_toTopOf="@+id/teamColorTitle">
 
@@ -189,7 +187,7 @@ tools:context=".Fragments.PreAutonFragment">
                 android:id="@+id/team_blue"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
@@ -198,14 +196,14 @@ tools:context=".Fragments.PreAutonFragment">
                 android:gravity="center"
                 android:text="@string/team_color_blue"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/team_red"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="1dp"
-                android:layout_marginRight="1dp"
+                android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/toggle_background_red"
@@ -213,34 +211,34 @@ tools:context=".Fragments.PreAutonFragment">
                 android:gravity="center"
                 android:text="@string/team_color_red"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
         </RadioGroup>
 
         <RadioGroup
             android:id="@+id/startingLocation"
             android:layout_width="375dp"
             android:layout_height="70dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginTop="50dp"
             android:background="@color/invisible"
             android:checkedButton="@+id/team_red"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/startingPosImage"
             app:layout_constraintEnd_toEndOf="@+id/startingPosImage"
-            app:layout_constraintStart_toStartOf="@+id/startingPosImage">
+            app:layout_constraintStart_toStartOf="@+id/startingPosImage"
+            app:layout_constraintTop_toTopOf="@+id/startingPosImage">
 
             <RadioButton
                 android:id="@+id/left_start"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="40sp"
+                android:layout_marginStart="1dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/start_toggle_red"
                 android:button="@null"
                 android:gravity="center"
-                android:text="@string/start_source"
+                android:text="@string/start_far"
                 android:textColor="@color/red_text_toggle"
                 android:textSize="16sp" />
 
@@ -248,31 +246,17 @@ tools:context=".Fragments.PreAutonFragment">
                 android:id="@+id/middle_left_start"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginRight="15sp"
+                android:layout_marginEnd="60sp"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/start_toggle_red"
                 android:button="@null"
                 android:gravity="center"
-                android:text="@string/start_source_speaker"
+                android:text="@string/start_middle"
                 android:textColor="@color/red_text_toggle"
                 android:textSize="15sp" />
-
-            <RadioButton
-                android:id="@+id/middle_right_start"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/start_toggle_red"
-                android:button="@null"
-                android:gravity="center"
-                android:text="@string/start_amp_speaker"
-                android:textColor="@color/red_text_toggle"
-                android:textSize="16sp" />
 
             <RadioButton
                 android:id="@+id/right_start"
@@ -285,24 +269,10 @@ tools:context=".Fragments.PreAutonFragment">
                 android:background="@drawable/start_toggle_red"
                 android:button="@null"
                 android:gravity="center"
-                android:text="@string/start_amp"
+                android:text="@string/start_processor"
                 android:textColor="@color/red_text_toggle"
                 android:textSize="16sp" />
         </RadioGroup>
-
-        <ImageButton
-            android:id="@+id/archiveButton"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/invisible"
-            android:contentDescription="@string/plus_button"
-            android:cropToPadding="false"
-            android:src="@drawable/bluetooth_outline"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/chaminade_orange" />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
