@@ -26,8 +26,8 @@ public class UndoStack {
     }
 
     public void addElement(UIElement element) {
-        allElements.put(allElements.size(), element);
-        reverseElements.put(element, reverseElements.size());
+        allElements.put(element.getID(), element);
+        reverseElements.put(element, element.getID());
     }
 
     public UIElement getElement(int datapointID) {
@@ -48,7 +48,7 @@ public class UndoStack {
 
         for(int i : inputStack) {
             tempJson = datapointTemplate;
-            tempJson.put("datapointID", Objects.requireNonNull(allElements.get(i)).getID());
+            tempJson.put("datapointID", Objects.requireNonNull(allElements.get(i)));
             tempJson.put("DCValue", Objects.requireNonNull(allElements.get(i)).getValue());
             tempJson.put("DCTimestamp", timestamps.pop());
             jsonArr.put(tempJson);

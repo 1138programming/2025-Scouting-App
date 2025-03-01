@@ -40,7 +40,7 @@ public class ButtonColorChanger {
 
     private void changeColor() {
         for(Button button : buttons.keySet()) {
-            button.setColor(changedColor ? Objects.requireNonNull(buttons.get(button)) : secondaryColor);
+            button.changeButtonColor(changedColor ? Objects.requireNonNull(buttons.get(button)) : secondaryColor);
         }
         changedColor = !changedColor;
     }

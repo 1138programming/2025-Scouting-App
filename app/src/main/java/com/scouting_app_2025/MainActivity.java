@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public PermissionManager permissionManager = new PermissionManager(this);
     public GUIManager guiManager = new GUIManager(this);
     public static Calendar calendar;
+    public final static String datapointEventValue = "Event";
     private boolean connectivity = false;
 
     /**

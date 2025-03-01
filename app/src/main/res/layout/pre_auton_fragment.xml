@@ -26,6 +26,18 @@ tools:context=".Fragments.PreAutonFragment">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/archiveButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/invisible"
+            android:contentDescription="@string/KYSSS"
+            android:cropToPadding="false"
+            android:src="@drawable/menu_hamburger"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/chaminade_orange" />
+
         <TextView
             android:id="@+id/NameOfScouterTitle"
             android:layout_width="wrap_content"

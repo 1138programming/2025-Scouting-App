@@ -1,11 +1,16 @@
 package com.scouting_app_2025.UIElements;
 
+import static com.scouting_app_2025.MainActivity.datapointEventValue;
+
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+
+import com.scouting_app_2025.MainActivity;
 
 public class Button extends UIElement {
     private final android.widget.Button button;
     private final UndoStack undostack;
+    private final ButtonAlt buttonAlt;
     private final boolean dataTracking;
     private final int titleLength;
     private int maxValue = 99;
@@ -15,6 +20,7 @@ public class Button extends UIElement {
         this.button = button;
         this.undostack = undoStack;
         this.dataTracking = true;
+        this.buttonAlt = new ButtonAlt(this);
         this.titleLength = button.getText().length()-1;
         button.setOnClickListener(view -> clicked());
     }
@@ -24,8 +30,11 @@ public class Button extends UIElement {
         this.button = button;
         this.undostack = null;
         this.dataTracking = false;
+        this.buttonAlt = new ButtonAlt(this);
         this.titleLength = 0;
     }
+
+
 
     @Override
     public void clicked() {
@@ -43,6 +52,10 @@ public class Button extends UIElement {
         button.setBackgroundColor(color);
     }
 
+    public void changeButtonColor() {
+
+    }
+
     /**
      * @Info: Called by {@link UndoStack} to decrease the value displayed on the button.
      */
@@ -57,6 +70,11 @@ public class Button extends UIElement {
     @Override
     public void redo() {
         increment();
+    }
+
+    @Override
+    public String getValue() {
+        return datapointEventValue;
     }
 
     public void setMaxValue(int maxValue) {

@@ -6,7 +6,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 public class UIElement {
-    protected final int datapointID;
+    protected int datapointID;
     private final Context context;
     private Runnable onClickFunction;
 
@@ -30,6 +30,9 @@ public class UIElement {
 
     public int getID() {
         return datapointID;
+    }
+    public void setID(int datapointID) {
+        this.datapointID = datapointID;
     }
     public String getValue() {
         return "true";

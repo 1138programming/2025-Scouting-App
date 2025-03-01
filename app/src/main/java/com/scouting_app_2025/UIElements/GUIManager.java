@@ -17,13 +17,13 @@ public class GUIManager {
         undoStack = new UndoStack();
     }
 
-    public void createColorChanger(int changerID, int datapointID, android.widget.Button button, boolean dataStoring, int color) {
+    public void createColorChanger(int changerButtonID, int datapointID, android.widget.Button button, boolean dataStoring, int color) {
         createButton(datapointID, button, dataStoring);
-        colorChangers.put(changerID, new ButtonColorChanger((Button)undoStack.getElement(datapointID), color));
+        colorChangers.put(changerButtonID, new ButtonColorChanger((Button)undoStack.getElement(datapointID), color));
     }
-    public void createColorChangerButton(int changerID, int datapointID, android.widget.Button button, boolean dataStoring) {
-        createButton(datapointID, button, dataStoring);
-        Objects.requireNonNull(colorChangers.get(changerID)).addButton((Button)undoStack.getElement(datapointID));
+    public void createColorChangerButton(int changerButtonID, ArrayList<Integer> datapointID, android.widget.Button button, boolean dataStoring) {
+        createButton(datapointID.get(0), button, dataStoring);
+        Objects.requireNonNull(colorChangers.get(changerButtonID)).addButton((Button)undoStack.getElement(datapointID.get(0)));
     }
 
     public void createButton(int datapointID, android.widget.Button button, boolean dataStoring) {
