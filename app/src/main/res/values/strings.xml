@@ -64,6 +64,17 @@
 
     <!-- Post Match Page -->
     <string name="post_match_title">Post Match</string>
+    <string name="hang_spinner_title">Hang successful?</string>
+    <string name="hang_park_title">Park:</string>
+    <string-array name="hang_spinner_opts">
+        <item>Not Attempted</item>
+        <item>Deep</item>
+        <item>Shallow</item>
+        <item>Failed</item>
+    </string-array>
+    <string name="hang_spinner_Deep">Deep</string>
+    <string name="hang_spinner_Shallow">Shallow</string>
+    <string name="hang_spinner_Failed">Failed</string>
 
     <!-- Submission Confirmation -->
     <string name="confirm_submit_title">Are you sure you want to submit?</string>
