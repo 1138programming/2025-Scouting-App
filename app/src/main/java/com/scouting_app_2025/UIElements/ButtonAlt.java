@@ -1,11 +1,13 @@
 package com.scouting_app_2025.UIElements;
 
+import android.graphics.drawable.Drawable;
+
 import java.util.ArrayList;
 
 public class ButtonAlt {
     private final Button button;
     private final ArrayList<Integer> datapointIDs = new ArrayList<>();
-    private final ArrayList<Integer> colors = new ArrayList<>();
+    private final ArrayList<Drawable> colors = new ArrayList<>();
     private int currentProfile = 0;
     public ButtonAlt(Button button) {
         this.button = button;
@@ -17,7 +19,7 @@ public class ButtonAlt {
         colors.add(button.getColor());
     }
 
-    public void addProfile(int datapointID, int color) {
+    public void addProfile(int datapointID, Drawable color) {
         datapointIDs.add(datapointID);
         colors.add(color);
     }

@@ -5,10 +5,12 @@ import static com.scouting_app_2025.UIElements.DatapointIDs.datapointIDs;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class UIElement {
     protected int datapointID;
     private final Context context;
-    private Runnable onClickFunction;
+    private ArrayList<Runnable> onClickFunctions;
 
     /**
      * @Info: Base constructor for UI Elements that are going to be
@@ -39,12 +41,12 @@ public class UIElement {
     }
 
     public void clicked() {
-        if(onClickFunction != null) {
+        for(Runnable onClickFunction : onClickFunctions) {
             onClickFunction.run();
         }
     }
     public void setOnClickFunction(Runnable onClickFunction) {
-        this.onClickFunction = onClickFunction;
+        onClickFunctions.add(onClickFunction);
     }
     public void undo() {
         Toast.makeText(context, "Undid " + datapointIDs.get(datapointID), Toast.LENGTH_SHORT).show();

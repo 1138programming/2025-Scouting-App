@@ -22,7 +22,6 @@
     <string name="pre_auton_title">Pre-Auton</string>
     <string name="name_prompt_title">Name of Scouter</string>
     <string name="match_number_title">Match Number</string>
-    <string name="bluetooth_disconnected_status">Disconnected</string>
         <!-- Team Color Buttons -->
         <string name="team_color_title">Team Color</string>
         <string name="team_color_red">RED</string>
@@ -34,6 +33,7 @@
         <string name="start_middle">Middle</string>
         <string name="start_far">Far</string>
     <string name="no_show_title">Team didn\'t show up</string>
+    <string name="hamburger_desc">Menu Button</string>
 
     <!-- Auton Popup -->
     <string name="auton_start_prompt">Press when Auton starts</string>
@@ -84,7 +84,7 @@
     <string name="confirm_reset_button">Reset</string>
 
     <!-- Bluetooth -->
-    <string name="connection_status_title">Connected</string>
+    <string name="connected_status_title">Connected</string>
     <string name="disconnected_status_title">Disconnected</string>
     <string name="archive_title">Select a match to upload</string>
 

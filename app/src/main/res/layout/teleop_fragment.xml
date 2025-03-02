@@ -75,6 +75,7 @@
             android:layout_height="473dp"
             android:layout_marginTop="35dp"
             android:src="@drawable/transparent_reef_side_profile"
+            android:background="@color/off_white"
             android:contentDescription="@string/reef_image_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias=".67"

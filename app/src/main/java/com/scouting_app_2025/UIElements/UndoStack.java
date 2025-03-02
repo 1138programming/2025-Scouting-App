@@ -19,7 +19,6 @@ public class UndoStack {
     private final Stack<Integer> redoStack = new Stack<Integer>();
     private final Stack<Long> redoTimestamps = new Stack<Long>();
     private final HashMap<Integer, UIElement> allElements = new HashMap<Integer, UIElement>();
-    private final HashMap<UIElement, Integer> reverseElements = new HashMap<UIElement, Integer>();
 
     public UndoStack() {
 
@@ -27,7 +26,6 @@ public class UndoStack {
 
     public void addElement(UIElement element) {
         allElements.put(element.getID(), element);
-        reverseElements.put(element, element.getID());
     }
 
     public UIElement getElement(int datapointID) {
@@ -35,10 +33,10 @@ public class UndoStack {
     }
 
     public void addTimestamp(UIElement element) {
-        if(!reverseElements.containsKey(element)) {
+        if(!allElements.containsKey(element.getID())) {
             addElement(element);
         }
-        inputStack.add(reverseElements.get(element));
+        inputStack.add(element.getID());
         timestamps.add(calendar.getTimeInMillis());
     }
 

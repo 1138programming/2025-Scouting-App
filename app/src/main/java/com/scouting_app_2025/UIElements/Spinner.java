@@ -32,7 +32,7 @@ public class Spinner extends UIElement {
 
     @Override
     public void clicked() {
-        ((MainActivity)context).updateTabletInformation();
+        super.clicked();
     }
 
     @Override

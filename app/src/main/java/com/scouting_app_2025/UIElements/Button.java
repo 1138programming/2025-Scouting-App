@@ -4,28 +4,34 @@ import static com.scouting_app_2025.MainActivity.datapointEventValue;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.view.View;
 
-import com.scouting_app_2025.MainActivity;
-
-public class Button extends UIElement {
-    private final android.widget.Button button;
+public class Button<T extends View> extends UIElement {
+    private final T button;
     private final UndoStack undostack;
     private final ButtonAlt buttonAlt;
     private final boolean dataTracking;
     private final int titleLength;
     private int maxValue = 99;
     private int minValue = 0;
-    public Button(int datapointID, android.widget.Button button, Context context, UndoStack undoStack) {
+    public Button(int datapointID, T button, Context context, UndoStack undoStack) {
         super(datapointID, context);
-        this.button = button;
         this.undostack = undoStack;
+        this.button = button;
         this.dataTracking = true;
         this.buttonAlt = new ButtonAlt(this);
-        this.titleLength = button.getText().length()-1;
+        if(button instanceof android.widget.Button) {
+            this.titleLength = ((android.widget.Button)button).getText().length() - 1;
+        }
+        else {
+            this.titleLength = 0;
+        }
+
         button.setOnClickListener(view -> clicked());
     }
 
-    public Button(int datapointID, android.widget.Button button, Context context) {
+    public Button(int datapointID, T button, Context context) {
         super(datapointID, context);
         this.button = button;
         this.undostack = null;
@@ -43,17 +49,24 @@ public class Button extends UIElement {
             undostack.addTimestamp(this);
         }
     }
-
-    public int getColor() {
-        return ((ColorDrawable)button.getBackground()).getColor();
+    public Drawable getColor() {
+        return button.getBackground();
     }
 
-    public void setColor(int color) {
-        button.setBackgroundColor(color);
+    public void setColor(Drawable color) {
+        button.setBackground(color);
     }
 
-    public void changeButtonColor() {
+    public void addAlt(int datapointID, Drawable color) {
+        buttonAlt.addProfile(datapointID, color);
+    }
 
+    public void changeButtonColor(int profileIndex) {
+        buttonAlt.setProfile(profileIndex);
+    }
+
+    public void cycleButtonColor() {
+        buttonAlt.cycleProfile();
     }
 
     /**
@@ -91,8 +104,9 @@ public class Button extends UIElement {
      * was updated or not due to it being at max value.
      */
     private boolean increment() {
+        if(!(button instanceof android.widget.Button)) return false;
         if(!dataTracking) return false;
-        String text = button.getText().toString();
+        String text = ((android.widget.Button)button).getText().toString();
         boolean updated = true;
         int num = Integer.parseInt(text);
         if (num < maxValue) {
@@ -100,7 +114,7 @@ public class Button extends UIElement {
             updated = false;
         }
         text = String.valueOf(num);
-        button.setText(text);
+        ((android.widget.Button)button).setText(text);
         return updated;
     }
 
@@ -110,12 +124,13 @@ public class Button extends UIElement {
      * to track if the decrement was successful because this is only used by {@link Button#undo()}
      */
     private void decrement() {
-        String text = button.getText().toString();
+        if(!(button instanceof android.widget.Button)) return;
+        String text = ((android.widget.Button)button).getText().toString();
         int num = Integer.parseInt(text);
         if (num > minValue) {
             num--;
         }
         text = String.valueOf(num);
-        button.setText(text);
+        ((android.widget.Button)button).setText(text);
     }
 }
