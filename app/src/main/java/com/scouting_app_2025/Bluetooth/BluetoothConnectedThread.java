@@ -3,7 +3,10 @@ package com.scouting_app_2025.Bluetooth;
 import static com.scouting_app_2025.MainActivity.TAG;
 
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.util.Log;
+
+import com.scouting_app_2025.MainActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +18,7 @@ import java.util.Arrays;
 import java.security.MessageDigest;
 
 public class BluetoothConnectedThread extends Thread {
+    private final Context context;
     private final BluetoothSocket socket;
     private final InputStream inputStream;
     private final OutputStream outputStream;
@@ -30,8 +34,9 @@ public class BluetoothConnectedThread extends Thread {
     /**
      * @Info:
      */
-    public BluetoothConnectedThread(BluetoothSocket socket) {
+    public BluetoothConnectedThread(BluetoothSocket socket, Context context) {
         this.socket = socket;
+        this.context = context;
 
         //creates temporary input and output stream objects
         InputStream tmpIn = null;
@@ -52,6 +57,7 @@ public class BluetoothConnectedThread extends Thread {
         //sets actual variables to temp versions
         inputStream = tmpIn;
         outputStream = tmpOut;
+        ((MainActivity)this.context).setConnectedThread(this);
     }
 
     @Override
@@ -113,8 +119,8 @@ public class BluetoothConnectedThread extends Thread {
 
     /**
      * @param code used to specify what information is going to be sent or received <p>
-     *     &nbsp;&nbsp;1 - send match data<p>
-     *     &nbsp;&nbsp;2 - send tablet information<p>
+     * &nbsp;&nbsp;1 - send match data<p>
+     * &nbsp;&nbsp;2 - send tablet information<p>
      *     -1 - check if lists of teams and matches are up to date <p>
      *     -2 - update lists of teams and matches <p>
      *      {@code IMPORTANT} numbers -1 and -2 shouldn't be used with this function.
@@ -140,7 +146,7 @@ public class BluetoothConnectedThread extends Thread {
     public boolean checkLists() {
         int byteLength;
         try {
-            write(new byte[]{3});
+            write(new byte[]{-1});
             read(3);
             byteLength = ByteBuffer.wrap(buffer).getInt();
             sendAck();
@@ -168,6 +174,7 @@ public class BluetoothConnectedThread extends Thread {
         catch(CommErrorException e) {
             Log.e(TAG, "Communication exchange failed");
         }
+
     }
 
     //used to flush stream and close socket

@@ -14,20 +14,13 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import com.scouting_app_2025.MainActivity;
-import com.scouting_app_2025.PermissionManager;
 
 import java.io.IOException;
 import java.util.UUID;
 
 public class BluetoothReceiver extends BroadcastReceiver {
-    BluetoothSocket socket;
-    BluetoothConnectedThread connectedThread;
-    Context context;
 
-    public BluetoothReceiver(Context context) {
-        super();
-        this.context = context;
-    }
+    public BluetoothReceiver() {}
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -80,9 +73,9 @@ public class BluetoothReceiver extends BroadcastReceiver {
 
                         if(device != null) {
                             try {
-                                socket = device.createRfcommSocketToServiceRecord(MY_UUID);
+                                BluetoothSocket socket = device.createRfcommSocketToServiceRecord(MY_UUID);
                                 socket.connect();
-                                connectedThread = new BluetoothConnectedThread(socket);
+                                BluetoothConnectedThread connectedThread = new BluetoothConnectedThread(socket, context);
                                 ((MainActivity)context).setConnectedThread(connectedThread);
                                 break;
                             } catch (IOException e) {
