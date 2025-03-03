@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Team1138ScoutingApp";
     public static final UUID MY_UUID = UUID.fromString("0007EA11-1138-1000-5465-616D31313338");
     private ActivityMainBinding binding;
+    public static Context context;
     public BluetoothConnectedThread connectedThread;
     public PreAutonFragment preAuton = new PreAutonFragment();
     public AutonStart autonStart = new AutonStart();
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public PostMatchFragment postMatch = new PostMatchFragment();
     public ConfirmSubmit confirmSubmit = new ConfirmSubmit();
     public PermissionManager permissionManager = new PermissionManager(this);
-    public GUIManager guiManager = new GUIManager(this);
+    public GUIManager guiManager = new GUIManager();
     public static Calendar calendar;
     public final static String datapointEventValue = "Event";
     private boolean connectivity = false;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
      * it looks at {@code connectivity} to make sure GUI element is accurate.
      */
     private void updateConnectivity() {
-        preAuton.setBtStatus(connectivity);
+        runOnUiThread(() -> preAuton.setBtStatus(connectivity));
     }
 
     /**
@@ -78,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
     private void createReceiver() {
         BluetoothReceiver receiver = new BluetoothReceiver();
         IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
-        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
         filter.addAction(BluetoothDevice.ACTION_FOUND);
         filter.addAction(BluetoothDevice.ACTION_UUID);
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
@@ -131,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         calendar = Calendar.getInstance();
+        context = this;
+
         permissionManager.addPermission(BLUETOOTH_CONNECT);
         permissionManager.addPermission(BLUETOOTH_SCAN);
         permissionManager.addPermission(ACCESS_FINE_LOCATION);

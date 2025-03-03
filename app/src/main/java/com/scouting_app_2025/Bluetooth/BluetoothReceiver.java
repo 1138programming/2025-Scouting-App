@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class BluetoothReceiver extends BroadcastReceiver {
-
     public BluetoothReceiver() {}
 
     @Override
@@ -37,7 +36,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
         if (device != null) {
             deviceAddress = device.getAddress();
             //device isn't guaranteed to have a name, so we need to check
-            if (((MainActivity)context).permissionManager.checkPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
+            if (((MainActivity)MainActivity.context).permissionManager.checkPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
                 if(device.getName() != null) {
                     deviceName = device.getName();
                     deviceTitle = deviceAddress + " - (" + deviceName + ")";
@@ -47,16 +46,8 @@ public class BluetoothReceiver extends BroadcastReceiver {
                 }
             }
         }
-
-        //updates bluetooth connected state on the UI
-        if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
-            ((MainActivity)context).setConnectivity(true);
-        } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
-            ((MainActivity)context).setConnectivity(false);
-        }
-
         //triggered in response to call to get UUIDs with SDP (called by ACTION_FOUND)
-        else if (BluetoothDevice.ACTION_UUID.equals(action)) {
+        if (BluetoothDevice.ACTION_UUID.equals(action)) {
             Log.i(TAG, "Checking UUID(s) from device: " + deviceTitle);
 
             //stores all received UUIDs
@@ -76,7 +67,8 @@ public class BluetoothReceiver extends BroadcastReceiver {
                                 BluetoothSocket socket = device.createRfcommSocketToServiceRecord(MY_UUID);
                                 socket.connect();
                                 BluetoothConnectedThread connectedThread = new BluetoothConnectedThread(socket, context);
-                                ((MainActivity)context).setConnectedThread(connectedThread);
+                                ((MainActivity)MainActivity.context).setConnectedThread(connectedThread);
+                                ((MainActivity)MainActivity.context).setConnectivity(true);
                                 break;
                             } catch (IOException e) {
                                 Log.e(TAG, "Failed to " + e);
@@ -97,7 +89,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
             //Format: "Device Found: [deviceAddress] - ([deviceName])"
             else if (BluetoothDevice.ACTION_FOUND.equals((action))) {
                 Log.i(TAG, "Device Found: " + deviceTitle);
-                if(device!= null) {
+                if(device!= null && device.getName() != null) {
                     device.fetchUuidsWithSdp();
                 }
             }

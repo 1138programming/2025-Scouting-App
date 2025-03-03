@@ -1,32 +1,31 @@
 package com.scouting_app_2025.UIElements;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class GUIManager {
     UndoStack undoStack;
-    Context context;
-    ArrayList<Spinner> tabletInfoElements = new ArrayList<>();
+    HashMap<Integer, Spinner> tabletInfoElements = new HashMap<>();
     HashMap<Integer, UIElement> nonStackElements = new HashMap<>();
     HashMap<Integer, ButtonColorChanger> colorChangers = new HashMap<>();
-    public GUIManager(Context context) {
-        this.context = context;
+    public GUIManager() {
         undoStack = new UndoStack();
     }
 
-    public int createColorChanger(ArrayList<Integer> changerButtonIDs, android.widget.Button button, boolean dataStoring, ArrayList<Drawable> colors) {
+    public void createColorChanger(ArrayList<Integer> changerButtonIDs, android.widget.Button button, boolean dataStoring, ArrayList<Drawable> colors) {
         createButton(changerButtonIDs.get(0), button, dataStoring);
         Button createdButton = (Button)Objects.requireNonNull((dataStoring ? undoStack.getElement(changerButtonIDs.get(0))
                 : nonStackElements.get(changerButtonIDs.get(0))));
-        colorChangers.put(colorChangers.size(), new ButtonColorChanger(createdButton, colors));
-        for(int i = 1; i < changerButtonIDs.size() && i < colors.size(); i++) {
-            createdButton.addAlt(changerButtonIDs.get(i), colors.get(i));
+        colors.add(0, button.getBackground());
+        colorChangers.put(changerButtonIDs.get(0), new ButtonColorChanger(createdButton, colors));
+        for(int i = 1; i < changerButtonIDs.size() && i < colors.size()-1; i++) {
+            createdButton.addAlt(changerButtonIDs.get(i), colors.get(i-1));
         }
-        return colorChangers.size()-1;
     }
     public void createColorChangerButton(int changerButtonID, ArrayList<Integer> datapointIDs, android.widget.Button button, boolean dataStoring) {
         createButton(datapointIDs.get(0), button, dataStoring);
@@ -40,29 +39,43 @@ public class GUIManager {
         }
     }
 
-    public void createButton(int datapointID, android.widget.Button button, boolean dataStoring) {
-        if(dataStoring) {
-            undoStack.addElement(new Button<>(datapointID, button, context, undoStack));
+    public <T extends View> void createUndoRedoButton(int datapointID, T button, boolean undo) {
+        createButton(datapointID, button, false);
+        if(undo) {
+            Objects.requireNonNull(nonStackElements.get(datapointID)).setOnClickFunction(() -> undoStack.undo());
         }
         else {
-            nonStackElements.put(datapointID, new Button<>(datapointID, button, context));
+            Objects.requireNonNull(nonStackElements.get(datapointID)).setOnClickFunction(() -> undoStack.redo());
+        }
+    }
+
+    public <T extends View> void createButton(int datapointID, T button, boolean dataStoring) {
+        if(dataStoring) {
+            undoStack.addElement(new Button<>(datapointID, button, undoStack));
+        }
+        else {
+            nonStackElements.put(datapointID, new Button<>(datapointID, button));
         }
     }
 
     public void createCheckbox(int datapointID, android.widget.CheckBox checkbox, boolean locked) {
-        undoStack.addElement(new Checkbox(datapointID, checkbox, locked, context, undoStack));
+        undoStack.addElement(new Checkbox(datapointID, checkbox, locked, undoStack));
     }
 
     public void createSpinner(int datapointID, android.widget.Spinner spinner) {
-        nonStackElements.put(datapointID, new Spinner(datapointID, spinner, context));
+        nonStackElements.put(datapointID, new Spinner(datapointID, spinner));
     }
     public void createTabletInfoSpinner(int datapointID, android.widget.Spinner spinner) {
-        tabletInfoElements.add(new Spinner(datapointID, spinner, context));
+        tabletInfoElements.put(datapointID, new Spinner(datapointID, spinner));
     }
 
     public void addAction(int elementID, Runnable runnable) {
         if(elementID > 0) {
             undoStack.getElement(elementID).setOnClickFunction(runnable);
+        }
+        //if the elementID is -1, -2, or -4, then it is tablet info
+        else if(elementID > -3 || elementID == -4) {
+            Objects.requireNonNull(tabletInfoElements.get(elementID)).setOnClickFunction(runnable);
         }
         else {
             Objects.requireNonNull(nonStackElements.get(elementID)).setOnClickFunction(runnable);
@@ -71,7 +84,7 @@ public class GUIManager {
 
     public String getTabletInformation() {
         StringBuilder tabletInfo = new StringBuilder();
-        for(Spinner element : tabletInfoElements) {
+        for(Spinner element : tabletInfoElements.values()) {
             tabletInfo.append(element.getValue());
             tabletInfo.append(": ");
         }

@@ -4,32 +4,6 @@ import java.util.EnumMap;
 import java.util.HashMap;
 
 public class DatapointIDs {
-    public enum NonDataEnum{
-        ScouterName,
-        MatchNumber,
-        TeamColor,
-        TeamNumber,
-        PreAutonNext,
-        ArchiveHamburger,
-        AutonStartBack,
-        AutonStartStart,
-        AutonUndo,
-        AutonRedo,
-        AutonMissedScored,
-        AutonBack,
-        AutonNext,
-        TeleopStartBack,
-        TeleopStartStart,
-        TeleopUndo,
-        TeleopRedo,
-        TeleopMissedScored,
-        TeleopBack,
-        TeleopNext,
-        PostMatchBack,
-        PostMatchSubmit,
-        ConfirmSubmitCancel,
-        ConfirmSubmitSubmit
-    }
     public static final HashMap<Integer, String> datapointIDs = new HashMap<Integer,String>();
     public static final EnumMap<NonDataEnum, Integer> nonDataIDs = new EnumMap<>(NonDataEnum.class);
 
@@ -90,20 +64,22 @@ public class DatapointIDs {
         nonDataIDs.put(NonDataEnum.AutonStartStart, -8);
         nonDataIDs.put(NonDataEnum.AutonUndo, -9);
         nonDataIDs.put(NonDataEnum.AutonRedo, -10);
-        nonDataIDs.put(NonDataEnum.AutonMissedScored, -11);
-        nonDataIDs.put(NonDataEnum.AutonBack, -12);
-        nonDataIDs.put(NonDataEnum.AutonNext, -13);
-        nonDataIDs.put(NonDataEnum.TeleopStartBack, -14);
-        nonDataIDs.put(NonDataEnum.TeleopStartStart, -15);
-        nonDataIDs.put(NonDataEnum.TeleopUndo, -16);
-        nonDataIDs.put(NonDataEnum.TeleopRedo, -17);
-        nonDataIDs.put(NonDataEnum.TeleopMissedScored, -18);
-        nonDataIDs.put(NonDataEnum.TeleopBack, -19);
-        nonDataIDs.put(NonDataEnum.TeleopNext, -20);
-        nonDataIDs.put(NonDataEnum.PostMatchBack, -21);
-        nonDataIDs.put(NonDataEnum.PostMatchSubmit, -22);
+        nonDataIDs.put(NonDataEnum.AutonScored, -11);
+        nonDataIDs.put(NonDataEnum.AutonMissed, -12);
+        nonDataIDs.put(NonDataEnum.AutonBack, -13);
+        nonDataIDs.put(NonDataEnum.AutonNext, -14);
+        nonDataIDs.put(NonDataEnum.TeleopStartBack, -15);
+        nonDataIDs.put(NonDataEnum.TeleopStartStart, -16);
+        nonDataIDs.put(NonDataEnum.TeleopUndo, -17);
+        nonDataIDs.put(NonDataEnum.TeleopRedo, -18);
+        nonDataIDs.put(NonDataEnum.TeleopScored, -19);
+        nonDataIDs.put(NonDataEnum.TeleopMissed, -20);
+        nonDataIDs.put(NonDataEnum.TeleopBack, -21);
+        nonDataIDs.put(NonDataEnum.TeleopNext, -22);
+        nonDataIDs.put(NonDataEnum.PostMatchBack, -23);
+        nonDataIDs.put(NonDataEnum.PostMatchSubmit, -24);
         nonDataIDs.put(NonDataEnum.ConfirmSubmitCancel, -23);
-        nonDataIDs.put(NonDataEnum.ConfirmSubmitSubmit, -24);
+        nonDataIDs.put(NonDataEnum.ConfirmSubmitSubmit, -22);
 
     }
 }

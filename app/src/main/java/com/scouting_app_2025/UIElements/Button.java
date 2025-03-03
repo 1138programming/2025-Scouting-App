@@ -2,8 +2,6 @@ package com.scouting_app_2025.UIElements;
 
 import static com.scouting_app_2025.MainActivity.datapointEventValue;
 
-import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -15,8 +13,8 @@ public class Button<T extends View> extends UIElement {
     private final int titleLength;
     private int maxValue = 99;
     private int minValue = 0;
-    public Button(int datapointID, T button, Context context, UndoStack undoStack) {
-        super(datapointID, context);
+    public Button(int datapointID, T button, UndoStack undoStack) {
+        super(datapointID);
         this.undostack = undoStack;
         this.button = button;
         this.dataTracking = true;
@@ -31,13 +29,14 @@ public class Button<T extends View> extends UIElement {
         button.setOnClickListener(view -> clicked());
     }
 
-    public Button(int datapointID, T button, Context context) {
-        super(datapointID, context);
+    public Button(int datapointID, T button) {
+        super(datapointID);
         this.button = button;
         this.undostack = null;
         this.dataTracking = false;
         this.buttonAlt = new ButtonAlt(this);
         this.titleLength = 0;
+        button.setOnClickListener(view -> clicked());
     }
 
 

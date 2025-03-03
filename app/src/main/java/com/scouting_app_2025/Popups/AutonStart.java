@@ -13,13 +13,15 @@ import androidx.navigation.Navigation;
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
+
+import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.AutonStartFragmentBinding;
 
 import java.util.Objects;
 
 public class AutonStart extends Fragment {
     AutonStartFragmentBinding binding;
-    GUIManager guiManager = new GUIManager(getContext());
+    GUIManager guiManager = new GUIManager();
     public AutonStart() {
 
     }
@@ -34,15 +36,15 @@ public class AutonStart extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get("Auton Start Back")),
+        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartBack)),
                 binding.backButton, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get("Auton Start Back")), () ->
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartBack)), () ->
             Navigation.findNavController(view).navigate(R.id.cancel)
         );
 
-        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get("Auton Start Start")),
+        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartStart)),
                 binding.startButton, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get("Auton Start Start")), () ->
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartStart)), () ->
                 Navigation.findNavController(view).navigate(R.id.start)
         );
     }

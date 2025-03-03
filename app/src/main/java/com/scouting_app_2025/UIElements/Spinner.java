@@ -12,11 +12,9 @@ import java.util.ArrayList;
 
 public class Spinner extends UIElement {
     private final android.widget.Spinner spinner;
-    private final Context context;
-    public Spinner(int datapointID, android.widget.Spinner spinner, Context context) {
+    public Spinner(int datapointID, android.widget.Spinner spinner) {
         super(datapointID);
         this.spinner = spinner;
-        this.context = context;
         this.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -45,7 +43,7 @@ public class Spinner extends UIElement {
         spinnerList.add("Other");
         spinnerList.addAll(providedList);
         ArrayAdapter<CharSequence> listAdapter
-                = new ArrayAdapter<>(context, R.layout.spinner_layout, spinnerList);
+                = new ArrayAdapter<>((MainActivity)MainActivity.context, R.layout.spinner_layout, spinnerList);
         listAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner.setAdapter(listAdapter);
     }

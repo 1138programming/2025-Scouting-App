@@ -15,17 +15,16 @@ import androidx.navigation.Navigation;
 import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
+import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.PreAutonFragmentBinding;
 
-import static com.scouting_app_2025.UIElements.DatapointIDs.datapointIDs;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
-import com.scouting_app_2025.UIElements.DatapointIDs.NonDataEnum;
 
 import java.util.Objects;
 
 public class PreAutonFragment extends Fragment {
     PreAutonFragmentBinding binding;
-    GUIManager guiManager = new GUIManager(getContext());
+    GUIManager guiManager = new GUIManager();
 
     public PreAutonFragment() {
 
@@ -41,7 +40,6 @@ public class PreAutonFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //sets connectivity based on connection after submitted
 
         guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)), binding.nameOfScouterSpinner);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)),
@@ -62,9 +60,9 @@ public class PreAutonFragment extends Fragment {
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
                 Navigation.findNavController(view).navigate(R.id.next)
         );
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
-                Navigation.findNavController(view).navigate(R.id.popup)
-        );
+//        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
+//                Navigation.findNavController(view).navigate(R.id.popup)
+//        );
     }
 
     public byte[] getTabletInformation() {
@@ -73,12 +71,12 @@ public class PreAutonFragment extends Fragment {
 
     public void setBtStatus(boolean status) {
         if(status) {
-            binding.btConnectionStatus.setText(getResources().getString(R.string.connected_status_title), TextView.BufferType.NORMAL);
-            Toast.makeText(this.getContext(), "connected", Toast.LENGTH_LONG).show();
+//            binding.btConnectionStatus.setText(getResources().getString(R.string.connected_status_title), TextView.BufferType.NORMAL);
+            Toast.makeText(MainActivity.context, "connected", Toast.LENGTH_LONG).show();
         }
         else {
-            binding.btConnectionStatus.setText(getResources().getString(R.string.disconnected_status_title), TextView.BufferType.NORMAL);
-            Toast.makeText(this.getContext(), "disconnected", Toast.LENGTH_LONG).show();
+//            binding.btConnectionStatus.setText(getResources().getString(R.string.disconnected_status_title), TextView.BufferType.NORMAL);
+            Toast.makeText(MainActivity.context, "disconnected", Toast.LENGTH_LONG).show();
         }
     }
 }

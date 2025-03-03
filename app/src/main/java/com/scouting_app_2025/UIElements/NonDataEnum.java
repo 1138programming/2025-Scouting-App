@@ -1,0 +1,30 @@
+package com.scouting_app_2025.UIElements;
+
+public enum NonDataEnum {
+    ScouterName	,
+    MatchNumber	,
+    TeamColor	,
+    TeamNumber	,
+    PreAutonNext	,
+    ArchiveHamburger	,
+    AutonStartBack	,
+    AutonStartStart	,
+    AutonUndo	,
+    AutonRedo	,
+    AutonScored	,
+    AutonMissed	,
+    AutonBack	,
+    AutonNext	,
+    TeleopStartBack	,
+    TeleopStartStart	,
+    TeleopUndo	,
+    TeleopRedo	,
+    TeleopScored	,
+    TeleopMissed	,
+    TeleopBack	,
+    TeleopNext	,
+    PostMatchBack	,
+    PostMatchSubmit	,
+    ConfirmSubmitCancel	,
+    ConfirmSubmitSubmit
+}

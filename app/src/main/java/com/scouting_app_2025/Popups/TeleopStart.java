@@ -14,13 +14,14 @@ import androidx.navigation.Navigation;
 
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
+import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.TeleopStartFragmentBinding;
 
 import java.util.Objects;
 
 public class TeleopStart extends Fragment {
     TeleopStartFragmentBinding binding;
-    GUIManager guiManager = new GUIManager(getContext());
+    GUIManager guiManager = new GUIManager();
     public TeleopStart() {
 
     }
@@ -35,15 +36,15 @@ public class TeleopStart extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get("Teleop Start Back")),
+        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartBack)),
                 binding.backButton, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get("Teleop Start Back")), () ->
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartBack)), () ->
                 Navigation.findNavController(view).navigate(R.id.cancel)
         );
 
-        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get("Teleop Start Start")),
+        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartStart)),
                 binding.startButton, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get("Teleop Start Start")), () ->
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartStart)), () ->
                 Navigation.findNavController(view).navigate(R.id.start)
         );
     }

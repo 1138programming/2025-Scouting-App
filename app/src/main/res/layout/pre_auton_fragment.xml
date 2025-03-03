@@ -43,7 +43,7 @@ tools:context=".Fragments.PreAutonFragment">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:text="@string/name_prompt_title"
             android:textColor="@color/off_white"
             android:textSize="45sp"
@@ -63,12 +63,12 @@ tools:context=".Fragments.PreAutonFragment">
             android:id="@+id/MatchNumberTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
             android:text="@string/match_number_title"
             android:textColor="@color/off_white"
             android:textSize="45sp"
+            app:layout_constraintBottom_toTopOf="@+id/teamColorTitle"
             app:layout_constraintStart_toStartOf="@+id/NameOfScouterTitle"
-            app:layout_constraintTop_toTopOf="@+id/NameOfScouterTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/NameOfScouterTitle" />
 
         <Spinner
             android:id="@+id/matchNumberSpinner"
@@ -83,23 +83,23 @@ tools:context=".Fragments.PreAutonFragment">
             android:id="@+id/teamColorTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
             android:text="@string/team_color_title"
             android:textColor="@color/off_white"
             android:textSize="48sp"
+            app:layout_constraintBottom_toTopOf="@+id/teamNoShowTitle"
             app:layout_constraintStart_toStartOf="@id/MatchNumberTitle"
-            app:layout_constraintTop_toTopOf="@+id/MatchNumberTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/NameOfScouterTitle" />
 
         <TextView
             android:id="@+id/teamNumberTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
             android:text="@string/team_prompt_title"
             android:textColor="@color/off_white"
             android:textSize="48sp"
+            app:layout_constraintBottom_toTopOf="@+id/teamNoShowTitle"
             app:layout_constraintStart_toStartOf="@+id/teamColorTitle"
-            app:layout_constraintTop_toTopOf="@+id/teamColorTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/teamColorTitle" />
 
         <Spinner
             android:id="@+id/teamNumberInput"
@@ -116,12 +116,13 @@ tools:context=".Fragments.PreAutonFragment">
             android:id="@+id/teamNoShowTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
             android:text="@string/no_show_title"
             android:textColor="@color/off_white"
             android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/teamNumberTitle"
-            app:layout_constraintTop_toTopOf="@+id/teamNumberTitle" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45" />
 
         <CheckBox
             android:id="@+id/noShowCheckbox"
@@ -173,13 +174,12 @@ tools:context=".Fragments.PreAutonFragment">
 
         <ImageView
             android:id="@+id/startingPosImage"
-            android:layout_width="465dp"
-            android:layout_height="450dp"
-            android:src="@drawable/frc_field_red"
+            android:layout_width="568.4dp"
+            android:layout_height="340dp"
             android:contentDescription="@string/field_image_desc"
+            android:src="@drawable/frc_field_red"
             app:layout_constraintBottom_toTopOf="@+id/nextButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/noShowCheckbox" />
 
@@ -228,7 +228,7 @@ tools:context=".Fragments.PreAutonFragment">
 
         <RadioGroup
             android:id="@+id/startingLocation"
-            android:layout_width="375dp"
+            android:layout_width="425dp"
             android:layout_height="70dp"
             android:layout_marginTop="50dp"
             android:background="@color/invisible"

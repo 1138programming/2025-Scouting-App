@@ -37,11 +37,8 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.bluetooth.device.action.ACL_Connected"/>
-                <action android:name="android.bluetooth.device.action.ACL_Disconnected"/>
                 <action android:name="android.bluetooth.device.action.UUID"/>
                 <action android:name="android.bluetooth.device.action.Discovery_Started"/>
-                <action android:name="android.bluetooth.device.action.ACL_Disconnected"/>
             </intent-filter>
         </receiver>
     </application>

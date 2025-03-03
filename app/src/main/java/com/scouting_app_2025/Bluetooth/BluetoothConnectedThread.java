@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +23,7 @@ public class BluetoothConnectedThread extends Thread {
     private final BluetoothSocket socket;
     private final InputStream inputStream;
     private final OutputStream outputStream;
+    private ByteBuffer byteBuffer;
     private byte[] buffer;
     private final String ack = "ACK";
     private final byte[] byteAck = ack.getBytes(StandardCharsets.UTF_8);
@@ -63,6 +65,11 @@ public class BluetoothConnectedThread extends Thread {
     @Override
     public void run() {
 
+    }
+
+    private void resetByteBuffer(int capacity) {
+        byteBuffer = ByteBuffer.allocate(capacity);
+        byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
     }
 
     /**
@@ -132,7 +139,8 @@ public class BluetoothConnectedThread extends Thread {
         try {
             write(new byte[]{(byte)code});
             readAck();
-            write(ByteBuffer.allocate(4).putInt(bytes.length).array());
+            resetByteBuffer(4);
+            write(byteBuffer.putInt(bytes.length).array());
             readAck();
             write(bytes);
         }
@@ -182,6 +190,7 @@ public class BluetoothConnectedThread extends Thread {
         try {
             outputStream.flush();
             socket.close();
+            ((MainActivity)MainActivity.context).setConnectivity(false);
         }
         catch(IOException e) {
             Log.e(TAG, "failed flush stream and close socket: ", e);
