@@ -1,22 +1,20 @@
 package com.scouting_app_2025.UIElements;
 
-import static com.scouting_app_2025.MainActivity.calendar;
-
-import android.graphics.drawable.Drawable;
-
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class ButtonColorChanger {
-    private final ArrayList<Drawable> secondaryColors;
+    private final ArrayList<Integer> secondaryColors;
     private boolean changedColor = false;
     private boolean lockedChanging = false;
-    private final HashMap<Button, Drawable> buttons = new HashMap<>();
+    private final HashMap<Button, Integer> buttons = new HashMap<>();
     private long lastClicked = 0;
     private int colorBuffer = 250;
-    public ButtonColorChanger(Button button, ArrayList<Drawable> colors) {
-        secondaryColors = colors;
+    public ButtonColorChanger(Button button, ArrayList<Integer> colors) {
+        this.secondaryColors = colors;
         button.setOnClickFunction(this::updateColorChanger);
+        buttons.put(button, button.getColor());
     }
     public void addButton(Button button) {
         button.setOnClickFunction(this::otherButtonPressed);
@@ -24,13 +22,13 @@ public class ButtonColorChanger {
     }
 
     public void otherButtonPressed() {
-        if(!lockedChanging) {
+        if(!lockedChanging && changedColor) {
             changeColor();
         }
     }
 
     public void updateColorChanger() {
-        long currClicked = calendar.getTimeInMillis();
+        long currClicked = Calendar.getInstance().getTimeInMillis();
         if(currClicked - lastClicked > colorBuffer) {
             changeColor();
             lockedChanging = false;
@@ -54,7 +52,7 @@ public class ButtonColorChanger {
         }
     }
 
-    public ArrayList<Drawable> getColors() {
+    public ArrayList<Integer> getColors() {
         return secondaryColors;
     }
 

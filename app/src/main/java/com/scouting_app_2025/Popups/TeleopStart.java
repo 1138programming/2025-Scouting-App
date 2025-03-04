@@ -48,4 +48,10 @@ public class TeleopStart extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.start)
         );
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "TeleopStartFragment";
+    }
 }

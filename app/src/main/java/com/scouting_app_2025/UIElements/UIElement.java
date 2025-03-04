@@ -39,10 +39,10 @@ public class UIElement {
         onClickFunctions.add(onClickFunction);
     }
     public void undo() {
-        Toast.makeText((MainActivity.context), "Undid " + datapointIDs.get(datapointID), Toast.LENGTH_SHORT).show();
+
     }
 
     public void redo() {
-        Toast.makeText((MainActivity.context), "Redid " + datapointIDs.get(datapointID), Toast.LENGTH_SHORT).show();
+
     }
 }

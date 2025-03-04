@@ -7,6 +7,7 @@ import static android.Manifest.permission.BLUETOOTH_ADVERTISE;
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
 import static android.Manifest.permission.BLUETOOTH_SCAN;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -15,6 +16,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
@@ -24,6 +26,7 @@ import android.util.Log;
 import com.scouting_app_2025.Bluetooth.BluetoothConnectedThread;
 import com.scouting_app_2025.Bluetooth.BluetoothReceiver;
 import com.scouting_app_2025.Fragments.AutonFragment;
+import com.scouting_app_2025.Fragments.FragmentTransManager;
 import com.scouting_app_2025.Fragments.PostMatchFragment;
 import com.scouting_app_2025.Fragments.PreAutonFragment;
 import com.scouting_app_2025.Fragments.TeleopFragment;
@@ -33,6 +36,7 @@ import com.scouting_app_2025.Popups.TeleopStart;
 import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -41,8 +45,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Team1138ScoutingApp";
     public static final UUID MY_UUID = UUID.fromString("0007EA11-1138-1000-5465-616D31313338");
     private ActivityMainBinding binding;
+    @SuppressLint("StaticFieldLeak")
     public static Context context;
     public BluetoothConnectedThread connectedThread;
+    public static FragmentTransManager ftm;
+    public ArrayList<Fragment> fragments = new ArrayList<>();
     public PreAutonFragment preAuton = new PreAutonFragment();
     public AutonStart autonStart = new AutonStart();
     public AutonFragment auton = new AutonFragment();
@@ -84,6 +91,16 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         this.registerReceiver(receiver, filter);
+
+        fragments.add(preAuton);
+        fragments.add(autonStart);
+        fragments.add(auton);
+        fragments.add(teleopStart);
+        fragments.add(teleop);
+        fragments.add(postMatch);
+        fragments.add(confirmSubmit);
+
+        ftm = new FragmentTransManager(fragments);
     }
 
     /**
@@ -141,11 +158,5 @@ public class MainActivity extends AppCompatActivity {
 
         permissionManager.requestPermissions();
         calendar.getTimeInMillis();
-
-        NavHostFragment navHostFragment =
-                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
-        NavGraph navGraph = navController.getNavInflater().inflate(R.navigation.nav_graph);
-        navController.setGraph(navGraph);
     }
 }

@@ -1,5 +1,7 @@
 package com.scouting_app_2025.Fragments;
 
+import android.content.res.ColorStateList;
+import android.graphics.drawable.ColorStateListDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -18,6 +21,8 @@ import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.PreAutonFragmentBinding;
 
+import static com.scouting_app_2025.MainActivity.TAG;
+import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
 
 import java.util.Objects;
@@ -41,6 +46,8 @@ public class PreAutonFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.nextButton.setBackgroundTintList(binding.nextButton.getBackgroundTintList());
+
         guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)), binding.nameOfScouterSpinner);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)),
                 () -> ((MainActivity)getContext()).updateTabletInformation());
@@ -58,11 +65,14 @@ public class PreAutonFragment extends Fragment {
         guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)),
                 binding.nextButton, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
-                Navigation.findNavController(view).navigate(R.id.next)
+                ftm.preAutonNext()
         );
-//        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
-//                Navigation.findNavController(view).navigate(R.id.popup)
-//        );
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "PreAutonFragment";
     }
 
     public byte[] getTabletInformation() {

@@ -1,9 +1,15 @@
 package com.scouting_app_2025.UIElements;
 
+import static com.scouting_app_2025.MainActivity.TAG;
 import static com.scouting_app_2025.MainActivity.datapointEventValue;
+import static com.scouting_app_2025.UIElements.DatapointIDs.datapointIDs;
 
-import android.graphics.drawable.Drawable;
+import android.content.res.ColorStateList;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import com.scouting_app_2025.MainActivity;
 
 public class Button<T extends View> extends UIElement {
     private final T button;
@@ -43,20 +49,21 @@ public class Button<T extends View> extends UIElement {
 
     @Override
     public void clicked() {
-        super.clicked();
-        if(increment()) {
+        if(increment(datapointID)) {
             undostack.addTimestamp(this);
         }
-    }
-    public Drawable getColor() {
-        return button.getBackground();
+        super.clicked();
     }
 
-    public void setColor(Drawable color) {
-        button.setBackground(color);
+    public int getColor() {
+        return button.getBackgroundTintList().getDefaultColor();
     }
 
-    public void addAlt(int datapointID, Drawable color) {
+    public void setColor(int color) {
+        button.setBackgroundTintList(ColorStateList.valueOf(color));
+    }
+
+    public void addAlt(int datapointID, int color) {
         buttonAlt.addProfile(datapointID, color);
     }
 
@@ -71,22 +78,45 @@ public class Button<T extends View> extends UIElement {
     /**
      * @Info: Called by {@link UndoStack} to decrease the value displayed on the button.
      */
-    @Override
-    public void undo() {
-        decrement();
+
+    public void undo(int datapointID) {
+        decrement(datapointID);
+        Toast.makeText((MainActivity.context), "Undid " + datapointIDs.get(datapointID), Toast.LENGTH_SHORT).show();
     }
 
     /**
      * @Info: Called by {@link UndoStack} to increase the value displayed on the button.
      */
-    @Override
-    public void redo() {
-        increment();
+    public void redo(int datapointID) {
+        increment(datapointID);
+        Toast.makeText((MainActivity.context), "Redid " + datapointIDs.get(datapointID), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public String getValue() {
         return datapointEventValue;
+    }
+
+    public int getCounter() {
+        if(button instanceof android.widget.Button) {
+            return Integer.parseInt(((android.widget.Button) button).getText().toString().substring(titleLength));
+        }
+        else return 0;
+    }
+
+    public void setCounter(int value) {
+        if(value > maxValue) {
+            value = maxValue;
+        }
+
+        if(button instanceof android.widget.Button) {
+            String title = ((android.widget.Button) button).getText().toString().substring(0,titleLength) + value;
+            ((android.widget.Button) button).setText(title);
+        }
+    }
+
+    public boolean isDataTracking() {
+        return dataTracking;
     }
 
     public void setMaxValue(int maxValue) {
@@ -102,18 +132,32 @@ public class Button<T extends View> extends UIElement {
      * @return Returns a {@code boolean} for whether or not the button's value
      * was updated or not due to it being at max value.
      */
-    private boolean increment() {
+    private boolean increment(int datapointID) {
         if(!(button instanceof android.widget.Button)) return false;
         if(!dataTracking) return false;
-        String text = ((android.widget.Button)button).getText().toString();
-        boolean updated = true;
-        int num = Integer.parseInt(text);
-        if (num < maxValue) {
-            num++;
-            updated = false;
+        int index = buttonAlt.getIndex(datapointID);
+        if(index == -1) return false;
+
+        boolean updated = false;
+        if(index == buttonAlt.getCurrentProfile()) {
+            String text = ((android.widget.Button) button).getText().toString();
+            int num = Integer.parseInt(text);
+            if (num < maxValue) {
+                num++;
+                updated = true;
+            }
+            text = String.valueOf(num);
+            ((android.widget.Button) button).setText(text);
+            return updated;
         }
-        text = String.valueOf(num);
-        ((android.widget.Button)button).setText(text);
+        else {
+            int counter = buttonAlt.getCounter(index);
+            if(counter < maxValue) {
+                counter++;
+                updated = true;
+            }
+            buttonAlt.setCounter(index, counter);
+        }
         return updated;
     }
 
@@ -122,14 +166,26 @@ public class Button<T extends View> extends UIElement {
      * (zero by default), it remains at the minimum. This doesn't have a {@code boolean}
      * to track if the decrement was successful because this is only used by {@link Button#undo()}
      */
-    private void decrement() {
+    private void decrement(int datapointID) {
         if(!(button instanceof android.widget.Button)) return;
-        String text = ((android.widget.Button)button).getText().toString();
-        int num = Integer.parseInt(text);
-        if (num > minValue) {
-            num--;
+        int index = buttonAlt.getIndex(datapointID);
+        if(index == -1) return;
+
+        if(index == buttonAlt.getCurrentProfile()) {
+            String text = ((android.widget.Button) button).getText().toString();
+            int num = Integer.parseInt(text);
+            if (num > minValue) {
+                num--;
+            }
+            text = String.valueOf(num);
+            ((android.widget.Button) button).setText(text);
         }
-        text = String.valueOf(num);
-        ((android.widget.Button)button).setText(text);
+        else {
+            int counter = buttonAlt.getCounter(index);
+            if(counter > minValue) {
+                counter--;
+            }
+            buttonAlt.setCounter(index, counter);
+        }
     }
 }

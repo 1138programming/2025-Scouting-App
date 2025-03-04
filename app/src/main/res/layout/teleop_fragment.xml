@@ -102,14 +102,14 @@
             android:text="@string/button_counter_default"
             android:textColor="@color/background_default"
             android:textSize="40sp"
-            app:layout_constraintBottom_toTopOf="@+id/level_two_scored"
+            app:layout_constraintBottom_toTopOf="@+id/level_one_scored"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/reef_image"
             app:layout_constraintTop_toBottomOf="@+id/level_four_scored"
             app:layout_constraintVertical_bias="0.22" />
 
         <Button
-            android:id="@+id/level_two_scored"
+            android:id="@+id/level_one_scored"
             android:layout_width="170dp"
             android:layout_height="70dp"
             android:backgroundTint="@color/chaminade_orange"
@@ -121,7 +121,7 @@
             app:layout_constraintStart_toEndOf="@+id/reef_image" />
 
         <Button
-            android:id="@+id/level_one_scored"
+            android:id="@+id/level_two_scored"
             android:layout_width="170dp"
             android:layout_height="70dp"
             android:backgroundTint="@color/chaminade_orange"
@@ -129,7 +129,7 @@
             android:textColor="@color/background_default"
             android:textSize="40sp"
 
-            app:layout_constraintBottom_toTopOf="@+id/level_two_scored"
+            app:layout_constraintBottom_toTopOf="@+id/level_one_scored"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/reef_image"
             app:layout_constraintTop_toBottomOf="@+id/level_three_scored" />
@@ -191,10 +191,10 @@
             android:text="@string/button_counter_default"
             android:textColor="@color/background_default"
             android:textSize="40sp"
-            app:layout_constraintBottom_toBottomOf="@+id/level_one_scored"
+            app:layout_constraintBottom_toBottomOf="@+id/level_two_scored"
             app:layout_constraintEnd_toStartOf="@+id/reef_image"
             app:layout_constraintStart_toEndOf="@+id/algae_removed"
-            app:layout_constraintTop_toTopOf="@+id/level_one_scored" />
+            app:layout_constraintTop_toTopOf="@+id/level_two_scored" />
 
         <Button
             android:id="@+id/swap_scored_missed"
@@ -272,7 +272,7 @@
             app:layout_constraintTop_toBottomOf="@+id/processorButton" />
 
         <CheckBox
-            android:id="@+id/leaveQuestionCheckBox"
+            android:id="@+id/hangAttemptedCheckbox"
             android:layout_width="120sp"
             android:layout_height="120sp"
             android:background="?android:attr/listChoiceIndicatorMultiple"

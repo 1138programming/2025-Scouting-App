@@ -1,11 +1,9 @@
 package com.scouting_app_2025.UIElements;
 
-import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 public class GUIManager {
@@ -17,14 +15,14 @@ public class GUIManager {
         undoStack = new UndoStack();
     }
 
-    public void createColorChanger(ArrayList<Integer> changerButtonIDs, android.widget.Button button, boolean dataStoring, ArrayList<Drawable> colors) {
+    public void createColorChanger(ArrayList<Integer> changerButtonIDs, android.widget.Button button, boolean dataStoring, ArrayList<Integer> colors) {
         createButton(changerButtonIDs.get(0), button, dataStoring);
         Button createdButton = (Button)Objects.requireNonNull((dataStoring ? undoStack.getElement(changerButtonIDs.get(0))
                 : nonStackElements.get(changerButtonIDs.get(0))));
-        colors.add(0, button.getBackground());
+        colors.add(0, button.getBackgroundTintList().getDefaultColor());
         colorChangers.put(changerButtonIDs.get(0), new ButtonColorChanger(createdButton, colors));
-        for(int i = 1; i < changerButtonIDs.size() && i < colors.size()-1; i++) {
-            createdButton.addAlt(changerButtonIDs.get(i), colors.get(i-1));
+        for(int i = 1; i < changerButtonIDs.size() && i < colors.size(); i++) {
+            createdButton.addAlt(changerButtonIDs.get(i), colors.get(i));
         }
     }
     public void createColorChangerButton(int changerButtonID, ArrayList<Integer> datapointIDs, android.widget.Button button, boolean dataStoring) {
@@ -33,7 +31,7 @@ public class GUIManager {
                 undoStack.getElement(datapointIDs.get(0)) : nonStackElements.get(datapointIDs.get(0))));
 
         Objects.requireNonNull(colorChangers.get(changerButtonID)).addButton(createdButton);
-        ArrayList<Drawable> colors = Objects.requireNonNull(colorChangers.get(changerButtonID)).getColors();
+        ArrayList<Integer> colors = Objects.requireNonNull(colorChangers.get(changerButtonID)).getColors();
         for(int i = 1; i < datapointIDs.size() && i < colors.size(); i++) {
             createdButton.addAlt(datapointIDs.get(i), colors.get(i));
         }
