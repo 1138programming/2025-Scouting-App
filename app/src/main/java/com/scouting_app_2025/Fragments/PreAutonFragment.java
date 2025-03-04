@@ -46,8 +46,6 @@ public class PreAutonFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.nextButton.setBackgroundTintList(binding.nextButton.getBackgroundTintList());
-
         guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)), binding.nameOfScouterSpinner);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)),
                 () -> ((MainActivity)getContext()).updateTabletInformation());
