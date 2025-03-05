@@ -14,15 +14,12 @@ public class Checkbox extends UIElement {
 
     @Override
     public void clicked() {
+        super.clicked();
         if (locking) {
             if(!checkbox.isChecked()) {
-                checkbox.setChecked(true);
                 checkbox.setEnabled(false);
+                undoStack.addTimestamp(this);
             }
-        }
-        else {
-            undoStack.addTimestamp(this);
-            checkbox.setChecked(!checkbox.isChecked());
         }
     }
 
@@ -35,19 +32,18 @@ public class Checkbox extends UIElement {
      * @Info: Called by both {@link Checkbox#undo()} and {@link Checkbox#redo()} functions
      * to update the status of the checkbox
      */
-    private void undoRedo() {
-        checkbox.setChecked(!checkbox.isChecked());
+    @Override
+    public void undo() {
         if(locking) {
-            checkbox.setEnabled(!checkbox.isEnabled());
+            checkbox.setChecked(false);
+            checkbox.setEnabled(true);
         }
     }
     @Override
-    public void undo() {
-        undoRedo();
-    }
-    @Override
     public void redo() {
-        undoRedo();
+        if(locking) {
+            checkbox.setChecked(true);
+            checkbox.setEnabled(false);
+        }
     }
-
 }

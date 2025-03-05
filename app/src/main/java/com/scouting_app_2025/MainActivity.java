@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         this.connectedThread = connectedThread;
     }
     public void updateTabletInformation() {
+        if(!connectivity) return;
         byte[] info = preAuton.getTabletInformation();
         connectedThread.sendInformation(info, 2);
     }

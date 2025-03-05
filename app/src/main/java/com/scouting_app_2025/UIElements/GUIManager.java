@@ -60,11 +60,25 @@ public class GUIManager {
         undoStack.addElement(new Checkbox(datapointID, checkbox, locked, undoStack));
     }
 
-    public void createSpinner(int datapointID, android.widget.Spinner spinner) {
-        nonStackElements.put(datapointID, new Spinner(datapointID, spinner));
+    public void createSpinner(int datapointID, android.widget.Spinner spinner, boolean addOther) {
+        nonStackElements.put(datapointID, new Spinner(datapointID, spinner, addOther));
     }
-    public void createTabletInfoSpinner(int datapointID, android.widget.Spinner spinner) {
-        tabletInfoElements.put(datapointID, new Spinner(datapointID, spinner));
+    public void createTabletInfoSpinner(int datapointID, android.widget.Spinner spinner, boolean addOther) {
+        tabletInfoElements.put(datapointID, new Spinner(datapointID, spinner, addOther));
+    }
+
+    public void setSpinner(int datapointID, ArrayList<CharSequence> list, boolean tabletInfo) {
+        if(tabletInfo) {
+            Objects.requireNonNull(tabletInfoElements.get(datapointID)).updateSpinnerList(list);
+        }
+        else {
+            if(datapointID > 0) {
+                Objects.requireNonNull((Spinner)undoStack.getElement(datapointID)).updateSpinnerList(list);
+            }
+            else {
+                Objects.requireNonNull((Spinner)nonStackElements.get(datapointID)).updateSpinnerList(list);
+            }
+        }
     }
 
     public void addAction(int elementID, Runnable runnable) {

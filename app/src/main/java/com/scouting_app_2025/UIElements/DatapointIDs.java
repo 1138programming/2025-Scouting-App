@@ -47,7 +47,7 @@ public class DatapointIDs {
         datapointIDs.put(37, "Teleop Processor Score");
         datapointIDs.put(38, "Teleop Processor Missed");
         datapointIDs.put(39, "Hang Attempted (boolean)");
-        datapointIDs.put(40, "Hang String:(Park Deep Shallow)");
+        datapointIDs.put(40, "Hang (String: Park Deep Shallow)");
         datapointIDs.put(41, "Hang Failed (boolean)");
         datapointIDs.put(42, "Disconnect (boolean)");
         datapointIDs.put(43, "Stuck String:(Coral Algae)");

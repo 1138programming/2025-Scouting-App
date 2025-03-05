@@ -1,5 +1,6 @@
 package com.scouting_app_2025.Popups;
 
+import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
 
 import android.os.Bundle;
@@ -39,13 +40,13 @@ public class TeleopStart extends Fragment {
         guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartBack)),
                 binding.backButton, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartBack)), () ->
-                Navigation.findNavController(view).navigate(R.id.cancel)
+                ftm.teleopStartBack()
         );
 
         guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartStart)),
                 binding.startButton, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartStart)), () ->
-                Navigation.findNavController(view).navigate(R.id.start)
+                ftm.teleopStartStart()
         );
     }
 

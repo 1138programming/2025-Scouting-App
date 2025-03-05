@@ -76,7 +76,7 @@ public class AutonFragment extends Fragment {
         guiManager.createColorChangerButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonScored)), new ArrayList<>(List.of(18,19)),
                 binding.processorButton,true);
 
-        guiManager.createCheckbox(20, binding.leaveQuestionCheckBox, false);
+        guiManager.createCheckbox(20, binding.leaveQuestionCheckBox, true);
 
         guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonBack)),
                 binding.backButton, false);

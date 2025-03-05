@@ -102,7 +102,7 @@ tools:context=".Fragments.PreAutonFragment">
             app:layout_constraintTop_toBottomOf="@+id/teamColorTitle" />
 
         <Spinner
-            android:id="@+id/teamNumberInput"
+            android:id="@+id/teamNumberSpinner"
             android:layout_width="150sp"
             android:layout_height="50dp"
             android:textColor="@color/off_white"
