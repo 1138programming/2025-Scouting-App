@@ -16,6 +16,7 @@ import android.util.Log;
 import com.scouting_app_2025.MainActivity;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public class BluetoothReceiver extends BroadcastReceiver {
@@ -69,6 +70,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
                                 BluetoothConnectedThread connectedThread = new BluetoothConnectedThread(socket, context);
                                 ((MainActivity)MainActivity.context).setConnectedThread(connectedThread);
                                 ((MainActivity)MainActivity.context).setConnectivity(true);
+                                connectedThread.sendInformation("AAAAHHHH".getBytes(StandardCharsets.UTF_8), 2);
                                 ((MainActivity)MainActivity.context).updateBtScoutingInfo();
                                 break;
                             } catch (IOException e) {

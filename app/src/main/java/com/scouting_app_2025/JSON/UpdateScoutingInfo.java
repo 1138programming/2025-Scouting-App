@@ -1,6 +1,7 @@
 package com.scouting_app_2025.JSON;
 
 import static com.scouting_app_2025.MainActivity.TAG;
+import static com.scouting_app_2025.MainActivity.context;
 
 import android.util.Log;
 
@@ -18,10 +19,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class UpdateScoutingInfo {
 
-    private final File folderDir = new File("/data/data/com.scouting_app_2025/files/scoutingData");
+    private final File folderDir = context.getFilesDir();
     private final String fileName = "scouterInfo.txt";
     boolean fileExists = true;
 
@@ -36,7 +38,12 @@ public class UpdateScoutingInfo {
 
     public void saveToFile(String text) throws IOException {
         if(!fileExists) return;
-        FileWriter fileWriter = new FileWriter(new File(folderDir, fileName), false);
+
+        File targetFile = new File(folderDir, fileName);
+        if (!targetFile.exists()) {
+            targetFile.createNewFile();
+        }
+        FileWriter fileWriter = new FileWriter(targetFile, false);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(text);
 
@@ -68,6 +75,7 @@ public class UpdateScoutingInfo {
         }
         catch (IOException e) {
             Log.e(TAG, e.toString());
+            return "";
         }
         return sb.toString();
     }
@@ -79,7 +87,14 @@ public class UpdateScoutingInfo {
         }
         String[] listsSplit = fileData.split("\n");
         String[] teamList = listsSplit[1].split(",");
-            Arrays.sort(teamList);
+            Arrays.sort(teamList, new Comparator<String>() {
+                @Override
+                public int compare(String s, String s2) {
+                    int i = Integer.parseInt(s);
+                    int i2 = Integer.parseInt(s2);
+                    return Integer.compare(i, i2);
+                }
+            });
 
         String[] scoutersWithNum = listsSplit[0].split(",");
             Arrays.sort(scoutersWithNum);

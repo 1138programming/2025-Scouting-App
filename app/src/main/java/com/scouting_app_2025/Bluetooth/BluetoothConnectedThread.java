@@ -152,13 +152,14 @@ public class BluetoothConnectedThread extends Thread {
             read(4);
 
             resetByteBuffer(4);
-            byteLength = byteBuffer.put(buffer).getInt();
+            byteLength = byteBuffer.put(buffer).getInt(0);
             sendAck();
 
             resetByteBuffer(byteLength);
             read(byteLength);
+            sendAck();
 
-            return byteBuffer.put(buffer).getInt() ==
+            return byteBuffer.put(buffer).getInt(0) ==
                     MurmurHash.makeHash((new UpdateScoutingInfo()).getDataFromFile().getBytes(StandardCharsets.UTF_8));
         }
         catch(CommErrorException e) {
@@ -176,7 +177,7 @@ public class BluetoothConnectedThread extends Thread {
 
             resetByteBuffer(4);
             read(4);
-            listLength = byteBuffer.put(buffer).getInt();
+            listLength = byteBuffer.put(buffer).getInt(0);
             sendAck();
             read(listLength);
             sendAck();
