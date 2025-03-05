@@ -30,6 +30,7 @@ import com.scouting_app_2025.Fragments.FragmentTransManager;
 import com.scouting_app_2025.Fragments.PostMatchFragment;
 import com.scouting_app_2025.Fragments.PreAutonFragment;
 import com.scouting_app_2025.Fragments.TeleopFragment;
+import com.scouting_app_2025.JSON.UpdateScoutingInfo;
 import com.scouting_app_2025.Popups.AutonStart;
 import com.scouting_app_2025.Popups.ConfirmSubmit;
 import com.scouting_app_2025.Popups.TeleopStart;
@@ -132,6 +133,12 @@ public class MainActivity extends AppCompatActivity {
     public void updateTabletInformation() {
         byte[] info = preAuton.getTabletInformation();
         connectedThread.sendInformation(info, 2);
+    }
+    public void updateBtScoutingInfo() {
+        if (!connectedThread.checkLists()) {
+            connectedThread.updateLists();
+        }
+        preAuton.setScoutingInfo((new UpdateScoutingInfo()).getSplitFileData());
     }
     /**
      * @Info: Called when tablets initially connect and is used
