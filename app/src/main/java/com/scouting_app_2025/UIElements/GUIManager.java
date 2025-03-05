@@ -102,4 +102,9 @@ public class GUIManager {
         }
         return tabletInfo.delete(tabletInfo.length()-2,tabletInfo.length()).toString();
     }
+
+    public void setTabletInfoElements(ArrayList<ArrayList<CharSequence>> info) {
+        setSpinner(-1, info.get(0), true); // scouterName
+        setSpinner(-4, info.get(2), true); // teamNum
+    }
 }

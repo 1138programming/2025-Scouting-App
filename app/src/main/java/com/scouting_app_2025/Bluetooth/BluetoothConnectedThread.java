@@ -6,6 +6,8 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.util.Log;
 
+import com.scouting_app_2025.JSON.MurmurHash;
+import com.scouting_app_2025.JSON.UpdateScoutingInfo;
 import com.scouting_app_2025.MainActivity;
 
 import java.io.IOException;
@@ -28,11 +30,6 @@ public class BluetoothConnectedThread extends Thread {
     private final String ack = "ACK";
     private final byte[] byteAck = ack.getBytes(StandardCharsets.UTF_8);
     private MessageDigest messageDigest;
-    /**
-     * @Info:
-     */
-    public static ArrayList<ArrayList<String>> downloadedData;
-
     /**
      * @Info:
      */
@@ -95,11 +92,8 @@ public class BluetoothConnectedThread extends Thread {
     private void readAck() throws CommErrorException {
         read(3);
 
-        byte[] sentAck = new byte[]{buffer[0],buffer[1],buffer[2]};
-
-        String message = new String(sentAck, StandardCharsets.UTF_8);
+        String message = new String(buffer, StandardCharsets.UTF_8);
         if(!message.equals(ack)) {
-
             throw new CommErrorException();
         }
     }
@@ -155,11 +149,17 @@ public class BluetoothConnectedThread extends Thread {
         int byteLength;
         try {
             write(new byte[]{-1});
-            read(3);
-            byteLength = ByteBuffer.wrap(buffer).getInt();
+            read(4);
+
+            resetByteBuffer(4);
+            byteLength = byteBuffer.put(buffer).getInt();
             sendAck();
+
+            resetByteBuffer(byteLength);
             read(byteLength);
-            return ByteBuffer.wrap(buffer).getInt() == Arrays.deepHashCode(downloadedData.toArray());
+
+            return byteBuffer.put(buffer).getInt() ==
+                    MurmurHash.makeHash((new UpdateScoutingInfo()).getDataFromFile().getBytes(StandardCharsets.UTF_8));
         }
         catch(CommErrorException e) {
             Log.e(TAG, "Communication exchange failed");
@@ -170,16 +170,20 @@ public class BluetoothConnectedThread extends Thread {
      * @Info:
      */
     public void updateLists() {
-        int byteLength;
+        int listLength;
         try {
-            write(new byte[]{4});
-            read(3);
-            byteLength = ByteBuffer.wrap(buffer).getInt();
+            write(new byte[]{-2});
+
+            resetByteBuffer(4);
+            read(4);
+            listLength = byteBuffer.put(buffer).getInt();
             sendAck();
-            read(byteLength);
+            read(listLength);
             sendAck();
+
+            (new UpdateScoutingInfo()).saveToFile(new String(buffer, StandardCharsets.UTF_8));
         }
-        catch(CommErrorException e) {
+        catch(CommErrorException | IOException e) {
             Log.e(TAG, "Communication exchange failed");
         }
 

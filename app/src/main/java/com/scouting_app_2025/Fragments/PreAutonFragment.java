@@ -24,6 +24,7 @@ import java.util.Objects;
 public class PreAutonFragment extends Fragment {
     PreAutonFragmentBinding binding;
     GUIManager guiManager = new GUIManager();
+    ArrayList<Integer> scouterIDs = new ArrayList<>();
 
     public PreAutonFragment() {
 
@@ -88,6 +89,14 @@ public class PreAutonFragment extends Fragment {
 
     public byte[] getTabletInformation() {
         return guiManager.getTabletInformation().getBytes();
+    }
+
+    public void setScoutingInfo(ArrayList<ArrayList<CharSequence>> list) {
+        for (CharSequence scouterNum : list.get(1)) {
+            String curr = scouterNum.toString();
+            this.scouterIDs.add(Integer.valueOf(curr));
+        }
+        guiManager.setTabletInfoElements(list);
     }
 
     public void setBtStatus(boolean status) {

@@ -4,19 +4,24 @@ import static com.scouting_app_2025.MainActivity.TAG;
 
 import android.util.Log;
 
+import com.scouting_app_2025.MainActivity;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UpdateScoutingInfo {
 
-    private File folderDir = new File("/data/data/com.scouting_app_2025/files/scoutingData");
+    private final File folderDir = new File("/data/data/com.scouting_app_2025/files/scoutingData");
     private final String fileName = "scouterInfo.txt";
     boolean fileExists = true;
 
@@ -29,17 +34,13 @@ public class UpdateScoutingInfo {
         }
     }
 
-    public void saveToFile(String text) {
+    public void saveToFile(String text) throws IOException {
         if(!fileExists) return;
-        try {
-            FileWriter fileWriter = new FileWriter(new File(folderDir, fileName), false);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(text);
-            bufferedWriter.close();
-        }
-        catch(IOException e) {
-            Log.e(TAG, e.toString());
-        }
+        FileWriter fileWriter = new FileWriter(new File(folderDir, fileName), false);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(text);
+
+        bufferedWriter.close();
     }
 
     public String getDataFromFile() {
@@ -68,9 +69,34 @@ public class UpdateScoutingInfo {
         catch (IOException e) {
             Log.e(TAG, e.toString());
         }
-        finally {
-            String contents = sb.toString();
-            return contents;
+        return sb.toString();
+    }
+
+    public ArrayList<ArrayList<CharSequence>> getSplitFileData() {
+        String fileData = getDataFromFile();
+        if (fileData.isEmpty()) {
+            return new ArrayList<>();
         }
+        String[] listsSplit = fileData.split("\n");
+        String[] teamList = listsSplit[1].split(",");
+            Arrays.sort(teamList);
+
+        String[] scoutersWithNum = listsSplit[0].split(",");
+            Arrays.sort(scoutersWithNum);
+
+        ArrayList<ArrayList<CharSequence>> retVal = new ArrayList<>();
+            retVal.add(new ArrayList<>());
+            retVal.add(new ArrayList<>());
+            retVal.add(new ArrayList<>());
+
+        for (String i : scoutersWithNum) {
+            String[] split = i.split(":");
+            retVal.get(0).add(split[0]);
+            retVal.get(1).add(split[1]);
+        }
+        for (String teamNum : teamList) {
+            retVal.get(2).add(teamNum);
+        }
+        return retVal;
     }
 }
