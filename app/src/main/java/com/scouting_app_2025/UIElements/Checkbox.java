@@ -14,9 +14,9 @@ public class Checkbox extends UIElement {
 
     @Override
     public void clicked() {
-        super.clicked();
+        if(!checkbox.isEnabled()) super.clicked();
         if (locking) {
-            if(!checkbox.isChecked()) {
+            if(checkbox.isChecked()) {
                 checkbox.setEnabled(false);
                 undoStack.addTimestamp(this);
             }

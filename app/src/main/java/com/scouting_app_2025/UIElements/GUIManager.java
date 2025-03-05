@@ -100,7 +100,12 @@ public class GUIManager {
             tabletInfo.append(element.getValue());
             tabletInfo.append(": ");
         }
-        return tabletInfo.delete(tabletInfo.length()-2,tabletInfo.length()).toString();
+        if(tabletInfo.length() > 2) {
+            return tabletInfo.delete(tabletInfo.length()-2,tabletInfo.length()).toString();
+        }
+        else {
+            return "Error getting tablet info"
+        }
     }
 
     public void setTabletInfoElements(ArrayList<ArrayList<CharSequence>> info) {
