@@ -1,10 +1,12 @@
 package com.scouting_app_2025.Fragments;
 
+import static com.scouting_app_2025.MainActivity.TAG;
 import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +27,15 @@ import com.scouting_app_2025.databinding.PreAutonFragmentBinding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class AutonFragment extends Fragment {
     AutonFragmentBinding binding;
     private final GUIManager guiManager = new GUIManager();
+    private Long autonStart;
 
     public AutonFragment() {
 
@@ -89,6 +94,18 @@ public class AutonFragment extends Fragment {
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonNext)), () ->
                 ftm.autonNext()
         );
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonNext)), () ->
+                ((TeleopFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("TeleopFragment"))).teleopOpen()
+        );
+    }
+
+    public void autonOpen() {
+        if(autonStart == null) {
+            ftm.showAutonStart();
+        }
+    }
+    public void autonStart() {
+        this.autonStart = Calendar.getInstance(Locale.US).getTimeInMillis();
     }
 
     @NonNull

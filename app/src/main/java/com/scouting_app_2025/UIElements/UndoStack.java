@@ -1,19 +1,12 @@
 package com.scouting_app_2025.UIElements;
 
-import static com.scouting_app_2025.MainActivity.TAG;
-import static com.scouting_app_2025.MainActivity.calendar;
-import static com.scouting_app_2025.UIElements.DatapointIDs.datapointIDs;
-
-import android.util.Log;
-import android.widget.Toast;
-
-import com.scouting_app_2025.MainActivity;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -44,7 +37,7 @@ public class UndoStack {
             addElement(element);
         }
         inputStack.add(element.getID());
-        timestamps.add(calendar.getTimeInMillis());
+        timestamps.add(Calendar.getInstance(Locale.US).getTimeInMillis());
         redoStack = new Stack<>();
     }
 

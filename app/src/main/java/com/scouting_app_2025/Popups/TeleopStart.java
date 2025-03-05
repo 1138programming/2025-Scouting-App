@@ -13,6 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.scouting_app_2025.Fragments.AutonFragment;
+import com.scouting_app_2025.Fragments.TeleopFragment;
+import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.NonDataEnum;
@@ -23,6 +26,7 @@ import java.util.Objects;
 public class TeleopStart extends Fragment {
     TeleopStartFragmentBinding binding;
     GUIManager guiManager = new GUIManager();
+
     public TeleopStart() {
 
     }
@@ -47,6 +51,9 @@ public class TeleopStart extends Fragment {
                 binding.startButton, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartStart)), () ->
                 ftm.teleopStartStart()
+        );
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartStart)), () ->
+                ((TeleopFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("TeleopFragment"))).teleopStart()
         );
     }
 

@@ -5,7 +5,6 @@ import static com.scouting_app_2025.MainActivity.datapointEventValue;
 import static com.scouting_app_2025.UIElements.DatapointIDs.datapointIDs;
 
 import android.content.res.ColorStateList;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 

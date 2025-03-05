@@ -61,6 +61,9 @@ public class PreAutonFragment extends Fragment {
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
                 ftm.preAutonNext()
         );
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
+                ((AutonFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("AutonFragment"))).autonOpen()
+        );
     }
 
     @NonNull

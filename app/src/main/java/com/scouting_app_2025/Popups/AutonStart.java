@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.scouting_app_2025.Fragments.AutonFragment;
+import com.scouting_app_2025.Fragments.TeleopFragment;
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
@@ -46,6 +48,9 @@ public class AutonStart extends Fragment {
                 binding.startButton, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartStart)), () ->
                 Navigation.findNavController(view).navigate(R.id.start)
+        );
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartStart)), () ->
+                ((AutonFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("AutonFragment"))).autonStart()
         );
     }
 

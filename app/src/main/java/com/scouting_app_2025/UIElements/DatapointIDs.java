@@ -80,7 +80,6 @@ public class DatapointIDs {
         nonDataIDs.put(NonDataEnum.PostMatchSubmit, -24);
         nonDataIDs.put(NonDataEnum.ConfirmSubmitCancel, -23);
         nonDataIDs.put(NonDataEnum.ConfirmSubmitSubmit, -22);
-
     }
 }
 

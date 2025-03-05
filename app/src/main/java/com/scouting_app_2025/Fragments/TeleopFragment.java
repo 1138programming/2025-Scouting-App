@@ -21,12 +21,15 @@ import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.TeleopFragmentBinding;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class TeleopFragment extends Fragment {
     private TeleopFragmentBinding binding;
     private final GUIManager guiManager = new GUIManager();
+    private Long teleopStart;
 
     public TeleopFragment() {
 
@@ -85,6 +88,15 @@ public class TeleopFragment extends Fragment {
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopNext)), () ->
                 ftm.teleopNext()
         );
+    }
+
+    public void teleopOpen() {
+        if(teleopStart == null) {
+            ftm.showTeleopStart();
+        }
+    }
+    public void teleopStart() {
+        this.teleopStart = Calendar.getInstance(Locale.US).getTimeInMillis();
     }
 
     @NonNull

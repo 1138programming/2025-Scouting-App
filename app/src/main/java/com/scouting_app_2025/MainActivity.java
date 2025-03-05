@@ -94,10 +94,10 @@ public class MainActivity extends AppCompatActivity {
         this.registerReceiver(receiver, filter);
 
         fragments.add(preAuton);
-        fragments.add(autonStart);
         fragments.add(auton);
-        fragments.add(teleopStart);
+        fragments.add(autonStart);
         fragments.add(teleop);
+        fragments.add(teleopStart);
         fragments.add(postMatch);
         fragments.add(confirmSubmit);
 
