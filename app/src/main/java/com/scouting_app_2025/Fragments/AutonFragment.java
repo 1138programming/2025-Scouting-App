@@ -1,44 +1,35 @@
 package com.scouting_app_2025.Fragments;
 
-import static com.scouting_app_2025.MainActivity.TAG;
 import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.AutonFragmentBinding;
-import com.scouting_app_2025.databinding.PreAutonFragmentBinding;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class AutonFragment extends Fragment {
+public class AutonFragment extends DataFragment {
     AutonFragmentBinding binding;
-    private final GUIManager guiManager = new GUIManager();
+    private final GUIManager guiManager;
     private Long autonStart;
 
     public AutonFragment() {
-
+        this.guiManager = super.guiManager;
     }
 
     @Override
@@ -104,8 +95,12 @@ public class AutonFragment extends Fragment {
             ftm.showAutonStart();
         }
     }
-    public void autonStart() {
+    public void startAuton() {
         this.autonStart = Calendar.getInstance(Locale.US).getTimeInMillis();
+    }
+
+    public String getAutonStart() {
+        return this.autonStart.toString();
     }
 
     @NonNull

@@ -1,4 +1,4 @@
-package com.scouting_app_2025.Popups;
+package com.scouting_app_2025.Fragments.Popups;
 
 import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
@@ -12,18 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.scouting_app_2025.Fragments.DataFragment;
+import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.ConfirmSubmitFragmentBinding;
 
 import java.util.Objects;
 
-public class ConfirmSubmit extends Fragment {
+public class ConfirmSubmit extends DataFragment {
     ConfirmSubmitFragmentBinding binding;
-    GUIManager guiManager = new GUIManager();
+    GUIManager guiManager;
 
     public ConfirmSubmit() {
-
+        this.guiManager = super.guiManager;
     }
 
 
@@ -45,9 +47,9 @@ public class ConfirmSubmit extends Fragment {
 
         guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ConfirmSubmitSubmit)),
                 binding.submitButton, false);
-//        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ConfirmSubmitSubmit)), () ->
-//                TODO
-//        );
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ConfirmSubmitSubmit)), () ->
+                ((MainActivity)MainActivity.context).sendMatchData()
+        );
     }
 
     @NonNull

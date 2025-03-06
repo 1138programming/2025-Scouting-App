@@ -232,7 +232,6 @@ tools:context=".Fragments.PreAutonFragment">
             android:layout_height="70dp"
             android:layout_marginTop="50dp"
             android:background="@color/invisible"
-            android:checkedButton="@+id/team_red"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@+id/startingPosImage"
             app:layout_constraintStart_toStartOf="@+id/startingPosImage"
@@ -252,7 +251,7 @@ tools:context=".Fragments.PreAutonFragment">
                 android:gravity="center"
                 android:text="@string/start_far"
                 android:textColor="@color/red_text_toggle"
-                android:textSize="16sp" />
+                android:textSize="24sp" />
 
             <RadioButton
                 android:id="@+id/middle_left_start"
@@ -268,13 +267,13 @@ tools:context=".Fragments.PreAutonFragment">
                 android:gravity="center"
                 android:text="@string/start_middle"
                 android:textColor="@color/red_text_toggle"
-                android:textSize="15sp" />
+                android:textSize="24sp" />
 
             <RadioButton
                 android:id="@+id/right_start"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
@@ -283,7 +282,7 @@ tools:context=".Fragments.PreAutonFragment">
                 android:gravity="center"
                 android:text="@string/start_processor"
                 android:textColor="@color/red_text_toggle"
-                android:textSize="16sp" />
+                android:textSize="24sp" />
         </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,9 @@
 package com.scouting_app_2025.UIElements;
 
+import static com.scouting_app_2025.MainActivity.TAG;
+
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,17 +44,45 @@ public class UndoStack {
         timestamps.add(Calendar.getInstance(Locale.US).getTimeInMillis());
         redoStack = new Stack<>();
     }
+    private JSONObject reconstructJSONObject(JSONObject a) throws JSONException {
+        JSONObject newJSON = new JSONObject();
+        newJSON.put("scouterID", a.get("scouterID"));
+        newJSON.put("matchID", a.get("matchID"));
+        newJSON.put("teamID", a.get("teamID"));
+        newJSON.put("allianceID", a.get("allianceID"));
 
+        return newJSON;
+    }
     public JSONArray getTimestamps(JSONObject datapointTemplate) throws JSONException {
         JSONArray jsonArr = new JSONArray();
         JSONObject tempJson;
-
+        for(Integer i : inputStack) {
+            Log.d(TAG, i.toString());
+        }
         for(int i : inputStack) {
-            tempJson = datapointTemplate;
-            tempJson.put("datapointID", Objects.requireNonNull(allElements.get(i)));
+            tempJson = reconstructJSONObject(datapointTemplate);
+            tempJson.put("datapointID", Integer.toString(i));
             tempJson.put("DCValue", Objects.requireNonNull(allElements.get(i)).getValue());
-            tempJson.put("DCTimestamp", timestamps.pop());
+            tempJson.put("DCTimestamp", timestamps.pop().toString());
             jsonArr.put(tempJson);
+        }
+        for(UIElement i : allElements.values()) {
+            if(i instanceof Checkbox) {
+                if(!((Checkbox) i).isChecked()) {
+                    tempJson = reconstructJSONObject(datapointTemplate);
+                    tempJson.put("datapointID", Integer.toString(i.getID()));
+                    tempJson.put("DCValue", i.getValue());
+                    tempJson.put("DCTimestamp", "0");
+                    jsonArr.put(tempJson);
+                }
+            }
+            else if(!(i instanceof Button)) {
+                tempJson = reconstructJSONObject(datapointTemplate);
+                tempJson.put("datapointID", Integer.toString(i.getID()));
+                tempJson.put("DCValue", i.getValue());
+                tempJson.put("DCTimestamp", "0");
+                jsonArr.put(tempJson);
+            }
         }
         return jsonArr;
     }

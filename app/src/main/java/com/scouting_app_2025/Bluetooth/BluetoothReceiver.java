@@ -67,7 +67,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
                             try {
                                 BluetoothSocket socket = device.createRfcommSocketToServiceRecord(MY_UUID);
                                 socket.connect();
-                                BluetoothConnectedThread connectedThread = new BluetoothConnectedThread(socket, context);
+                                BluetoothConnectedThread connectedThread = new BluetoothConnectedThread(socket);
                                 ((MainActivity)MainActivity.context).setConnectedThread(connectedThread);
                                 ((MainActivity)MainActivity.context).setConnectivity(true);
                                 connectedThread.sendInformation("AAAAHHHH".getBytes(StandardCharsets.UTF_8), 2);

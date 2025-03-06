@@ -1,4 +1,4 @@
-package com.scouting_app_2025.Popups;
+package com.scouting_app_2025.Fragments.Popups;
 
 import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
@@ -10,25 +10,21 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
-import com.scouting_app_2025.Fragments.AutonFragment;
+import com.scouting_app_2025.Fragments.DataFragment;
 import com.scouting_app_2025.Fragments.TeleopFragment;
-import com.scouting_app_2025.MainActivity;
-import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.TeleopStartFragmentBinding;
 
 import java.util.Objects;
 
-public class TeleopStart extends Fragment {
+public class TeleopStart extends DataFragment {
     TeleopStartFragmentBinding binding;
-    GUIManager guiManager = new GUIManager();
+    GUIManager guiManager;
 
     public TeleopStart() {
-
+        this.guiManager = super.guiManager;
     }
 
     @Override
@@ -53,7 +49,7 @@ public class TeleopStart extends Fragment {
                 ftm.teleopStartStart()
         );
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopStartStart)), () ->
-                ((TeleopFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("TeleopFragment"))).teleopStart()
+                ((TeleopFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("TeleopFragment"))).startTeleop()
         );
     }
 

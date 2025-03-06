@@ -1,6 +1,15 @@
 package com.scouting_app_2025.UIElements;
 
+import static com.scouting_app_2025.MainActivity.TAG;
+
+import android.util.Log;
 import android.view.View;
+
+import com.scouting_app_2025.MainActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,8 +69,36 @@ public class GUIManager {
         undoStack.addElement(new Checkbox(datapointID, checkbox, locked, undoStack));
     }
 
+    public void createRadioGroup(int datapointID, android.widget.RadioGroup radioGroup) {
+        if(datapointID > 0) {
+            undoStack.addElement(new RadioGroup(datapointID, radioGroup));
+        }
+        else {
+            nonStackElements.put(datapointID, new RadioGroup(datapointID, radioGroup));
+        }
+    }
+
+    public void createRadioCheckboxGroup(int groupDatapointID) {
+        undoStack.addElement(new RadioCheckboxGroup(groupDatapointID));
+    }
+
+    public void createCheckboxInGroup(int groupDatapointID, int datapointID, android.widget.CheckBox checkbox, String name) {
+        nonStackElements.put(datapointID, new Checkbox(datapointID, checkbox, name));
+        ((RadioCheckboxGroup)undoStack.getElement(groupDatapointID)).addElement(nonStackElements.get(datapointID));
+    }
+
+    public void createRadioGroupInGroup(int groupDatapointID, int datapointID, android.widget.RadioGroup radioGroup) {
+        nonStackElements.put(datapointID, new RadioGroup(datapointID, radioGroup));
+        ((RadioCheckboxGroup)undoStack.getElement(groupDatapointID)).addElement(nonStackElements.get(datapointID));
+    }
+
     public void createSpinner(int datapointID, android.widget.Spinner spinner, boolean addOther) {
-        nonStackElements.put(datapointID, new Spinner(datapointID, spinner, addOther));
+        if(datapointID > 0) {
+            undoStack.addElement(new Spinner(datapointID, spinner, addOther));
+        }
+        else {
+            nonStackElements.put(datapointID, new Spinner(datapointID, spinner, addOther));
+        }
     }
     public void createTabletInfoSpinner(int datapointID, android.widget.Spinner spinner, boolean addOther) {
         tabletInfoElements.put(datapointID, new Spinner(datapointID, spinner, addOther));
@@ -94,6 +131,19 @@ public class GUIManager {
         }
     }
 
+    public UIElement getElement(int datapointID) {
+        if(datapointID > 0) {
+            return undoStack.getElement(datapointID);
+        }
+        //if the elementID is -1, -2, or -4, then it is tablet info
+        else if(datapointID > -3 || datapointID == -4) {
+            return Objects.requireNonNull(tabletInfoElements.get(datapointID));
+        }
+        else {
+            return Objects.requireNonNull(nonStackElements.get(datapointID));
+        }
+    }
+
     public String getTabletInformation() {
         StringBuilder tabletInfo = new StringBuilder();
         for(Spinner element : tabletInfoElements.values()) {
@@ -104,8 +154,12 @@ public class GUIManager {
             return tabletInfo.delete(tabletInfo.length()-2,tabletInfo.length()).toString();
         }
         else {
-            return "Error getting tablet info"
+            return "Error getting tablet info";
         }
+    }
+
+    public JSONArray getFragmentMatchData() throws JSONException {
+        return undoStack.getTimestamps(((MainActivity) MainActivity.context).getBaseJSON());
     }
 
     public void setTabletInfoElements(ArrayList<ArrayList<CharSequence>> info) {

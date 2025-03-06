@@ -17,40 +17,44 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavGraph;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.scouting_app_2025.Bluetooth.BluetoothConnectedThread;
 import com.scouting_app_2025.Bluetooth.BluetoothReceiver;
 import com.scouting_app_2025.Fragments.AutonFragment;
+import com.scouting_app_2025.Fragments.DataFragment;
 import com.scouting_app_2025.Fragments.FragmentTransManager;
 import com.scouting_app_2025.Fragments.PostMatchFragment;
 import com.scouting_app_2025.Fragments.PreAutonFragment;
 import com.scouting_app_2025.Fragments.TeleopFragment;
+import com.scouting_app_2025.JSON.FileSaver;
 import com.scouting_app_2025.JSON.UpdateScoutingInfo;
-import com.scouting_app_2025.Popups.AutonStart;
-import com.scouting_app_2025.Popups.ConfirmSubmit;
-import com.scouting_app_2025.Popups.TeleopStart;
-import com.scouting_app_2025.UIElements.GUIManager;
-import com.scouting_app_2025.databinding.ActivityMainBinding;
+import com.scouting_app_2025.Fragments.Popups.AutonStart;
+import com.scouting_app_2025.Fragments.Popups.ConfirmSubmit;
+import com.scouting_app_2025.Fragments.Popups.TeleopStart;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Objects;
 import java.util.UUID;
-
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Team1138ScoutingApp";
     public static final UUID MY_UUID = UUID.fromString("0007EA11-1138-1000-5465-616D31313338");
-    private ActivityMainBinding binding;
     @SuppressLint("StaticFieldLeak")
     public static Context context;
     public BluetoothConnectedThread connectedThread;
     public static FragmentTransManager ftm;
-    public ArrayList<Fragment> fragments = new ArrayList<>();
+    public ArrayList<DataFragment> fragments = new ArrayList<>();
     public PreAutonFragment preAuton = new PreAutonFragment();
     public AutonStart autonStart = new AutonStart();
     public AutonFragment auton = new AutonFragment();
@@ -59,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
     public PostMatchFragment postMatch = new PostMatchFragment();
     public ConfirmSubmit confirmSubmit = new ConfirmSubmit();
     public PermissionManager permissionManager = new PermissionManager(this);
-    public GUIManager guiManager = new GUIManager();
-    public static Calendar calendar;
     public final static String datapointEventValue = "Event";
     private boolean connectivity = false;
 
@@ -92,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         this.registerReceiver(receiver, filter);
+    }
 
+    private void addFragmentsToManager() {
         fragments.add(preAuton);
         fragments.add(auton);
         fragments.add(autonStart);
@@ -104,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
         ftm = new FragmentTransManager(fragments);
     }
 
+    private void addPermissions() {
+        permissionManager.addPermission(BLUETOOTH_CONNECT);
+        permissionManager.addPermission(BLUETOOTH_SCAN);
+        permissionManager.addPermission(ACCESS_FINE_LOCATION);
+        permissionManager.addPermission(BLUETOOTH);
+        permissionManager.addPermission(BLUETOOTH_ADMIN);
+        permissionManager.addPermission(BLUETOOTH_ADVERTISE);
+    }
+
     /**
      *
      */
@@ -112,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         if (adapter == null) {
             Log.e(TAG, "no BT adapter");
         }
-        if(permissionManager.checkPermission(BLUETOOTH_SCAN)) {
+        if(adapter != null && permissionManager.checkPermission(BLUETOOTH_SCAN)) {
             adapter.cancelDiscovery();
             adapter.startDiscovery();
             Log.i(TAG, "should be receiving");
@@ -141,30 +154,63 @@ public class MainActivity extends AppCompatActivity {
         }
         preAuton.setScoutingInfo((new UpdateScoutingInfo()).getSplitFileData());
     }
+    public JSONObject getBaseJSON() throws JSONException {
+        return preAuton.getBaseJSON();
+    }
+    public void sendMatchData() {
+        JSONObject jsonFile = new JSONObject();
+        JSONArray jsonArray;
+        JSONArray jsonCollection = new JSONArray();
+        try {
+            for (DataFragment fragment : fragments) {
+                jsonArray = fragment.getFragmentMatchData();
+                Log.d(TAG, jsonArray.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    jsonCollection.put(jsonArray.getJSONObject(i));
+                }
+            }
+            //adding Auton and Teleop Start
+            JSONObject temp = getBaseJSON();
+            temp.put("datapointID", "2");
+            temp.put("DCValue", datapointEventValue);
+            temp.put("DCTimestamp", auton.getAutonStart());
+            jsonCollection.put(temp);
+
+            temp = getBaseJSON();
+            temp.put("datapointID", "21");
+            temp.put("DCValue", datapointEventValue);
+            temp.put("DCTimestamp", teleop.getTeleopStart());
+            jsonCollection.put(temp);
+
+            jsonFile.put("scoutingData",jsonCollection);
+        }
+        catch (JSONException e) {
+            Log.e(TAG, e.toString());
+            return;
+        }
+
+        FileSaver.saveFile(jsonFile.toString(), preAuton.getFileTitle());
+
+        if(connectivity) {
+            connectedThread.sendInformation(jsonFile.toString().getBytes(StandardCharsets.UTF_8), 1);
+        }
+        else {
+            Toast.makeText(this, "Data has not been uploaded because bluetooth isn't connected", Toast.LENGTH_LONG).show();
+        }
+    }
     /**
      * @Info: Called when tablets initially connect and is used
      * to easily detect when auton or teleop is incorrectly started.
      */
-    public void setTime(int year, int month, int date, int hour, int min, int sec) {
-        calendar.clear();
-        calendar.set(year,month,date,hour,min,sec);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        calendar = Calendar.getInstance();
         context = this;
+        addFragmentsToManager();
 
-        permissionManager.addPermission(BLUETOOTH_CONNECT);
-        permissionManager.addPermission(BLUETOOTH_SCAN);
-        permissionManager.addPermission(ACCESS_FINE_LOCATION);
-        permissionManager.addPermission(BLUETOOTH);
-        permissionManager.addPermission(BLUETOOTH_ADMIN);
-        permissionManager.addPermission(BLUETOOTH_ADVERTISE);
-
+        addPermissions();
         permissionManager.requestPermissions();
-        calendar.getTimeInMillis();
     }
 }

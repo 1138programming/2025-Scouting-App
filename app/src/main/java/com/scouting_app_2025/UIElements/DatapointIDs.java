@@ -8,7 +8,7 @@ public class DatapointIDs {
     public static final EnumMap<NonDataEnum, Integer> nonDataIDs = new EnumMap<>(NonDataEnum.class);
 
     static {
-        datapointIDs.put(1, "Robot Start Point String (1, 2, 3)");
+        datapointIDs.put(1, "Robot Start Point String (1, 2, 3, NoShow)");
         datapointIDs.put(2, "Auton Start");
         datapointIDs.put(3, "Auton Coral Score L1");
         datapointIDs.put(4, "Auton Coral Score L2");
@@ -78,8 +78,10 @@ public class DatapointIDs {
         nonDataIDs.put(NonDataEnum.TeleopNext, -22);
         nonDataIDs.put(NonDataEnum.PostMatchBack, -23);
         nonDataIDs.put(NonDataEnum.PostMatchSubmit, -24);
-        nonDataIDs.put(NonDataEnum.ConfirmSubmitCancel, -23);
-        nonDataIDs.put(NonDataEnum.ConfirmSubmitSubmit, -22);
+        nonDataIDs.put(NonDataEnum.ConfirmSubmitCancel, -25);
+        nonDataIDs.put(NonDataEnum.ConfirmSubmitSubmit, -26);
+        nonDataIDs.put(NonDataEnum.NoShow, -27);
+        nonDataIDs.put(NonDataEnum.StartPosRadio, -28);
     }
 }
 

@@ -18,12 +18,12 @@ import com.scouting_app_2025.databinding.PostMatchFragmentBinding;
 
 import java.util.Objects;
 
-public class PostMatchFragment extends Fragment {
+public class PostMatchFragment extends DataFragment {
     PostMatchFragmentBinding binding;
-    GUIManager guiManager = new GUIManager();
+    GUIManager guiManager;
 
     public PostMatchFragment() {
-
+        this.guiManager = super.guiManager;
     }
 
     @Override

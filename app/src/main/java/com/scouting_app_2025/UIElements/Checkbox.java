@@ -1,9 +1,14 @@
 package com.scouting_app_2025.UIElements;
 
+import static com.scouting_app_2025.MainActivity.TAG;
+
+import android.util.Log;
+
 public class Checkbox extends UIElement {
     private final android.widget.CheckBox checkbox;
     private final boolean locking;
     private final UndoStack undoStack;
+    private String nameValue;
     public Checkbox(int datapointID, android.widget.CheckBox checkbox, boolean locking, UndoStack undoStack) {
         super(datapointID);
         this.checkbox = checkbox;
@@ -12,8 +17,18 @@ public class Checkbox extends UIElement {
         checkbox.setOnClickListener(view -> clicked());
     }
 
+    public Checkbox(int datapointID, android.widget.CheckBox checkbox, String name) {
+        super(datapointID);
+        this.checkbox = checkbox;
+        this.locking = false;
+        this.undoStack = null;
+        this.nameValue = name;
+        checkbox.setOnClickListener(view -> super.clicked());
+    }
+
     @Override
     public void clicked() {
+        Log.d(TAG, "check clicked");
         if(!checkbox.isEnabled()) super.clicked();
         if (locking) {
             if(checkbox.isChecked()) {
@@ -23,9 +38,17 @@ public class Checkbox extends UIElement {
         }
     }
 
+    public void setChecked(boolean checked) {
+        checkbox.setChecked(checked);
+    }
+
+    public boolean isChecked() {
+        return checkbox.isChecked();
+    }
     @Override
     public String getValue() {
-        return Boolean.toString(checkbox.isChecked());
+        if(undoStack == null) return nameValue;
+        else return Boolean.toString(checkbox.isChecked());
     }
 
     /**

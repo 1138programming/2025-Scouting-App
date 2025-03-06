@@ -3,7 +3,6 @@ package com.scouting_app_2025.Bluetooth;
 import static com.scouting_app_2025.MainActivity.TAG;
 
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
 import android.util.Log;
 
 import com.scouting_app_2025.JSON.MurmurHash;
@@ -17,11 +16,9 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.security.MessageDigest;
 
 public class BluetoothConnectedThread extends Thread {
-    private final Context context;
     private final BluetoothSocket socket;
     private final InputStream inputStream;
     private final OutputStream outputStream;
@@ -33,9 +30,8 @@ public class BluetoothConnectedThread extends Thread {
     /**
      * @Info:
      */
-    public BluetoothConnectedThread(BluetoothSocket socket, Context context) {
+    public BluetoothConnectedThread(BluetoothSocket socket) {
         this.socket = socket;
-        this.context = context;
 
         //creates temporary input and output stream objects
         InputStream tmpIn = null;
@@ -56,7 +52,7 @@ public class BluetoothConnectedThread extends Thread {
         //sets actual variables to temp versions
         inputStream = tmpIn;
         outputStream = tmpOut;
-        ((MainActivity)this.context).setConnectedThread(this);
+        ((MainActivity)MainActivity.context).setConnectedThread(this);
     }
 
     @Override

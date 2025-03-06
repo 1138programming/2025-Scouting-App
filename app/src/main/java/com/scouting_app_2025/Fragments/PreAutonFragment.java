@@ -1,6 +1,7 @@
 package com.scouting_app_2025.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +12,29 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.scouting_app_2025.MainActivity;
+import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.NonDataEnum;
+import com.scouting_app_2025.UIElements.Spinner;
 import com.scouting_app_2025.databinding.PreAutonFragmentBinding;
 
+import static com.scouting_app_2025.MainActivity.TAG;
 import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PreAutonFragment extends Fragment {
+public class PreAutonFragment extends DataFragment {
     PreAutonFragmentBinding binding;
-    GUIManager guiManager = new GUIManager();
+    GUIManager guiManager;
     ArrayList<Integer> scouterIDs = new ArrayList<>();
 
     public PreAutonFragment() {
-
+        this.guiManager = super.guiManager;
     }
 
     @Override
@@ -54,7 +61,12 @@ public class PreAutonFragment extends Fragment {
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber)),
                 () -> Objects.requireNonNull(((MainActivity)getContext())).updateTabletInformation());
 
-        guiManager.createCheckbox(1, binding.noShowCheckbox, false);
+        guiManager.createRadioCheckboxGroup(1);
+        guiManager.createCheckboxInGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.NoShow)),binding.noShowCheckbox, "NoShow");
+        guiManager.createRadioGroupInGroup(1,Objects.requireNonNull(nonDataIDs.get(NonDataEnum.StartPosRadio)),binding.startingLocation);
+
+        guiManager.createRadioGroup(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor)), binding.teamColorSwitch);
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor)), this::setFieldImage);
 
         guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)),
                 binding.nextButton, false);
@@ -78,14 +90,14 @@ public class PreAutonFragment extends Fragment {
         for(int i = 1; i<=100; i++) {
             matchNumbers.add(Integer.toString(i));
         }
-        for(int i = 1; i<=100; i++) {
-            matchNumbers.add("Practice "+i);
-        }
         for(int i = 1; i<=13; i++) {
             matchNumbers.add("Playoffs "+i);
         }
         for(int i = 1; i<=3; i++) {
             matchNumbers.add("Finals "+i);
+        }
+        for(int i = 1; i<=100; i++) {
+            matchNumbers.add("Practice "+i);
         }
         return matchNumbers;
     }
@@ -100,6 +112,40 @@ public class PreAutonFragment extends Fragment {
             this.scouterIDs.add(Integer.valueOf(curr));
         }
         guiManager.setTabletInfoElements(list);
+    }
+
+    public JSONObject getBaseJSON() throws JSONException {
+        JSONObject baseJson = new JSONObject();
+
+        baseJson.put("scouterID", guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName))).getValue());
+        baseJson.put("matchID", guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber))).getValue());
+        baseJson.put("teamID", guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber))).getValue());
+        String allianceName = guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor))).getValue();
+        switch(allianceName) {
+            case "RED":
+                baseJson.put("allianceID", "1");
+                break;
+            case "BLUE":
+                baseJson.put("allianceID", "2");
+        }
+
+        return baseJson;
+    }
+
+    public String getFileTitle() {
+        String title = (guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)))).getValue()
+                + " Match #"+(guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)))).getValue();
+        return title;
+    }
+
+    public void setFieldImage() {
+        switch(guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor))).getValue()) {
+            case "RED":
+                binding.startingPosImage.setImageResource(R.drawable.frc_field_red);
+                break;
+            case "BLUE":
+                binding.startingPosImage.setImageResource(R.drawable.frc_field_blue);
+        }
     }
 
     public void setBtStatus(boolean status) {

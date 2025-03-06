@@ -6,12 +6,12 @@ import androidx.fragment.app.Fragment;
 import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.databinding.ArchiveFragmentBinding;
 
-public class ArchiveFragment extends Fragment {
+public class ArchiveFragment extends DataFragment {
     ArchiveFragmentBinding binding;
-    GUIManager guiManager = new GUIManager();
+    GUIManager guiManager;
 
     public ArchiveFragment() {
-
+        this.guiManager = super.guiManager;
     }
 
     @NonNull

@@ -14,7 +14,7 @@ public class FragmentTransManager {
     private FragmentTransaction ft;
     private final FragmentManager fm = ((MainActivity)MainActivity.context).getSupportFragmentManager();
 
-    public FragmentTransManager(ArrayList<Fragment> fragments) {
+    public FragmentTransManager(ArrayList<DataFragment> fragments) {
         ((MainActivity)MainActivity.context).setContentView(R.layout.activity_main);
 
         ft = fm.beginTransaction();

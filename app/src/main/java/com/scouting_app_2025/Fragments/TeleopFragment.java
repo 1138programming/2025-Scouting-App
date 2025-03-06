@@ -3,7 +3,6 @@ package com.scouting_app_2025.Fragments;
 import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
@@ -26,13 +23,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class TeleopFragment extends Fragment {
+public class TeleopFragment extends DataFragment {
     private TeleopFragmentBinding binding;
-    private final GUIManager guiManager = new GUIManager();
+    private final GUIManager guiManager;
     private Long teleopStart;
 
     public TeleopFragment() {
-
+        this.guiManager = super.guiManager;
     }
 
     @Override
@@ -95,8 +92,11 @@ public class TeleopFragment extends Fragment {
             ftm.showTeleopStart();
         }
     }
-    public void teleopStart() {
+    public void startTeleop() {
         this.teleopStart = Calendar.getInstance(Locale.US).getTimeInMillis();
+    }
+    public String getTeleopStart() {
+        return this.teleopStart.toString();
     }
 
     @NonNull
