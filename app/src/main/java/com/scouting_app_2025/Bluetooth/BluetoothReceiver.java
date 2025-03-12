@@ -70,7 +70,6 @@ public class BluetoothReceiver extends BroadcastReceiver {
                                 BluetoothConnectedThread connectedThread = new BluetoothConnectedThread(socket);
                                 ((MainActivity)MainActivity.context).setConnectedThread(connectedThread);
                                 ((MainActivity)MainActivity.context).setConnectivity(true);
-                                connectedThread.sendInformation("AAAAHHHH".getBytes(StandardCharsets.UTF_8), 2);
                                 ((MainActivity)MainActivity.context).updateBtScoutingInfo();
                                 break;
                             } catch (IOException e) {

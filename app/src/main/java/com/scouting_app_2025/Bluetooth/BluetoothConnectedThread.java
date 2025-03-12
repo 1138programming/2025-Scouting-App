@@ -15,8 +15,8 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.security.MessageDigest;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class BluetoothConnectedThread extends Thread {
     private final BluetoothSocket socket;
@@ -25,8 +25,8 @@ public class BluetoothConnectedThread extends Thread {
     private ByteBuffer byteBuffer;
     private byte[] buffer;
     private final String ack = "ACK";
+    private int timeoutMs = 10000;
     private final byte[] byteAck = ack.getBytes(StandardCharsets.UTF_8);
-    private MessageDigest messageDigest;
     /**
      * @Info:
      */
@@ -72,9 +72,13 @@ public class BluetoothConnectedThread extends Thread {
     private void read(int numBytes) throws CommErrorException {
         buffer = new byte[numBytes];
         int bytesRead = 0;
+        long readStart = Calendar.getInstance(Locale.US).getTimeInMillis();
         try {
             while (bytesRead == 0) {
                 bytesRead = inputStream.read(buffer);
+            }
+            if((Calendar.getInstance(Locale.US).getTimeInMillis() - readStart) > timeoutMs) {
+                throw new CommErrorException();
             }
         } catch (IOException e) {
             Log.e(TAG, "Failure to read: " + e);
@@ -136,10 +140,13 @@ public class BluetoothConnectedThread extends Thread {
         }
         catch(CommErrorException e) {
             Log.e(TAG, "Communication exchange failed");
+            cancel();
         }
     }
     /**
      * @Info:
+     * @return Returns true if the data is up to date with the central computer
+     * and false if there is a difference;
      */
     public boolean checkLists() {
         int byteLength;
@@ -155,11 +162,14 @@ public class BluetoothConnectedThread extends Thread {
             read(byteLength);
             sendAck();
 
+            Log.d(TAG, "Murmur Hash: \"" + MurmurHash.makeHash((new UpdateScoutingInfo()).getDataFromFile().getBytes(StandardCharsets.UTF_8)) + "\"");
+
             return byteBuffer.put(buffer).getInt(0) ==
                     MurmurHash.makeHash((new UpdateScoutingInfo()).getDataFromFile().getBytes(StandardCharsets.UTF_8));
         }
         catch(CommErrorException e) {
             Log.e(TAG, "Communication exchange failed");
+            cancel();
             return false;
         }
     }
@@ -182,8 +192,13 @@ public class BluetoothConnectedThread extends Thread {
         }
         catch(CommErrorException | IOException e) {
             Log.e(TAG, "Communication exchange failed");
+            cancel();
         }
 
+    }
+
+    public void setTimeoutMs(int timeoutMs) {
+        this.timeoutMs = timeoutMs;
     }
 
     //used to flush stream and close socket

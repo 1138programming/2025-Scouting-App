@@ -15,10 +15,12 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.scouting_app_2025.Bluetooth.BluetoothConnectedThread;
@@ -39,9 +41,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -149,13 +148,33 @@ public class MainActivity extends AppCompatActivity {
         connectedThread.sendInformation(info, 2);
     }
     public void updateBtScoutingInfo() {
-        if (!connectedThread.checkLists()) {
+        if (!Objects.isNull(connectedThread) && !connectedThread.checkLists()) {
             connectedThread.updateLists();
         }
-        preAuton.setScoutingInfo((new UpdateScoutingInfo()).getSplitFileData());
+//        preAuton.setScoutingInfo((new UpdateScoutingInfo()).getSplitFileData());
     }
     public JSONObject getBaseJSON() throws JSONException {
         return preAuton.getBaseJSON();
+    }
+    public void recreateFragments() {
+        fragments.clear();
+        preAuton = new PreAutonFragment();
+        fragments.add(preAuton);
+        auton = new AutonFragment();
+        fragments.add(auton);
+        autonStart = new AutonStart();
+        fragments.add(autonStart);
+        teleop = new TeleopFragment();
+        fragments.add(teleop);
+        teleopStart = new TeleopStart();
+        fragments.add(teleopStart);
+        postMatch = new PostMatchFragment();
+        fragments.add(postMatch);
+        confirmSubmit = new ConfirmSubmit();
+        fragments.add(confirmSubmit);
+
+        ftm = new FragmentTransManager(fragments);
+        updateBtScoutingInfo();
     }
     public void sendMatchData() {
         JSONObject jsonFile = new JSONObject();

@@ -18,42 +18,25 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12dd3f31-1035-41b8-b55c-d3fbf1f75994" name="Changes" comment="committing some unversioned files">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/DataFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/JSON/FileSaver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/RadioCheckboxGroup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/RadioGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/sha1-checksums.bin" afterDir="false" />
+    <list default="true" id="12dd3f31-1035-41b8-b55c-d3fbf1f75994" name="Changes" comment="worked on checkboxes and got post match done with confirm submit popup as well, but checkboxes don't work and other popups don't either.">
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothConnectedThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothConnectedThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/ArchiveFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/ArchiveFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/AutonFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/AutonFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/FragmentTransManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/FragmentTransManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/Popups/ArchiveConfirm.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/Popups/ArchiveConfirm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/Popups/AutonStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/Popups/AutonStart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/Popups/ConfirmSubmit.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/Popups/ConfirmSubmit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/Popups/TeleopStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/Popups/TeleopStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PostMatchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PostMatchFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/TeleopFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/TeleopFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/Checkbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/Checkbox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/DatapointIDs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/DatapointIDs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/GUIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/GUIManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/NonDataEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/NonDataEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/UndoStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/UndoStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/Spinner.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/Spinner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/pre_auton_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pre_auton_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +47,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=R9PW10T72RH)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=R9PR90BJNFM)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -117,6 +100,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -155,7 +139,8 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "Console"
   }
 }]]></component>
   <component name="RunManager">
@@ -244,7 +229,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="committing some unversioned files" />
-    <option name="LAST_COMMIT_MESSAGE" value="committing some unversioned files" />
+    <MESSAGE value="worked on checkboxes and got post match done with confirm submit popup as well, but checkboxes don't work and other popups don't either." />
+    <option name="LAST_COMMIT_MESSAGE" value="worked on checkboxes and got post match done with confirm submit popup as well, but checkboxes don't work and other popups don't either." />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">

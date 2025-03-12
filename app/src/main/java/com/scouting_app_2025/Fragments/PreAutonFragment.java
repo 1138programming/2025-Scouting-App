@@ -26,12 +26,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class PreAutonFragment extends DataFragment {
     PreAutonFragmentBinding binding;
     GUIManager guiManager;
-    ArrayList<Integer> scouterIDs = new ArrayList<>();
+    ArrayList<Integer> scouterIDs = new ArrayList<>(List.of(-1));
 
     public PreAutonFragment() {
         this.guiManager = super.guiManager;
@@ -47,17 +49,15 @@ public class PreAutonFragment extends DataFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)), binding.nameOfScouterSpinner, true);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)),
                 () -> Objects.requireNonNull(((MainActivity)getContext())).updateTabletInformation());
-
         guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)), binding.matchNumberSpinner, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)),
                 () -> Objects.requireNonNull(((MainActivity)getContext())).updateTabletInformation());
         guiManager.setSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)), generateMatches(), true);
 
-        guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber)), binding.teamNumberSpinner, true);
+        guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber)), binding.teamNumberSpinner, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber)),
                 () -> Objects.requireNonNull(((MainActivity)getContext())).updateTabletInformation());
 
@@ -76,6 +76,8 @@ public class PreAutonFragment extends DataFragment {
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
                 ((AutonFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("AutonFragment"))).autonOpen()
         );
+
+//        ((MainActivity)MainActivity.context).updateBtScoutingInfo();
     }
 
     @NonNull
@@ -107,6 +109,7 @@ public class PreAutonFragment extends DataFragment {
     }
 
     public void setScoutingInfo(ArrayList<ArrayList<CharSequence>> list) {
+        this.scouterIDs = new ArrayList<>(List.of(this.scouterIDs.get(0)));
         for (CharSequence scouterNum : list.get(1)) {
             String curr = scouterNum.toString();
             this.scouterIDs.add(Integer.valueOf(curr));
@@ -117,9 +120,14 @@ public class PreAutonFragment extends DataFragment {
     public JSONObject getBaseJSON() throws JSONException {
         JSONObject baseJson = new JSONObject();
 
-        baseJson.put("scouterID", guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName))).getValue());
+        baseJson.put("scouterID", scouterIDs.get(((Spinner)guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)))).getSelectedIndex()).toString());
         baseJson.put("matchID", guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber))).getValue());
-        baseJson.put("teamID", guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber))).getValue());
+        try {
+            baseJson.put("teamID", guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber))).getValue());
+        }
+        catch(NullPointerException e) {
+            baseJson.put("teamID", "0");
+        }
         String allianceName = guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor))).getValue();
         switch(allianceName) {
             case "RED":
@@ -133,9 +141,8 @@ public class PreAutonFragment extends DataFragment {
     }
 
     public String getFileTitle() {
-        String title = (guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)))).getValue()
+        return (guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)))).getValue()
                 + " Match #"+(guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)))).getValue();
-        return title;
     }
 
     public void setFieldImage() {

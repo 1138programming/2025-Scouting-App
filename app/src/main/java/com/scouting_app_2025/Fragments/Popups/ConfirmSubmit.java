@@ -47,8 +47,10 @@ public class ConfirmSubmit extends DataFragment {
 
         guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ConfirmSubmitSubmit)),
                 binding.submitButton, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ConfirmSubmitSubmit)), () ->
-                ((MainActivity)MainActivity.context).sendMatchData()
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ConfirmSubmitSubmit)), () -> {
+            ((MainActivity)MainActivity.context).sendMatchData();
+            ((MainActivity)MainActivity.context).recreateFragments();
+        }
         );
     }
 
