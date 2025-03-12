@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.NonDataEnum;
@@ -39,7 +38,7 @@ public class PostMatchFragment extends DataFragment {
 
         guiManager.createSpinner(40, binding.hangSpinner, false);
 
-        guiManager.createCheckbox(41, binding.parkCheckbox, false);
+        guiManager.createCheckbox(41, binding.parkCheckbox, false,false);
 
         guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PostMatchBack)), binding.returnToTeleop, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PostMatchBack)), () ->
@@ -50,10 +49,6 @@ public class PostMatchFragment extends DataFragment {
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PostMatchSubmit)), () ->
             ftm.postMatchSubmit()
         );
-    }
-
-    private void openConfirmSubmit() {
-
     }
 
     @NonNull

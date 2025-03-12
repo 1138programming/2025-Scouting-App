@@ -9,21 +9,23 @@ public class Checkbox extends UIElement {
     private final boolean locking;
     private final UndoStack undoStack;
     private String nameValue;
-    public Checkbox(int datapointID, android.widget.CheckBox checkbox, boolean locking, UndoStack undoStack) {
+    public Checkbox(int datapointID, android.widget.CheckBox checkbox, boolean startingState, boolean locking, UndoStack undoStack) {
         super(datapointID);
         this.checkbox = checkbox;
         this.locking = locking;
         this.undoStack = undoStack;
         checkbox.setOnClickListener(view -> clicked());
+        if(startingState) checkbox.performClick();
     }
 
-    public Checkbox(int datapointID, android.widget.CheckBox checkbox, String name) {
+    public Checkbox(int datapointID, android.widget.CheckBox checkbox, boolean startingState, String name) {
         super(datapointID);
         this.checkbox = checkbox;
         this.locking = false;
         this.undoStack = null;
         this.nameValue = name;
         checkbox.setOnClickListener(view -> super.clicked());
+        if(startingState) checkbox.performClick();
     }
 
     @Override

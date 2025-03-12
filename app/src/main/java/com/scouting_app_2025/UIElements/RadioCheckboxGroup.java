@@ -21,6 +21,11 @@ public class RadioCheckboxGroup extends UIElement{
         unselectAllExceptSelected();
     }
 
+    public void selectElement(UIElement element) {
+        currSelected = elements.indexOf(element);
+        unselectAllExceptSelected();
+    }
+
     private void unselectAllExceptSelected() {
         for(int i = 0; i < elements.size(); i++) {
             if(i != currSelected) {

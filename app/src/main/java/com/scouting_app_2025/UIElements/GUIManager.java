@@ -65,8 +65,8 @@ public class GUIManager {
         }
     }
 
-    public void createCheckbox(int datapointID, android.widget.CheckBox checkbox, boolean locked) {
-        undoStack.addElement(new Checkbox(datapointID, checkbox, locked, undoStack));
+    public void createCheckbox(int datapointID, android.widget.CheckBox checkbox, boolean startingState, boolean locked) {
+        undoStack.addElement(new Checkbox(datapointID, checkbox, startingState, locked, undoStack));
     }
 
     public void createRadioGroup(int datapointID, android.widget.RadioGroup radioGroup) {
@@ -82,14 +82,18 @@ public class GUIManager {
         undoStack.addElement(new RadioCheckboxGroup(groupDatapointID));
     }
 
-    public void createCheckboxInGroup(int groupDatapointID, int datapointID, android.widget.CheckBox checkbox, String name) {
-        nonStackElements.put(datapointID, new Checkbox(datapointID, checkbox, name));
+    public void createCheckboxInGroup(int groupDatapointID, int datapointID, android.widget.CheckBox checkbox, boolean startingState, String name) {
+        nonStackElements.put(datapointID, new Checkbox(datapointID, checkbox, startingState, name));
         ((RadioCheckboxGroup)undoStack.getElement(groupDatapointID)).addElement(nonStackElements.get(datapointID));
     }
 
     public void createRadioGroupInGroup(int groupDatapointID, int datapointID, android.widget.RadioGroup radioGroup) {
         nonStackElements.put(datapointID, new RadioGroup(datapointID, radioGroup));
         ((RadioCheckboxGroup)undoStack.getElement(groupDatapointID)).addElement(nonStackElements.get(datapointID));
+    }
+
+    public void setSelectedInRadioCheckboxGroup(int groupDatapointID, int datapointID) {
+        ((RadioCheckboxGroup)undoStack.getElement(groupDatapointID)).selectElement(nonStackElements.get(datapointID));
     }
 
     public void createSpinner(int datapointID, android.widget.Spinner spinner, boolean addOther) {

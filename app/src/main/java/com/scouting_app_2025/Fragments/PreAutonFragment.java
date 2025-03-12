@@ -1,7 +1,6 @@
 package com.scouting_app_2025.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
-import com.scouting_app_2025.JSON.UpdateScoutingInfo;
 import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
@@ -19,7 +16,6 @@ import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.UIElements.Spinner;
 import com.scouting_app_2025.databinding.PreAutonFragmentBinding;
 
-import static com.scouting_app_2025.MainActivity.TAG;
 import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
 
@@ -27,7 +23,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,8 +58,9 @@ public class PreAutonFragment extends DataFragment {
                 () -> Objects.requireNonNull(((MainActivity) getContext())).updateTabletInformation());
 
         guiManager.createRadioCheckboxGroup(1);
-        guiManager.createCheckboxInGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.NoShow)), binding.noShowCheckbox, "NoShow");
+        guiManager.createCheckboxInGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.NoShow)), binding.noShowCheckbox, true,"NoShow");
         guiManager.createRadioGroupInGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.StartPosRadio)), binding.startingLocation);
+        guiManager.setSelectedInRadioCheckboxGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.NoShow)));
 
         guiManager.createRadioGroup(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor)), binding.teamColorSwitch);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor)), this::setFieldImage);
@@ -76,9 +72,6 @@ public class PreAutonFragment extends DataFragment {
         );
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
                 ((AutonFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("AutonFragment"))).autonOpen()
-        );
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
-                ((MainActivity) MainActivity.context).updateBtScoutingInfo()
         );
     }
 

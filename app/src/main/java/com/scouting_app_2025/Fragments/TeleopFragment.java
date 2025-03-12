@@ -72,7 +72,7 @@ public class TeleopFragment extends DataFragment {
         guiManager.createColorChangerButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopScored)), new ArrayList<>(List.of(37,38)),
                 binding.processorButton,true);
 
-        guiManager.createCheckbox(39, binding.hangAttemptedCheckbox, true);
+        guiManager.createCheckbox(39, binding.hangAttemptedCheckbox, false, true);
 
         guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeleopBack)),
                 binding.backButton, false);
