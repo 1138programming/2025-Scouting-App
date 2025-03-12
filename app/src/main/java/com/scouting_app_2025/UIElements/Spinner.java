@@ -1,6 +1,9 @@
 package com.scouting_app_2025.UIElements;
 
+import static com.scouting_app_2025.MainActivity.TAG;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,7 +43,13 @@ public class Spinner extends UIElement {
 
     @Override
     public String getValue() {
-        return spinner.getSelectedItem().toString();
+        try {
+            return spinner.getSelectedItem().toString();
+        }
+        catch(Exception e) {
+            Log.e(TAG, e.toString());
+            return "";
+        }
     }
 
     public int getSelectedIndex() {

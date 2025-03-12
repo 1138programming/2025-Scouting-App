@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.scouting_app_2025.JSON.UpdateScoutingInfo;
 import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.GUIManager;
@@ -51,19 +52,19 @@ public class PreAutonFragment extends DataFragment {
         super.onViewCreated(view, savedInstanceState);
         guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)), binding.nameOfScouterSpinner, true);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)),
-                () -> Objects.requireNonNull(((MainActivity)getContext())).updateTabletInformation());
+                () -> Objects.requireNonNull(((MainActivity) getContext())).updateTabletInformation());
         guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)), binding.matchNumberSpinner, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)),
-                () -> Objects.requireNonNull(((MainActivity)getContext())).updateTabletInformation());
+                () -> Objects.requireNonNull(((MainActivity) getContext())).updateTabletInformation());
         guiManager.setSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)), generateMatches(), true);
 
         guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber)), binding.teamNumberSpinner, false);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber)),
-                () -> Objects.requireNonNull(((MainActivity)getContext())).updateTabletInformation());
+                () -> Objects.requireNonNull(((MainActivity) getContext())).updateTabletInformation());
 
         guiManager.createRadioCheckboxGroup(1);
-        guiManager.createCheckboxInGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.NoShow)),binding.noShowCheckbox, "NoShow");
-        guiManager.createRadioGroupInGroup(1,Objects.requireNonNull(nonDataIDs.get(NonDataEnum.StartPosRadio)),binding.startingLocation);
+        guiManager.createCheckboxInGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.NoShow)), binding.noShowCheckbox, "NoShow");
+        guiManager.createRadioGroupInGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.StartPosRadio)), binding.startingLocation);
 
         guiManager.createRadioGroup(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor)), binding.teamColorSwitch);
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor)), this::setFieldImage);
@@ -76,8 +77,15 @@ public class PreAutonFragment extends DataFragment {
         guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
                 ((AutonFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("AutonFragment"))).autonOpen()
         );
+        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
+                ((MainActivity) MainActivity.context).updateBtScoutingInfo()
+        );
+    }
 
-//        ((MainActivity)MainActivity.context).updateBtScoutingInfo();
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((MainActivity) MainActivity.context).updateBtScoutingInfo();
     }
 
     @NonNull

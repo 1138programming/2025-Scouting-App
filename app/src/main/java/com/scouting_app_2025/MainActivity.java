@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         if (!Objects.isNull(connectedThread) && !connectedThread.checkLists()) {
             connectedThread.updateLists();
         }
-//        preAuton.setScoutingInfo((new UpdateScoutingInfo()).getSplitFileData());
+        preAuton.setScoutingInfo((new UpdateScoutingInfo()).getSplitFileData());
     }
     public JSONObject getBaseJSON() throws JSONException {
         return preAuton.getBaseJSON();
@@ -174,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(confirmSubmit);
 
         ftm = new FragmentTransManager(fragments);
-        updateBtScoutingInfo();
     }
     public void sendMatchData() {
         JSONObject jsonFile = new JSONObject();
