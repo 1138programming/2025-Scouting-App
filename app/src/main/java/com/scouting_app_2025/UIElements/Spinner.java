@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Spinner extends UIElement {
     private final android.widget.Spinner spinner;
     private final boolean addOther;
-    private int currPos = 0;
+    private String currSelected = "";
     public Spinner(int datapointID, android.widget.Spinner spinner, boolean addOther) {
         super(datapointID);
         this.spinner = spinner;
@@ -27,7 +27,7 @@ public class Spinner extends UIElement {
         this.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                currPos = i;
+                currSelected = spinner.getSelectedItem().toString();
                 clicked();
             }
 
@@ -66,9 +66,9 @@ public class Spinner extends UIElement {
                 = new ArrayAdapter<>(MainActivity.context, R.layout.spinner_layout, spinnerList);
         listAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner.setAdapter(listAdapter);
-        int size = spinner.getAdapter().getCount();
-        if(currPos < size) {
-            spinner.setSelection(currPos);
+        int index = listAdapter.getPosition(currSelected);
+        if(index != -1) {
+            spinner.setSelection(index);
         }
     }
 }
