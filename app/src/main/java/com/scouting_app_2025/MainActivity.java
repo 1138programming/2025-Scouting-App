@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.scouting_app_2025.Bluetooth.BluetoothConnectedThread;
 import com.scouting_app_2025.Bluetooth.BluetoothReceiver;
+import com.scouting_app_2025.Fragments.ArchiveFragment;
 import com.scouting_app_2025.Fragments.AutonFragment;
 import com.scouting_app_2025.Fragments.DataFragment;
 import com.scouting_app_2025.Fragments.FragmentTransManager;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public TeleopFragment teleop = new TeleopFragment();
     public PostMatchFragment postMatch = new PostMatchFragment();
     public ConfirmSubmit confirmSubmit = new ConfirmSubmit();
+    public ArchiveFragment archiveFragment = new ArchiveFragment();
     public PermissionManager permissionManager = new PermissionManager(this);
     public final static String datapointEventValue = "Event";
     private boolean connectivity = false;
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(teleopStart);
         fragments.add(postMatch);
         fragments.add(confirmSubmit);
+        fragments.add(archiveFragment);
 
         ftm = new FragmentTransManager(fragments);
     }
@@ -157,21 +160,23 @@ public class MainActivity extends AppCompatActivity {
         return preAuton.getBaseJSON();
     }
     public void recreateFragments() {
-        fragments.clear();
+//        fragments.clear();
         preAuton = new PreAutonFragment();
-        fragments.add(preAuton);
+//        fragments.add(preAuton);
         auton = new AutonFragment();
-        fragments.add(auton);
+//        fragments.add(auton);
         autonStart = new AutonStart();
-        fragments.add(autonStart);
+//        fragments.add(autonStart);
         teleop = new TeleopFragment();
-        fragments.add(teleop);
+//        fragments.add(teleop);
         teleopStart = new TeleopStart();
-        fragments.add(teleopStart);
+//        fragments.add(teleopStart);
         postMatch = new PostMatchFragment();
-        fragments.add(postMatch);
+//        fragments.add(postMatch);
         confirmSubmit = new ConfirmSubmit();
-        fragments.add(confirmSubmit);
+//        fragments.add(confirmSubmit);
+        archiveFragment = new ArchiveFragment();
+//        fragments.add(archiveFragment);
 
         ftm = new FragmentTransManager(fragments);
     }

@@ -129,4 +129,18 @@ public class FragmentTransManager {
         hideFragment("ConfirmSubmitFragment");
         ft.commit();
     }
+
+    public void preAutonMenu() {
+        ft = fm.beginTransaction();
+        hideFragment("PreAutonFragment");
+        showFragment("ArchiveFragment");
+        ft.commit();
+    }
+
+    public void archiveFragmentBack() {
+        ft = fm.beginTransaction();
+        hideFragment("ArchiveFragment");
+        showFragment("PreAutonFragment");
+        ft.commit();
+    }
 }
