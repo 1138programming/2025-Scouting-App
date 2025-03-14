@@ -6,7 +6,7 @@
     <string name="empty"></string>
 
     <!-- App Version -->
-    <string name="app_version">2.0.2</string>
+    <string name="app_version">2.0.4</string>
 
     <!-- Undo and Redo Buttons -->
     <string name="undo_title">Undo</string>
@@ -83,6 +83,6 @@
     <!-- Bluetooth -->
     <string name="connected_status_title">Connected</string>
     <string name="disconnected_status_title">Disconnected</string>
-    <string name="archive_title">Select a match to upload</string>
+    <string name="archive_title">Menu</string>
 
 </resources>

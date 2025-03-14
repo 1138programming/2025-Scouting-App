@@ -160,23 +160,23 @@ public class MainActivity extends AppCompatActivity {
         return preAuton.getBaseJSON();
     }
     public void recreateFragments() {
-//        fragments.clear();
+        fragments.clear();
         preAuton = new PreAutonFragment();
-//        fragments.add(preAuton);
+        fragments.add(preAuton);
         auton = new AutonFragment();
-//        fragments.add(auton);
+        fragments.add(auton);
         autonStart = new AutonStart();
-//        fragments.add(autonStart);
+        fragments.add(autonStart);
         teleop = new TeleopFragment();
-//        fragments.add(teleop);
+        fragments.add(teleop);
         teleopStart = new TeleopStart();
-//        fragments.add(teleopStart);
+        fragments.add(teleopStart);
         postMatch = new PostMatchFragment();
-//        fragments.add(postMatch);
+        fragments.add(postMatch);
         confirmSubmit = new ConfirmSubmit();
-//        fragments.add(confirmSubmit);
+        fragments.add(confirmSubmit);
         archiveFragment = new ArchiveFragment();
-//        fragments.add(archiveFragment);
+        fragments.add(archiveFragment);
 
         ftm = new FragmentTransManager(fragments);
     }
