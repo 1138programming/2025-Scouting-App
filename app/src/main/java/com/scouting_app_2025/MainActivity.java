@@ -133,6 +133,16 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "should be receiving");
         }
     }
+    public void stopScan() {
+        BluetoothAdapter adapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
+        if (adapter == null) {
+            Log.e(TAG, "no BT adapter");
+        }
+        if(adapter != null && permissionManager.checkPermission(BLUETOOTH_SCAN)) {
+            adapter.cancelDiscovery();
+            Log.i(TAG, "should have stopped discovery");
+        }
+    }
 
     /**
      * @Info: Called once at the start of the program to create the receivers
@@ -154,7 +164,10 @@ public class MainActivity extends AppCompatActivity {
         if (!Objects.isNull(connectedThread) && !connectedThread.checkLists()) {
             connectedThread.updateLists();
         }
-        preAuton.setScoutingInfo((new UpdateScoutingInfo()).getSplitFileData());
+        ArrayList<ArrayList<CharSequence>> splitData = (new UpdateScoutingInfo()).getSplitFileData();
+        if (!splitData.isEmpty() && !splitData.get(0).isEmpty()) {
+            preAuton.setScoutingInfo(splitData);
+        }
     }
     public JSONObject getBaseJSON() throws JSONException {
         return preAuton.getBaseJSON();

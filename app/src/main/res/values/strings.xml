@@ -6,7 +6,7 @@
     <string name="empty"></string>
 
     <!-- App Version -->
-    <string name="app_version">2.0.4</string>
+    <string name="app_version">2.0.6</string>
 
     <!-- Undo and Redo Buttons -->
     <string name="undo_title">Undo</string>
