@@ -35,6 +35,7 @@ import com.scouting_app_2025.Popups.AutonStart;
 import com.scouting_app_2025.Popups.ConfirmSubmit;
 import com.scouting_app_2025.Popups.TeleopStart;
 import com.scouting_app_2025.UIElements.GUIManager;
+import com.scouting_app_2025.UniversalSerialBus.USBConnectedThread;
 import com.scouting_app_2025.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public PostMatchFragment postMatch = new PostMatchFragment();
     public ConfirmSubmit confirmSubmit = new ConfirmSubmit();
     public PermissionManager permissionManager = new PermissionManager(this);
+    public USBConnectedThread usbConnectedThread = new USBConnectedThread();
     public GUIManager guiManager = new GUIManager();
     public static Calendar calendar;
     public final static String datapointEventValue = "Event";
