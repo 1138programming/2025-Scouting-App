@@ -53,44 +53,26 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d61d975-5c94-4573-8c7e-7b35a33e9be5" name="Changes" comment="committing some unversioned files">
-      <change afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/FragmentTransManager.java" afterDir="false" />
+    <list default="true" id="2d61d975-5c94-4573-8c7e-7b35a33e9be5" name="Changes" comment="Fixed some problems in BluetoothConnectedThread &amp;&amp; added functionality to set spinners based off of what the main computer sends.">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UniversalSerialBus/USBConnectedThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/35aa1710071bb623a732d121a382335a297ab07b-d8a00f9f-9db3-425f-9727-13a8ba251c43/metadata.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/35aa1710071bb623a732d121a382335a297ab07b-d8a00f9f-9db3-425f-9727-13a8ba251c43/sources/org/gradle/accessors/dm/LibrariesForLibs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/dependencies-accessors/35aa1710071bb623a732d121a382335a297ab07b-d8a00f9f-9db3-425f-9727-13a8ba251c43/sources/org/gradle/accessors/dm/LibrariesForLibsInPluginsBlock.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileChanges/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileChanges/last-build.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/ArchiveFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/ArchiveFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/AutonFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/AutonFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PostMatchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PostMatchFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/TeleopFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/TeleopFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Popups/ArchiveConfirm.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Popups/ArchiveConfirm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Popups/AutonStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Popups/AutonStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Popups/ConfirmSubmit.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Popups/ConfirmSubmit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Popups/TeleopStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Popups/TeleopStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/ButtonAlt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/ButtonAlt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/ButtonColorChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/ButtonColorChanger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/DatapointIDs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/DatapointIDs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/GUIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/GUIManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/UIElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/UIElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/UndoStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/UndoStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/auton_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/auton_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/teleop_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/teleop_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothConnectedThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothConnectedThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +82,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=R9PW10T72RH)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\eeuser\.android\avd\A7_Lite_API_33.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -153,6 +135,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -165,7 +152,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/1138programming/2025-Scouting-App.git&quot;,
-    &quot;accountId&quot;: &quot;37b04dd6-c311-412f-8905-c3ef15848003&quot;
+    &quot;accountId&quot;: &quot;9598e641-9f21-4f2b-82c1-fbbc1ebe0f41&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -175,6 +162,9 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2tcEmhED0uENZEnqOByUIqlNsC7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -188,7 +178,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "currently-working",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/klein_6p28zkz/AndroidStudioProjects/2025-Scouting-App",
     "settings.editor.selected.configurable": "com.android.tools.idea.logcat.settings.LogcatApplicationSettingsConfigurableProvider"
@@ -294,6 +284,17 @@
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created new ButtonColorChanger class along with altering UIElement to have a function that runs a Runnable when clicked as default functionality of parent clicked(). ButtonChanger still needs to communicate with individual buttons so each button class can know if it should miss or not." />
