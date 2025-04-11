@@ -7,13 +7,15 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
+import android.hardware.usb.UsbRequest;
 import android.util.Log;
 
 import com.scouting_app_2025.MainActivity;
 
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 
-public class USBConnectedThread {
+public class UsbConnectedThread {
     private final UsbManager usbManager;
     private UsbDeviceConnection usbDeviceConnection;
     private HashMap<String, UsbDevice> deviceList;
@@ -21,12 +23,15 @@ public class USBConnectedThread {
     private HashMap<UsbDevice, UsbInterface> interfaces;
     private final String deviceName = "";
     private final UsbDevice connectedDevice;
+    private final UsbRequest request = new UsbRequest();
     private final int USB_CLASS_HID = 3; //need to figure out -> probably 3
-    private final int USB_ENDPOINT_GOAL = 0; //need to figure out -> i have no idea what it is
+    private final int USB_ENDPOINT_GOAL = 42; //need to figure out -> i have no idea what it is
 
-    public USBConnectedThread() {
+    public UsbConnectedThread() {
         usbManager = (UsbManager) (MainActivity.context).getSystemService(MainActivity.USB_SERVICE);
         deviceList = usbManager.getDeviceList();
+
+        connectedDevice = usbManager.getDeviceList().values().iterator().next();
 
         for (UsbDevice device : deviceList.values()) {
             for (int i = 0; i < device.getInterfaceCount(); i++) {
@@ -39,35 +44,33 @@ public class USBConnectedThread {
                             Log.i(TAG, "Endpoint found");
                             endPoints.put(device, endpoint);
                             interfaces.put(device, usbInterface);
-
                         }
                     }
                 }
             }
         }
 
-
         if(deviceList.containsKey(deviceName)){
             connectedDevice = deviceList.get(deviceName);
             usbDeviceConnection = usbManager.openDevice(connectedDevice);
+            request.initialize(usbDeviceConnection, endPoints.get(connectedDevice));
         }
         else{
             Log.e(TAG, "Not Connected to Central Computer");
             connectedDevice = null;
         }
-
-
-
     }
 
-    public void sendData() {
-        byte[] bytes = {12, 13, 14, 15}; //test data
-//        UsbInterface usbInterface = connectedDevice.getInterface(USB_CLASS_HID);
-//        usbInterface.getEndpoint(USB_ENDPOINT_CLASS);
-        for (UsbDevice device : deviceList.values()) {
-            usbDeviceConnection.bulkTransfer(endPoints.get(device), bytes, bytes.length , 0);
-            break;
-        }
-        //TODO: can get endpoint from interface (but also needs index???)
+    public void readData() {
+        if(connectedDevice == null) return;
+        ByteBuffer buffer = null;
+
+
+
+        request.queue(buffer);
+    }
+
+    public boolean isConnected() {
+        return (connectedDevice == null);
     }
 }

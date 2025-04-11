@@ -17,9 +17,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavGraph;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 
@@ -35,7 +32,8 @@ import com.scouting_app_2025.Popups.AutonStart;
 import com.scouting_app_2025.Popups.ConfirmSubmit;
 import com.scouting_app_2025.Popups.TeleopStart;
 import com.scouting_app_2025.UIElements.GUIManager;
-import com.scouting_app_2025.UniversalSerialBus.USBConnectedThread;
+import com.scouting_app_2025.UniversalSerialBus.UsbConnectedThread;
+import com.scouting_app_2025.UniversalSerialBus.UsbReceiver;
 import com.scouting_app_2025.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public PostMatchFragment postMatch = new PostMatchFragment();
     public ConfirmSubmit confirmSubmit = new ConfirmSubmit();
     public PermissionManager permissionManager = new PermissionManager(this);
-    public USBConnectedThread usbConnectedThread = new USBConnectedThread();
+    public UsbConnectedThread usbConnectedThread = new UsbConnectedThread();
     public GUIManager guiManager = new GUIManager();
     public static Calendar calendar;
     public final static String datapointEventValue = "Event";
@@ -86,14 +84,19 @@ public class MainActivity extends AppCompatActivity {
      * @Info: Called once to instantiate {@code BluetoothReceiver()} and state
      * all the actions it should be listening for.
      */
-    private void createReceiver() {
-        BluetoothReceiver receiver = new BluetoothReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothDevice.ACTION_FOUND);
-        filter.addAction(BluetoothDevice.ACTION_UUID);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-        this.registerReceiver(receiver, filter);
+    private void createReceivers() {
+        UsbReceiver usbReceiver = new UsbReceiver();
+        IntentFilter usbFilter = new IntentFilter();
+        usbFilter.addAction(UsbReceiver.CONNECTION_ADDRESS_RECEIVED);
+        this.registerReceiver(usbReceiver, usbFilter);
+
+        BluetoothReceiver bluetoothReceiver = new BluetoothReceiver();
+        IntentFilter bluetoothFilter = new IntentFilter();
+        bluetoothFilter.addAction(BluetoothDevice.ACTION_FOUND);
+        bluetoothFilter.addAction(BluetoothDevice.ACTION_UUID);
+        bluetoothFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        bluetoothFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+        this.registerReceiver(bluetoothReceiver, bluetoothFilter);
 
         fragments.add(preAuton);
         fragments.add(autonStart);
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
      * and begin discovery.
      */
     public void createReceiverScan() {
-        createReceiver();
+        createReceivers();
         startScan();
     }
     public void setConnectedThread(BluetoothConnectedThread connectedThread) {
