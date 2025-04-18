@@ -16,18 +16,28 @@ import static com.scouting_app_2025.MainActivity.TAG;
 import com.scouting_app_2025.MainActivity;
 
 import java.nio.ByteBuffer;
+import java.util.Iterator;
 
 public class UsbReadThread extends Thread {
     private final UsbReceiver receiver;
     private final UsbManager usbManager;
-    private final UsbDevice device;
+    private UsbDevice device;
     private UsbInterface usbInterface;
     private UsbEndpoint readEndpoint;
-    private final UsbDeviceConnection deviceConnection;
+    private UsbDeviceConnection deviceConnection;
     public UsbReadThread(UsbReceiver receiver) {
         this.receiver = receiver;
         this.usbManager = (UsbManager) MainActivity.context.getSystemService(Context.USB_SERVICE);
-        this.device = usbManager.getDeviceList().values().iterator().next();
+
+        Iterator<UsbDevice> it = usbManager.getDeviceList().values().iterator();
+        if (it.hasNext()) {
+            device = it.next();
+        }
+        else {
+            Log.e(TAG, "No USB device detected");
+            return;
+        }
+
         this.deviceConnection = usbManager.openDevice(device);
         communicationSetup();
     }

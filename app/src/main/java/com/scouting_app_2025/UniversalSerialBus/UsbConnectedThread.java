@@ -14,6 +14,7 @@ import com.scouting_app_2025.MainActivity;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class UsbConnectedThread {
     private final UsbManager usbManager;
@@ -22,7 +23,7 @@ public class UsbConnectedThread {
     private HashMap<UsbDevice, UsbEndpoint> endPoints;
     private HashMap<UsbDevice, UsbInterface> interfaces;
     private final String deviceName = "";
-    private final UsbDevice connectedDevice;
+    private UsbDevice connectedDevice;
     private final UsbRequest request = new UsbRequest();
     private final int USB_CLASS_HID = 3; //need to figure out -> probably 3
     private final int USB_ENDPOINT_GOAL = 42; //need to figure out -> i have no idea what it is
@@ -31,7 +32,14 @@ public class UsbConnectedThread {
         usbManager = (UsbManager) (MainActivity.context).getSystemService(MainActivity.USB_SERVICE);
         deviceList = usbManager.getDeviceList();
 
-        connectedDevice = usbManager.getDeviceList().values().iterator().next();
+        Iterator<UsbDevice> it = usbManager.getDeviceList().values().iterator();
+        if (it.hasNext()) {
+            connectedDevice = it.next();
+        }
+        else {
+            Log.e(TAG, "No USB device detected");
+            return;
+        }
 
         for (UsbDevice device : deviceList.values()) {
             for (int i = 0; i < device.getInterfaceCount(); i++) {
@@ -59,6 +67,18 @@ public class UsbConnectedThread {
             Log.e(TAG, "Not Connected to Central Computer");
             connectedDevice = null;
         }
+    }
+
+    public UsbManager getUsbManager() {
+        return usbManager;
+    }
+
+    public UsbDevice getConnectedDevice() {
+        return connectedDevice;
+    }
+
+    public UsbDeviceConnection getUsbDeviceConnection() {
+        return usbDeviceConnection;
     }
 
     public void readData() {

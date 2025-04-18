@@ -16,6 +16,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public PostMatchFragment postMatch = new PostMatchFragment();
     public ConfirmSubmit confirmSubmit = new ConfirmSubmit();
     public PermissionManager permissionManager = new PermissionManager(this);
-    public UsbConnectedThread usbConnectedThread = new UsbConnectedThread();
+    public UsbConnectedThread usbConnectedThread;
     public GUIManager guiManager = new GUIManager();
     public static Calendar calendar;
     public final static String datapointEventValue = "Event";
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         UsbReceiver usbReceiver = new UsbReceiver();
         IntentFilter usbFilter = new IntentFilter();
         usbFilter.addAction(UsbReceiver.CONNECTION_ADDRESS_RECEIVED);
-        this.registerReceiver(usbReceiver, usbFilter);
+        ContextCompat.registerReceiver(this, usbReceiver, usbFilter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
         BluetoothReceiver bluetoothReceiver = new BluetoothReceiver();
         IntentFilter bluetoothFilter = new IntentFilter();
