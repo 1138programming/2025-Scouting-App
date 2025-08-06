@@ -11,9 +11,7 @@ public class RadioCheckboxGroup extends UIElement{
 
     public void addElement(UIElement element) {
         elements.add(element);
-        element.setOnClickFunction(() -> {
-            elementSelected(element);
-        });
+        element.setOnClickFunction(() -> elementSelected(element));
     }
 
     public void elementSelected(UIElement element) {
