@@ -1,11 +1,5 @@
 package com.scouting_app_2025.UIElements;
 
-import static com.scouting_app_2025.UIElements.DatapointIDs.datapointIDs;
-
-import android.widget.Toast;
-
-import com.scouting_app_2025.MainActivity;
-
 import java.util.ArrayList;
 
 public class UIElement {

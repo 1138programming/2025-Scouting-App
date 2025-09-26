@@ -1,54 +1,75 @@
 package com.scouting_app_2025.Bluetooth;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import static com.scouting_app_2025.MainActivity.TAG;
+
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
+
+import com.scouting_app_2025.MainActivity;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class QrBtConnThread extends Thread {
-
-    static BluetoothAdapter adapter;
-    static BluetoothDevice device;
     static BluetoothSocket socket;
     public QrBtConnThread() {
 
     }
+
+    /**
+     *
+     * @param mac The MAC address of the device
+     * @param port The bluetooth port of the  on that device
+     */
      public static void bluetoothConnect(String mac, int port) {
-         BluetoothSocket tmp;
-         device = adapter.getRemoteDevice(mac);
+        if(((MainActivity) MainActivity.context).permissionManager.checkPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
+            Log.e(TAG, "need permission for Bluetooth_Connect");
+            cancel();
+        }
+        BluetoothSocket tmp;
+        BluetoothDevice device = ((BluetoothManager) MainActivity.context.getSystemService(Context.BLUETOOTH_SERVICE))
+                 .getAdapter().getRemoteDevice(mac);
 
+        try {
+            Method method = device.getClass().getMethod("createInsecureRfcommSocket", int.class);
+            tmp = (BluetoothSocket) method.invoke(device, port);
+            socket = tmp;
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            Log.e(TAG,"connect method failed",e);
+            return;
+        }
+
+        if(socket == null) return;
+
+        try {
+            Log.e(TAG, "badlet?");
+            socket.connect();
+            Log.e(TAG, "ROBERTBADLETTTTT");
+        }
+        catch(IOException er){
+            Log.e(TAG, "Timed out/error");
+            // Unable to connect; close the socket and return.
+            cancel();
+        }
+     }
+
+     public static void cancel() {
          try {
-             Method method = device.getClass().getMethod("createInsecureRfcommSocket", int.class);
-             tmp = (BluetoothSocket) method.invoke(device, port);
-             socket = tmp;
-         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-             Log.e("1138 SCApp","connect method failed",e);
-             return;
-         }
-
-         if(socket == null) return;
-
-         try {
-             Log.e("1138 SCApp", "badlet?");
-             socket.connect();
-             Log.e("1138 SCApp", "ROBERTBADLETTTTT");
-         }
-         catch(IOException er){
-             Log.e("1138 SCApp", "Timed out/error");
-             // Unable to connect; close the socket and return.
-             try {
-                 socket.close();
-                 Log.e("1138 SCApp", "socket closed");
-             } catch (IOException closeException) {
-                 Log.e("1138 SCApp", "couldn't close", closeException);
-             }
+             socket.close();
+             Log.e(TAG, "socket closed");
+         } catch (IOException closeException) {
+             Log.e(TAG, "couldn't close", closeException);
          }
      }
 }

@@ -64,7 +64,7 @@ public class PreAutonFragmentRewrite extends Fragment {
         int datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName));
         scouterNameSpinner = new Spinner(datapointID, binding.nameOfScouterSpinner, true);
         scouterNameSpinner.setOnClickFunction(() -> ((MainActivity) requireContext()).updateTabletInformation());
-
+        
         datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber));
         matchNumberSpinner = new Spinner(datapointID, binding.matchNumberSpinner, false);
         matchNumberSpinner.updateSpinnerList(generateMatches());

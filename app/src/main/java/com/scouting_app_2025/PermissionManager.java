@@ -1,10 +1,7 @@
 package com.scouting_app_2025;
 
-import static com.scouting_app_2025.MainActivity.TAG;
-
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -12,8 +9,6 @@ import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class PermissionManager {
     private final Context context;
@@ -34,7 +29,7 @@ public class PermissionManager {
     }
 
     /**
-     * @Info:
+     * @Info: Adds a permission to the permission tracker
      */
     public void addPermission(String permission) {
         permissionTracker.put(permission, false);
@@ -48,8 +43,10 @@ public class PermissionManager {
     public void requestPermissions() {
         bluetoothPermissionRequest.launch(getNeededPermissions());
     }
+
     /**
      * @Info: Called to check if app has a certain permission
+     * @return Returns if you have the permission or not
      */
     public boolean checkPermission(String permission) {
         return ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
