@@ -36,6 +36,7 @@ android {
 
 dependencies {
 
+    implementation(libs.journeyapps.zxing.android.embedded)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

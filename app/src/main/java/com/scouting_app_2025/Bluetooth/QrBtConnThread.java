@@ -28,14 +28,14 @@ public class QrBtConnThread extends Thread {
     }
 
     /**
+     * Creates a BluetoothConnectedThread based on a given MAC address and port.
      *
      * @param mac The MAC address of the device
      * @param port The bluetooth port of the  on that device
      */
      public static void bluetoothConnect(String mac, int port) {
-        if(((MainActivity) MainActivity.context).permissionManager.checkPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
+        if(!((MainActivity) MainActivity.context).permissionManager.checkPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
             Log.e(TAG, "need permission for Bluetooth_Connect");
-            cancel();
         }
         BluetoothSocket tmp;
         BluetoothDevice device = ((BluetoothManager) MainActivity.context.getSystemService(Context.BLUETOOTH_SERVICE))

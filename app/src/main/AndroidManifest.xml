@@ -33,14 +33,19 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.scouting_app_2025.Bluetooth.BluetoothReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.bluetooth.device.action.UUID"/>
-                <action android:name="android.bluetooth.device.action.Discovery_Started"/>
-            </intent-filter>
-        </receiver>
+<!--        <receiver android:name="com.scouting_app_2025.Bluetooth.BluetoothReceiver"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.bluetooth.device.action.UUID"/>-->
+<!--                <action android:name="android.bluetooth.device.action.Discovery_Started"/>-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+        <activity android:name=".Bluetooth.CaptureAct"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"/>
+
+
     </application>
 
 </manifest>

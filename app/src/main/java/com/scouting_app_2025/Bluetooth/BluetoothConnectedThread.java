@@ -53,6 +53,8 @@ public class BluetoothConnectedThread extends Thread {
         inputStream = tmpIn;
         outputStream = tmpOut;
         ((MainActivity)MainActivity.context).setConnectedThread(this);
+        ((MainActivity)MainActivity.context).setConnectivity(true);
+        ((MainActivity)MainActivity.context).updateBtScoutingInfo();
     }
 
     @Override

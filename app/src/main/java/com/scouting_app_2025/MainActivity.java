@@ -87,15 +87,15 @@ public class MainActivity extends AppCompatActivity {
      * @Info: Called once to instantiate {@code BluetoothReceiver()} and state
      * all the actions it should be listening for.
      */
-    private void createReceiver() {
-        BluetoothReceiver receiver = new BluetoothReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothDevice.ACTION_FOUND);
-        filter.addAction(BluetoothDevice.ACTION_UUID);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-        this.registerReceiver(receiver, filter);
-    }
+//    private void createReceiver() {
+//        BluetoothReceiver receiver = new BluetoothReceiver();
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(BluetoothDevice.ACTION_FOUND);
+//        filter.addAction(BluetoothDevice.ACTION_UUID);
+//        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+//        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+//        this.registerReceiver(receiver, filter);
+//    }
 
     private void addFragmentsToManager() {
         fragments.add(preAuton);
@@ -122,36 +122,36 @@ public class MainActivity extends AppCompatActivity {
     /**
      *
      */
-    public void startScan() {
-        BluetoothAdapter adapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
-        if (adapter == null) {
-            Log.e(TAG, "no BT adapter");
-        }
-        if(adapter != null && permissionManager.checkPermission(BLUETOOTH_SCAN)) {
-            adapter.cancelDiscovery();
-            adapter.startDiscovery();
-            Log.i(TAG, "should be receiving");
-        }
-    }
-    public void stopScan() {
-        BluetoothAdapter adapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
-        if (adapter == null) {
-            Log.e(TAG, "no BT adapter");
-        }
-        if(adapter != null && permissionManager.checkPermission(BLUETOOTH_SCAN)) {
-            adapter.cancelDiscovery();
-            Log.i(TAG, "should have stopped discovery");
-        }
-    }
+//    public void startScan() {
+//        BluetoothAdapter adapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
+//        if (adapter == null) {
+//            Log.e(TAG, "no BT adapter");
+//        }
+//        if(adapter != null && permissionManager.checkPermission(BLUETOOTH_SCAN)) {
+//            adapter.cancelDiscovery();
+//            adapter.startDiscovery();
+//            Log.i(TAG, "should be receiving");
+//        }
+//    }
+//    public void stopScan() {
+//        BluetoothAdapter adapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
+//        if (adapter == null) {
+//            Log.e(TAG, "no BT adapter");
+//        }
+//        if(adapter != null && permissionManager.checkPermission(BLUETOOTH_SCAN)) {
+//            adapter.cancelDiscovery();
+//            Log.i(TAG, "should have stopped discovery");
+//        }
+//    }
 
     /**
      * @Info: Called once at the start of the program to create the receivers
      * and begin discovery.
      */
-    public void createReceiverScan() {
-        createReceiver();
-        startScan();
-    }
+//    public void createReceiverScan() {
+//        createReceiver();
+//        startScan();
+//    }
     public void setConnectedThread(BluetoothConnectedThread connectedThread) {
         this.connectedThread = connectedThread;
     }

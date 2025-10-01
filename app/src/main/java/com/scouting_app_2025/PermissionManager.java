@@ -1,5 +1,6 @@
 package com.scouting_app_2025;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
@@ -14,6 +15,7 @@ public class PermissionManager {
     private final Context context;
     private final HashMap<String, Boolean> permissionTracker = new HashMap<>();
     private final ActivityResultLauncher<String[]> bluetoothPermissionRequest;
+    private static boolean hasAllPermissions = false;
 
     public PermissionManager(Context context) {
         this.context = context;
@@ -23,7 +25,7 @@ public class PermissionManager {
         bluetoothPermissionRequest = ((MainActivity)context).registerForActivityResult(
                 new ActivityResultContracts.RequestMultiplePermissions(), isGranted -> {
                     if(!isGranted.containsValue(false)) {
-                        ((MainActivity)context).createReceiverScan();
+                        hasAllPermissions = true;
                     }
                 });
     }

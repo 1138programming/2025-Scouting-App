@@ -51,14 +51,30 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d61d975-5c94-4573-8c7e-7b35a33e9be5" name="Changes" comment="small gradle background changes">
+    <list default="true" id="2d61d975-5c94-4573-8c7e-7b35a33e9be5" name="Changes" comment="currently reviewing qr-code and bt code">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/CaptureAct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothConnectedThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothConnectedThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/QrBtConnThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/QrBtConnThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragmentRewrite.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragmentRewrite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/ParentFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/ParentFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/PermissionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/PermissionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/UIElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/UIElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +84,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\1138\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -177,6 +193,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;com.android.tools.idea.logcat.settings.LogcatApplicationSettingsConfigurableProvider&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.scouting_app_2025.Bluetooth" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="Scouting-App-2025.app" />
@@ -284,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741912700609</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="currently reviewing qr-code and bt code">
+      <option name="closed" value="true" />
+      <created>1758851954466</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1758851954466</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -293,19 +322,20 @@
     <MESSAGE value="added functions for changing to and from archive fragment" />
     <MESSAGE value="fixed issue with xml visualization" />
     <MESSAGE value="small gradle background changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="small gradle background changes" />
+    <MESSAGE value="currently reviewing qr-code and bt code" />
+    <option name="LAST_COMMIT_MESSAGE" value="currently reviewing qr-code and bt code" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.scouting_app_2025">
           <value>
-            <CheckInfo lastCheckTimestamp="1757461739121" />
+            <CheckInfo lastCheckTimestamp="1759273046481" />
           </value>
         </entry>
         <entry key="com.scouting_app_2025.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1757461739121" />
+            <CheckInfo lastCheckTimestamp="1759273046482" />
           </value>
         </entry>
       </map>
