@@ -1,6 +1,7 @@
 package com.scouting_app_2025.JSON;
 
 import static com.scouting_app_2025.MainActivity.TAG;
+import static com.scouting_app_2025.MainActivity.context;
 
 import android.util.Log;
 
@@ -15,7 +16,7 @@ import java.util.Objects;
 public class FileSaver {
 
     public static void saveFile(String fileText, String fileTitle) {
-        String path = MainActivity.context.getFilesDir().getPath() + "/scoutingData";
+        String path = context.getFilesDir().getPath() + "/scoutingData";
         File folderDir = new File(path);
         //creates the directory if it doesn't exist
         if (!folderDir.isDirectory()) {

@@ -62,6 +62,7 @@ public class QrBtConnThread extends Thread {
             // Unable to connect; close the socket and return.
             cancel();
         }
+        new BluetoothConnectedThread(socket).start();
      }
 
      public static void cancel() {

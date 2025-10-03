@@ -23,25 +23,27 @@ import java.util.Comparator;
 
 public class UpdateScoutingInfo {
 
-    private final File folderDir = context.getFilesDir();
+    private final File folderDir = new File(context.getFilesDir().getPath() + "/scoutingData");
     private final String fileName = "scouterInfo.txt";
-    boolean fileExists = true;
+    boolean dirExists = true;
 
     public UpdateScoutingInfo() {
         if (!folderDir.isDirectory()) {
             if (!folderDir.mkdir()) {
-                fileExists = false;
+                dirExists = false;
                 Log.e(TAG, "File System is Broken");
             }
         }
     }
 
     public void saveToFile(String text) throws IOException {
-        if(!fileExists) return;
+        if(!dirExists) return;
 
         File targetFile = new File(folderDir, fileName);
         if (!targetFile.exists()) {
-            targetFile.createNewFile();
+            if(!targetFile.createNewFile()) {
+                Log.e(TAG, "Unable to create file");
+            }
         }
         FileWriter fileWriter = new FileWriter(targetFile, false);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -52,11 +54,11 @@ public class UpdateScoutingInfo {
 
     public String getDataFromFile() {
         File file = new File(folderDir, fileName);
-        FileInputStream fis = null;
+        FileInputStream fis;
         try {
             fis = new FileInputStream(file);
         } catch (FileNotFoundException e) {
-            Log.e(TAG, e.toString());
+            Log.e(TAG, "File doesn't exist" + e);
             return "";
         }
         
@@ -74,7 +76,7 @@ public class UpdateScoutingInfo {
             }
         }
         catch (IOException e) {
-            Log.e(TAG, e.toString());
+            Log.e(TAG, "Couldn't read file: " + e);
             return "";
         }
         return sb.toString();

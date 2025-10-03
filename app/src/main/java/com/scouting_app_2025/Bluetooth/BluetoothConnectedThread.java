@@ -52,14 +52,13 @@ public class BluetoothConnectedThread extends Thread {
         //sets actual variables to temp versions
         inputStream = tmpIn;
         outputStream = tmpOut;
-        ((MainActivity)MainActivity.context).setConnectedThread(this);
-        ((MainActivity)MainActivity.context).setConnectivity(true);
-        ((MainActivity)MainActivity.context).updateBtScoutingInfo();
     }
 
     @Override
     public void run() {
-
+        ((MainActivity)MainActivity.context).setConnectedThread(this);
+        ((MainActivity)MainActivity.context).setConnectivity(true);
+        ((MainActivity)MainActivity.context).updateBtScoutingInfo();
     }
 
     private void resetByteBuffer(int capacity) {
