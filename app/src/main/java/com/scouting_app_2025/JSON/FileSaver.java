@@ -5,6 +5,8 @@ import static com.scouting_app_2025.MainActivity.context;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.scouting_app_2025.MainActivity;
 
 import java.io.BufferedWriter;
@@ -25,6 +27,20 @@ public class FileSaver {
                 return;
             }
         }
+        File scoutingFile = getScoutingFile(fileTitle, folderDir);
+        try {
+            FileWriter fileWriter = new FileWriter(scoutingFile, false);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(fileText);
+            bufferedWriter.close();
+        }
+        catch(IOException e) {
+            Log.e(TAG, e.toString());
+        }
+    }
+
+    @NonNull
+    private static File getScoutingFile(String fileTitle, File folderDir) {
         boolean fileExists = true;
         File scoutingFile = new File(folderDir, fileTitle + ".json");
         for (int i = 1; fileExists; i++) {
@@ -37,14 +53,6 @@ public class FileSaver {
             if (fileExists)
                 scoutingFile = new File(folderDir, fileTitle + "(" + i + ").json");
         }
-        try {
-            FileWriter fileWriter = new FileWriter(scoutingFile, false);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(fileText);
-            bufferedWriter.close();
-        }
-        catch(IOException e) {
-            Log.e(TAG, e.toString());
-        }
+        return scoutingFile;
     }
 }

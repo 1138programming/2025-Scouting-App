@@ -71,7 +71,6 @@ public class BluetoothReceiver extends BroadcastReceiver {
                                 ((MainActivity)MainActivity.context).setConnectedThread(connectedThread);
                                 ((MainActivity)MainActivity.context).setConnectivity(true);
                                 ((MainActivity)MainActivity.context).updateBtScoutingInfo();
-//                                ((MainActivity)MainActivity.context).stopScan();
                                 break;
                             } catch (IOException e) {
                                 Log.e(TAG, "Failed to " + e);

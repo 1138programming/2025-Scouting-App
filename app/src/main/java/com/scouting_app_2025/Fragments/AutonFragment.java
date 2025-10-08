@@ -17,6 +17,9 @@ import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.AutonFragmentBinding;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

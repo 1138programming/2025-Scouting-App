@@ -8,23 +8,15 @@ import static android.Manifest.permission.BLUETOOTH_CONNECT;
 import static android.Manifest.permission.BLUETOOTH_SCAN;
 
 import android.annotation.SuppressLint;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
 import android.content.Context;
-import android.content.IntentFilter;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.scouting_app_2025.Bluetooth.BluetoothConnectedThread;
-import com.scouting_app_2025.Bluetooth.BluetoothReceiver;
 import com.scouting_app_2025.Fragments.ArchiveFragment;
 import com.scouting_app_2025.Fragments.AutonFragment;
 import com.scouting_app_2025.Fragments.DataFragment;
@@ -119,9 +111,6 @@ public class MainActivity extends AppCompatActivity {
         permissionManager.addPermission(BLUETOOTH_ADVERTISE);
     }
 
-    /**
-     *
-     */
 //    public void startScan() {
 //        BluetoothAdapter adapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
 //        if (adapter == null) {
@@ -152,6 +141,14 @@ public class MainActivity extends AppCompatActivity {
 //        createReceiver();
 //        startScan();
 //    }
+    public void submitMatchData(byte[] data) {
+        if(connectivity) {
+            connectedThread.sendInformation(data, 1);
+        }
+        else {
+            Toast.makeText(context, "Data has not been uploaded because bluetooth isn't connected", Toast.LENGTH_LONG).show();
+        }
+    }
     public void setConnectedThread(BluetoothConnectedThread connectedThread) {
         this.connectedThread = connectedThread;
     }
