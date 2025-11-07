@@ -22,7 +22,7 @@ public class PostMatchFragment extends DataFragment {
     GUIManager guiManager;
 
     public PostMatchFragment() {
-        this.guiManager = super.guiManager;
+
     }
 
     @Override
@@ -32,7 +32,7 @@ public class PostMatchFragment extends DataFragment {
         return binding.getRoot();
     }
 
-        @Override
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

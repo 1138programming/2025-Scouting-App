@@ -1,5 +1,6 @@
 package com.scouting_app_2025.Fragments;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,8 +21,10 @@ import com.scouting_app_2025.Bluetooth.QrBtConnThread;
 import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.Button;
-import com.scouting_app_2025.UIElements.GUIManager;
+import com.scouting_app_2025.UIElements.Checkbox;
 import com.scouting_app_2025.UIElements.NonDataEnum;
+import com.scouting_app_2025.UIElements.RadioCheckboxGroup;
+import com.scouting_app_2025.UIElements.RadioGroup;
 import com.scouting_app_2025.UIElements.Spinner;
 import com.scouting_app_2025.databinding.PreAutonFragmentBinding;
 
@@ -36,14 +39,20 @@ import java.util.List;
 import java.util.Objects;
 
 public class PreAutonFragment extends DataFragment {
-    PreAutonFragmentBinding binding;
-    GUIManager guiManager;
-    ArrayList<Integer> scouterIDs = new ArrayList<>(List.of(-1));
+    private PreAutonFragmentBinding binding;
+    private Spinner scouterNameSpinner;
+    private Spinner matchNumberSpinner;
+    private RadioGroup teamColorButtons;
+    private Spinner teamNumberSpinner;
+
+    private ArrayList<Integer> scouterIDs = new ArrayList<>(List.of(-1));
 
     public PreAutonFragment() {
-        this.guiManager = super.guiManager;
+
     }
 
+    /* When the fragment binding is created we override the function so we
+    * can get the binding in this class to use. */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,52 +63,67 @@ public class PreAutonFragment extends DataFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)), binding.nameOfScouterSpinner, true);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)),
-                () -> Objects.requireNonNull(((MainActivity) getContext())).updateTabletInformation());
-        guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)), binding.matchNumberSpinner, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)),
-                () -> Objects.requireNonNull(((MainActivity) getContext())).updateTabletInformation());
-        guiManager.setSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)), generateMatches(), true);
 
-        guiManager.createTabletInfoSpinner(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber)), binding.teamNumberSpinner, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber)),
-                () -> Objects.requireNonNull(((MainActivity) getContext())).updateTabletInformation());
+        int datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName));
+        scouterNameSpinner = new Spinner(datapointID, binding.nameOfScouterSpinner, true);
+        scouterNameSpinner.setOnClickFunction(() -> ((MainActivity) requireContext()).updateTabletInformation());
+        
+        datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber));
+        matchNumberSpinner = new Spinner(datapointID, binding.matchNumberSpinner, false);
+        matchNumberSpinner.updateSpinnerList(generateMatches());
+        matchNumberSpinner.setOnClickFunction(() -> ((MainActivity) requireContext()).updateTabletInformation());
 
-        guiManager.createRadioCheckboxGroup(1);
-        guiManager.createCheckboxInGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.NoShow)), binding.noShowCheckbox, true,"NoShow");
-        guiManager.createRadioGroupInGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.StartPosRadio)), binding.startingLocation);
-        guiManager.setSelectedInRadioCheckboxGroup(1, Objects.requireNonNull(nonDataIDs.get(NonDataEnum.NoShow)));
+        datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor));
+        teamColorButtons = new RadioGroup(datapointID, binding.teamColorSwitch);
+        teamColorButtons.setOnClickFunction(this::updateTeamColor);
 
-        guiManager.createRadioGroup(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor)), binding.teamColorSwitch);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor)), this::setFieldImage);
+        datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber));
+        teamNumberSpinner = new Spinner(datapointID, binding.teamNumberSpinner, false);
+        teamNumberSpinner.setOnClickFunction(() -> ((MainActivity) requireContext()).updateTabletInformation());
 
-        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)),
-                binding.nextButton, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
-                ftm.preAutonNext()
-        );
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext)), () ->
-                ((AutonFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("AutonFragment"))).autonOpen()
-        );
-        int datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ArchiveHamburger));
+        RadioCheckboxGroup startingPositionGroup = new RadioCheckboxGroup(-1);
+            datapointID = 1;
+        RadioGroup startingPosition = new RadioGroup(datapointID, binding.startingLocation);
+            startingPositionGroup.addElement(startingPosition);
+            undoStack.addElement(startingPosition);
+
+            datapointID = 2;
+        Checkbox noShowCheckbox = new Checkbox(datapointID, binding.noShowCheckbox, true, "noShow");
+            startingPositionGroup.addElement(noShowCheckbox);
+            undoStack.addElement(noShowCheckbox);
+
+            startingPositionGroup.selectElement(noShowCheckbox);
+
+        datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext));
+        Button<android.widget.Button> nextButton = new Button<>(datapointID, binding.nextButton);
+        nextButton.setOnClickFunction(() -> ftm.preAutonNext());
+        nextButton.setOnClickFunction(() -> ((AutonFragment) Objects.requireNonNull(
+                getParentFragmentManager().findFragmentByTag("AutonFragment"))).autonOpen());
+
+        datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ArchiveHamburger));
         Button<ImageButton> button = new Button<>(datapointID, binding.archiveButton);
-//        button.setOnClickFunction(() -> ftm.preAutonMenu());
+        button.setOnClickFunction(() -> ftm.preAutonMenu());
         button.setOnClickFunction(this::scanCode);
     }
 
+    /* When the fragment is completely created, we test so see
+    * if we are connected and if so we send send our basic info. */
     @Override
     public void onStart() {
         super.onStart();
         ((MainActivity) MainActivity.context).updateBtScoutingInfo();
     }
 
+    /* Makes it so the toString() function for this class
+    * return the name of the class. */
     @NonNull
     @Override
     public String toString() {
         return "PreAutonFragment";
     }
 
+    /** @Info: Generates an ArrayList filled with the necessary qualifying
+     * and playoffs matches for an entire comp. */
     private ArrayList<CharSequence> generateMatches() {
         ArrayList<CharSequence> matchNumbers = new ArrayList<>();
         //creates spinner for match number
@@ -118,8 +142,36 @@ public class PreAutonFragment extends DataFragment {
         return matchNumbers;
     }
 
+    public void updateTeamColor() {
+        switch(teamColorButtons.getValue()) {
+            case "RED":
+                binding.startingPosImage.setImageResource(R.drawable.frc_field_red);
+                binding.startingLocation.setBackgroundTintList(ColorStateList.valueOf(
+                        MainActivity.context.getColor(R.color.red)));
+                break;
+            case "BLUE":
+                binding.startingPosImage.setImageResource(R.drawable.frc_field_blue);
+                binding.startingLocation.setBackgroundTintList(ColorStateList.valueOf(
+                        MainActivity.context.getColor(R.color.blue)));
+        }
+    }
+
     public byte[] getTabletInformation() {
-        return guiManager.getTabletInformation().getBytes();
+        StringBuilder tabletInfo = new StringBuilder();
+
+        tabletInfo.append(scouterNameSpinner.getValue());
+        tabletInfo.append(": ");
+        tabletInfo.append(matchNumberSpinner.getValue());
+        tabletInfo.append(": ");
+        tabletInfo.append(teamNumberSpinner.getValue());
+        tabletInfo.append(": ");
+
+        if(tabletInfo.length() > 2) {
+            return tabletInfo.delete(tabletInfo.length()-2,tabletInfo.length()).toString().getBytes();
+        }
+        else {
+            return "Error".getBytes();
+        }
     }
 
     public void setScoutingInfo(ArrayList<ArrayList<CharSequence>> list) {
@@ -128,45 +180,9 @@ public class PreAutonFragment extends DataFragment {
             String curr = scouterNum.toString();
             this.scouterIDs.add(Integer.valueOf(curr));
         }
-        guiManager.setTabletInfoElements(list);
-    }
 
-    public JSONObject getBaseJSON() throws JSONException {
-        JSONObject baseJson = new JSONObject();
-
-        baseJson.put("scouterID", scouterIDs.get(((Spinner)guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)))).getSelectedIndex()).toString());
-        baseJson.put("matchID", guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber))).getValue());
-        try {
-            baseJson.put("teamID", guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamNumber))).getValue());
-        }
-        catch(NullPointerException e) {
-            baseJson.put("teamID", "0");
-        }
-        String allianceName = guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor))).getValue();
-        switch(allianceName) {
-            case "RED":
-                baseJson.put("allianceID", "1");
-                break;
-            case "BLUE":
-                baseJson.put("allianceID", "2");
-        }
-
-        return baseJson;
-    }
-
-    public String getFileTitle() {
-        return (guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ScouterName)))).getValue()
-                + " Match #"+(guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.MatchNumber)))).getValue();
-    }
-
-    public void setFieldImage() {
-        switch(guiManager.getElement(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.TeamColor))).getValue()) {
-            case "RED":
-                binding.startingPosImage.setImageResource(R.drawable.frc_field_red);
-                break;
-            case "BLUE":
-                binding.startingPosImage.setImageResource(R.drawable.frc_field_blue);
-        }
+        scouterNameSpinner.updateSpinnerList(list.get(0));
+        teamNumberSpinner.updateSpinnerList(list.get(2));
     }
 
     public void setBtStatus(boolean status) {
@@ -179,9 +195,14 @@ public class PreAutonFragment extends DataFragment {
             Toast.makeText(MainActivity.context, "disconnected", Toast.LENGTH_LONG).show();
         }
     }
+
+    public String getFileTitle() {
+        return scouterNameSpinner.getValue() + " Match #"+matchNumberSpinner.getValue();
+    }
+
     public void scanCode() {
         ScanOptions options = new ScanOptions();
-        options.setPrompt("womp womp");
+        options.setPrompt("Scan QR-Code on Computer to Connect");
         options.setBeepEnabled(true);
         options.setOrientationLocked(true);
         options.setCaptureActivity(CaptureAct.class);
@@ -205,4 +226,26 @@ public class PreAutonFragment extends DataFragment {
             }
         }
     });
+
+    public JSONObject getBaseJSON() throws JSONException {
+        JSONObject baseJson = new JSONObject();
+
+        baseJson.put("scouterID", scouterIDs.get(scouterNameSpinner.getSelectedIndex()).toString());
+        baseJson.put("matchID", matchNumberSpinner.getValue());
+        try {
+            baseJson.put("teamID", teamNumberSpinner.getValue());
+        } catch (NullPointerException e) {
+            baseJson.put("teamID", "0");
+        }
+        String allianceName = teamColorButtons.getValue();
+        switch (allianceName) {
+            case "RED":
+                baseJson.put("allianceID", "1");
+                break;
+            case "BLUE":
+                baseJson.put("allianceID", "2");
+        }
+
+        return baseJson;
+    }
 }

@@ -51,12 +51,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d61d975-5c94-4573-8c7e-7b35a33e9be5" name="Changes" comment="app crashes when first connecting to app and scouterInfo.txt doesn't exist. Afterwards it works fine.">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
+    <list default="true" id="2d61d975-5c94-4573-8c7e-7b35a33e9be5" name="Changes" comment="working on JSON submission restructure">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragmentOld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Bluetooth/BluetoothReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/JSON/FileSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/JSON/FileSaver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/AutonFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/AutonFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/DataFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/DataFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PostMatchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PostMatchFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/Fragments/PreAutonFragmentRewrite.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/GUIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/scouting_app_2025/UIElements/GUIManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +70,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\1138\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -118,6 +122,7 @@
       <list>
         <option value="resourceFile" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -303,7 +308,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759456903471</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="working on JSON submission restructure">
+      <option name="closed" value="true" />
+      <created>1759889129197</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1759889129197</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -314,7 +327,8 @@
     <MESSAGE value="small gradle background changes" />
     <MESSAGE value="currently reviewing qr-code and bt code" />
     <MESSAGE value="app crashes when first connecting to app and scouterInfo.txt doesn't exist. Afterwards it works fine." />
-    <option name="LAST_COMMIT_MESSAGE" value="app crashes when first connecting to app and scouterInfo.txt doesn't exist. Afterwards it works fine." />
+    <MESSAGE value="working on JSON submission restructure" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on JSON submission restructure" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">

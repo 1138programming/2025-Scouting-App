@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 
 import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
-import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.AutonFragmentBinding;
 
@@ -28,11 +27,10 @@ import java.util.Objects;
 
 public class AutonFragment extends DataFragment {
     AutonFragmentBinding binding;
-    private final GUIManager guiManager;
     private Long autonStart;
 
     public AutonFragment() {
-        this.guiManager = super.guiManager;
+
     }
 
     @Override

@@ -33,6 +33,7 @@ public class GUIManager {
         for(int i = 1; i < changerButtonIDs.size() && i < colors.size(); i++) {
             createdButton.addAlt(changerButtonIDs.get(i), colors.get(i));
         }
+
     }
     public void createColorChangerButton(int changerButtonID, ArrayList<Integer> datapointIDs, android.widget.Button button, boolean dataStoring) {
         createButton(datapointIDs.get(0), button, dataStoring);
