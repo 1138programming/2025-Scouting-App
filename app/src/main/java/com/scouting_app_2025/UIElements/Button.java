@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.scouting_app_2025.MainActivity;
 
+import java.util.Objects;
+
 public class Button<T extends View> extends UIElement {
     private final T button;
     private final UndoStack undostack;
@@ -55,7 +57,7 @@ public class Button<T extends View> extends UIElement {
     }
 
     public int getColor() {
-        return button.getBackgroundTintList().getDefaultColor();
+        return Objects.requireNonNull(button.getBackgroundTintList()).getDefaultColor();
     }
 
     public void setColor(int color) {

@@ -4,6 +4,8 @@ import static com.scouting_app_2025.MainActivity.TAG;
 
 import android.util.Log;
 
+import com.scouting_app_2025.JSON.JSONManager;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,11 +20,11 @@ import java.util.Stack;
  * @Info:
  */
 public class UndoStack {
-    private final Stack<Integer> inputStack = new Stack<Integer>();
+    private final Stack<UIElement> inputStack = new Stack<UIElement>();
     private final Stack<Long> timestamps = new Stack<Long>();
-    private Stack<Integer> redoStack = new Stack<Integer>();
+    private Stack<UIElement> redoStack = new Stack<UIElement>();
     private final Stack<Long> redoTimestamps = new Stack<Long>();
-    private final HashMap<Integer, UIElement> allElements = new HashMap<Integer, UIElement>();
+    private final Array allElements = new HashMap<Integer, UIElement>();
 
     public UndoStack() {
 
@@ -40,31 +42,23 @@ public class UndoStack {
         if(!allElements.containsKey(element.getID())) {
             addElement(element);
         }
-        inputStack.add(element.getID());
+        inputStack.add(element);
         timestamps.add(Calendar.getInstance(Locale.US).getTimeInMillis());
         redoStack = new Stack<>();
     }
-    private JSONObject reconstructJSONObject(JSONObject a) throws JSONException {
-        JSONObject newJSON = new JSONObject();
-        newJSON.put("scouterID", a.get("scouterID"));
-        newJSON.put("matchID", a.get("matchID"));
-        newJSON.put("teamID", a.get("teamID"));
-        newJSON.put("allianceID", a.get("allianceID"));
 
-        return newJSON;
-    }
     public JSONArray getTimestamps(JSONObject datapointTemplate) throws JSONException {
         JSONArray jsonArr = new JSONArray();
         JSONObject tempJson;
-        for(Integer i : inputStack) {
-            Log.d(TAG, i.toString());
+
+        JSONManager manager = new JSONManager(datapointTemplate);
+
+        for(UIElement element : inputStack) {
+            Log.d(TAG, String.valueOf(element.getID()));
         }
-        for(int i : inputStack) {
-            tempJson = reconstructJSONObject(datapointTemplate);
-            tempJson.put("datapointID", Integer.toString(i));
-            tempJson.put("DCValue", Objects.requireNonNull(allElements.get(i)).getValue());
-            tempJson.put("DCTimestamp", timestamps.pop().toString());
-            jsonArr.put(tempJson);
+
+        for(UIElement element : inputStack) {
+            manager.addDatapoint(element.getID(), element.getValue(), timestamps.pop().toString());
         }
         for(UIElement i : allElements.values()) {
             if(i instanceof Checkbox) {
@@ -91,11 +85,15 @@ public class UndoStack {
      */
     public void undo() {
         if(inputStack.isEmpty()) return;
+
+        inputStack.peek().undo();
+
         redoStack.push(inputStack.pop());
         redoTimestamps.push(timestamps.pop());
         /* allElements.get() might be null, so it must be checked in this way
          * (even though this should never be the case due to how the stacks are stored)
         */
+
         if(allElements.get(redoStack.peek()) instanceof Button) {
             Objects.requireNonNull((Button)allElements.get(redoStack.peek())).undo(redoStack.peek());
         }
