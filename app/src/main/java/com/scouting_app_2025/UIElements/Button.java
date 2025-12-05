@@ -12,84 +12,78 @@ import com.scouting_app_2025.MainActivity;
 
 import java.util.Objects;
 
-public class Button<T extends View> extends UIElement {
-    private final T button;
+public class Button extends UIElement {
+    private final android.widget.Button binding;
     private final UndoStack undostack;
-    private final ButtonAlt buttonAlt;
     private final boolean dataTracking;
     private final int titleLength;
+    private int currValue;
     private int maxValue = 99;
     private int minValue = 0;
-    public Button(int datapointID, T button, UndoStack undoStack) {
+    private int color;
+    public Button(int datapointID, UndoStack undoStack, int color) {
         super(datapointID);
+        this.binding = null;
         this.undostack = undoStack;
-        this.button = button;
         this.dataTracking = true;
-        this.buttonAlt = new ButtonAlt(this);
-        if(button instanceof android.widget.Button) {
-            this.titleLength = ((android.widget.Button)button).getText().length() - 1;
-        }
-        else {
-            this.titleLength = 0;
-        }
-
-        button.setOnClickListener(view -> clicked());
+        this.titleLength = -1;
+        this.color = color;
     }
 
-    public Button(int datapointID, T button) {
+    public Button(int datapointID, int color) {
         super(datapointID);
-        this.button = button;
+        this.binding = null;
         this.undostack = null;
         this.dataTracking = false;
-        this.buttonAlt = new ButtonAlt(this);
-        this.titleLength = 0;
-        button.setOnClickListener(view -> clicked());
+        this.titleLength = -1;
+        this.color = color;
+    }
+
+    public Button(int datapointID, android.widget.Button binding) {
+        super(datapointID);
+        this.binding = binding;
+        this.undostack = null;
+        this.dataTracking = false;
+        this.titleLength = -1;
+        this.color = Objects.requireNonNull(binding.getBackgroundTintList()).getDefaultColor();
+        binding.setOnClickListener(view -> clicked());
     }
 
 
 
     @Override
     public void clicked() {
-        if(increment(datapointID)) {
+        if(increment()) {
             undostack.addTimestamp(this);
         }
         super.clicked();
     }
 
     public int getColor() {
-        return Objects.requireNonNull(button.getBackgroundTintList()).getDefaultColor();
+        return color;
     }
 
     public void setColor(int color) {
-        button.setBackgroundTintList(ColorStateList.valueOf(color));
-    }
-
-    public void addAlt(int datapointID, int color) {
-        buttonAlt.addProfile(datapointID, color);
-    }
-
-    public void changeButtonColor(int profileIndex) {
-        buttonAlt.setProfile(profileIndex);
-    }
-
-    public void cycleButtonColor() {
-        buttonAlt.cycleProfile();
+        this.color = color;
+        if(binding != null) {
+            binding.setBackgroundTintList(ColorStateList.valueOf(this.color));
+        }
     }
 
     /**
      * @Info: Called by {@link UndoStack} to decrease the value displayed on the button.
      */
-
-    public void undo(int datapointID) {
-        decrement(datapointID);
+    @Override
+    public void undo() {
+        decrement();
         Toast.makeText((MainActivity.context), "Undid " + datapointIDs.get(datapointID), Toast.LENGTH_SHORT).show();
     }
 
     /**
      * @Info: Called by {@link UndoStack} to increase the value displayed on the button.
      */
-    public void redo(int datapointID) {
-        increment(datapointID);
+    public void redo() {
+        increment();
         Toast.makeText((MainActivity.context), "Redid " + datapointIDs.get(datapointID), Toast.LENGTH_SHORT).show();
     }
 
@@ -99,20 +93,13 @@ public class Button<T extends View> extends UIElement {
     }
 
     public int getCounter() {
-        if(button instanceof android.widget.Button) {
-            return Integer.parseInt(((android.widget.Button) button).getText().toString().substring(titleLength));
-        }
-        else return 0;
+        return currValue;
     }
 
     public void setCounter(int value) {
-        if(value > maxValue) {
-            value = maxValue;
-        }
-
-        if(button instanceof android.widget.Button) {
-            String title = ((android.widget.Button) button).getText().toString().substring(0,titleLength) + value;
-            ((android.widget.Button) button).setText(title);
+        currValue = Math.min(value, maxValue);
+        if(binding != null) {
+            binding.setText(String.valueOf(currValue));
         }
     }
 
@@ -133,31 +120,18 @@ public class Button<T extends View> extends UIElement {
      * @return Returns a {@code boolean} for whether or not the button's value
      * was updated or not due to it being at max value.
      */
-    private boolean increment(int datapointID) {
-        if(!(button instanceof android.widget.Button)) return false;
+    private boolean increment() {
         if(!dataTracking) return false;
-        int index = buttonAlt.getIndex(datapointID);
-        if(index == -1) return false;
 
         boolean updated = false;
-        if(index == buttonAlt.getCurrentProfile()) {
-            String text = ((android.widget.Button) button).getText().toString();
-            int num = Integer.parseInt(text);
-            if (num < maxValue) {
-                num++;
-                updated = true;
-            }
-            text = String.valueOf(num);
-            ((android.widget.Button) button).setText(text);
-            return updated;
+
+        if (currValue < maxValue) {
+            currValue++;
+            updated = true;
         }
-        else {
-            int counter = buttonAlt.getCounter(index);
-            if(counter < maxValue) {
-                counter++;
-                updated = true;
-            }
-            buttonAlt.setCounter(index, counter);
+
+        if(binding != null) {
+            binding.setText(String.valueOf(currValue));
         }
         return updated;
     }
@@ -167,26 +141,13 @@ public class Button<T extends View> extends UIElement {
      * (zero by default), it remains at the minimum. This doesn't have a {@code boolean}
      * to track if the decrement was successful because this is only used by {@link Button#undo()}
      */
-    private void decrement(int datapointID) {
-        if(!(button instanceof android.widget.Button)) return;
-        int index = buttonAlt.getIndex(datapointID);
-        if(index == -1) return;
-
-        if(index == buttonAlt.getCurrentProfile()) {
-            String text = ((android.widget.Button) button).getText().toString();
-            int num = Integer.parseInt(text);
-            if (num > minValue) {
-                num--;
-            }
-            text = String.valueOf(num);
-            ((android.widget.Button) button).setText(text);
+    private void decrement() {
+        if(currValue > minValue) {
+            currValue--;
         }
-        else {
-            int counter = buttonAlt.getCounter(index);
-            if(counter > minValue) {
-                counter--;
-            }
-            buttonAlt.setCounter(index, counter);
+
+        if(binding != null) {
+            binding.setText(String.valueOf(currValue));
         }
     }
 }
