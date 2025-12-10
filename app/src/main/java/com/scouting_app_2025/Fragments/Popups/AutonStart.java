@@ -8,23 +8,31 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.scouting_app_2025.Fragments.AutonFragment;
 import com.scouting_app_2025.Fragments.DataFragment;
-import com.scouting_app_2025.UIElements.GUIManager;
+import com.scouting_app_2025.JSON.JSONManager;
+import com.scouting_app_2025.MainActivity;
+import com.scouting_app_2025.UIElements.Button;
 
+import static com.scouting_app_2025.MainActivity.defaultTimestamp;
 import static com.scouting_app_2025.MainActivity.ftm;
 import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
 
 import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.databinding.AutonStartFragmentBinding;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Objects;
 
 public class AutonStart extends DataFragment {
     AutonStartFragmentBinding binding;
-    GUIManager guiManager;
+    private String autonStartTimestamp;
+
     public AutonStart() {
-        this.guiManager = super.guiManager;
+        super();
     }
 
     @Override
@@ -37,25 +45,32 @@ public class AutonStart extends DataFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartBack)),
-                binding.backButton, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartBack)), () ->
-            ftm.autonStartBack()
-        );
+        Button backButton = new Button(
+                Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartBack)), binding.backButton);
+        backButton.setOnClickFunction(() -> ftm.autonStartBack());
 
-        guiManager.createButton(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartStart)),
-                binding.startButton, false);
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartStart)), () ->
-                ftm.autonStartStart()
-        );
-        guiManager.addAction(Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartStart)), () ->
-                ((AutonFragment) Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("AutonFragment"))).startAuton()
-        );
+        Button startButton = new Button(
+                Objects.requireNonNull(nonDataIDs.get(NonDataEnum.AutonStartStart)), binding.startButton);
+        startButton.setOnClickFunction(() -> ftm.autonStartStart());
+        startButton.setOnClickFunction(this::autonStart);
     }
 
     @NonNull
     @Override
     public String toString() {
         return "AutonStartFragment";
+    }
+
+    public void autonStart() {
+        if(autonStartTimestamp == null) {
+            autonStartTimestamp = String.valueOf(Calendar.getInstance(Locale.US).getTimeInMillis());
+        }
+    }
+
+    @Override
+    public JSONArray getFragmentMatchData() throws JSONException {
+        JSONManager manager = new JSONManager(((MainActivity) MainActivity.context).getBaseJSON());
+        manager.addStart(2, Objects.requireNonNullElse(autonStartTimestamp, defaultTimestamp));
+        return manager.getJSON();
     }
 }

@@ -3,7 +3,6 @@ package com.scouting_app_2025.Fragments;
 import androidx.fragment.app.Fragment;
 
 import com.scouting_app_2025.MainActivity;
-import com.scouting_app_2025.UIElements.GUIManager;
 import com.scouting_app_2025.UIElements.UndoStack;
 
 import org.json.JSONArray;

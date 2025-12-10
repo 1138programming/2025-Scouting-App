@@ -2,6 +2,7 @@ package com.scouting_app_2025.JSON;
 
 import static com.scouting_app_2025.MainActivity.TAG;
 import static com.scouting_app_2025.MainActivity.datapointEventValue;
+import static com.scouting_app_2025.MainActivity.defaultTimestamp;
 
 import android.util.Log;
 
@@ -10,13 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JSONManager {
-    private JSONObject jsonTemplate;
-    private JSONArray masterJSON;
+    private final JSONObject jsonTemplate;
+    private final JSONArray masterJSON = new JSONArray();
     public JSONManager(JSONObject jsonTemplate) {
-        this.jsonTemplate = jsonTemplate;
-    }
-
-    public void setJSONTemplate(JSONObject jsonTemplate) {
         this.jsonTemplate = jsonTemplate;
     }
 
@@ -41,7 +38,15 @@ public class JSONManager {
         masterJSON.put(temp);
     }
 
-    public JSONArray getMasterJSON() {
+    public void addDatapoint(int datapointID, String value) {
+        addDatapoint(datapointID, value, defaultTimestamp);
+    }
+
+    public void addStart(int datapointID, String timestamp) {
+        addDatapoint(datapointID, datapointEventValue, timestamp);
+    }
+
+    public JSONArray getJSON() {
         return masterJSON;
     }
 }

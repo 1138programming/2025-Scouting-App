@@ -25,6 +25,7 @@ import com.scouting_app_2025.Fragments.PostMatchFragment;
 import com.scouting_app_2025.Fragments.PreAutonFragment;
 import com.scouting_app_2025.Fragments.TeleopFragment;
 import com.scouting_app_2025.JSON.FileSaver;
+import com.scouting_app_2025.JSON.JSONManager;
 import com.scouting_app_2025.JSON.UpdateScoutingInfo;
 import com.scouting_app_2025.Fragments.Popups.AutonStart;
 import com.scouting_app_2025.Fragments.Popups.ConfirmSubmit;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public ArchiveFragment archiveFragment = new ArchiveFragment();
     public PermissionManager permissionManager = new PermissionManager(this);
     public final static String datapointEventValue = "Event";
+    public final static String defaultTimestamp = "0";
     private boolean connectivity = false;
 
     /**
@@ -202,23 +204,11 @@ public class MainActivity extends AppCompatActivity {
                     jsonCollection.put(jsonArray.getJSONObject(i));
                 }
             }
-            //adding Auton and Teleop Start
-            JSONObject temp = getBaseJSON();
-            temp.put("datapointID", "2");
-            temp.put("DCValue", datapointEventValue);
-            temp.put("DCTimestamp", auton.getAutonStart());
-            jsonCollection.put(temp);
-
-            temp = getBaseJSON();
-            temp.put("datapointID", "21");
-            temp.put("DCValue", datapointEventValue);
-            temp.put("DCTimestamp", teleop.getTeleopStart());
-            jsonCollection.put(temp);
 
             jsonFile.put("scoutingData",jsonCollection);
         }
         catch (JSONException e) {
-            Log.e(TAG, e.toString());
+            Log.e(TAG, "Failed to compile match data from each fragment to send.\n" + e);
             return;
         }
 

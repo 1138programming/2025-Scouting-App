@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +25,7 @@ import com.scouting_app_2025.UIElements.NonDataEnum;
 import com.scouting_app_2025.UIElements.RadioCheckboxGroup;
 import com.scouting_app_2025.UIElements.RadioGroup;
 import com.scouting_app_2025.UIElements.Spinner;
+import com.scouting_app_2025.UIElements.ImageButton;
 import com.scouting_app_2025.databinding.PreAutonFragmentBinding;
 
 import static com.scouting_app_2025.MainActivity.ftm;
@@ -95,13 +95,13 @@ public class PreAutonFragment extends DataFragment {
             startingPositionGroup.selectElement(noShowCheckbox);
 
         datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.PreAutonNext));
-        Button<android.widget.Button> nextButton = new Button<>(datapointID, binding.nextButton);
+        Button nextButton = new Button(datapointID, binding.nextButton);
         nextButton.setOnClickFunction(() -> ftm.preAutonNext());
         nextButton.setOnClickFunction(() -> ((AutonFragment) Objects.requireNonNull(
                 getParentFragmentManager().findFragmentByTag("AutonFragment"))).autonOpen());
 
         datapointID = Objects.requireNonNull(nonDataIDs.get(NonDataEnum.ArchiveHamburger));
-        Button<ImageButton> button = new Button<>(datapointID, binding.archiveButton);
+        ImageButton button = new ImageButton(datapointID, binding.archiveButton);
         button.setOnClickFunction(() -> ftm.preAutonMenu());
         button.setOnClickFunction(this::scanCode);
     }

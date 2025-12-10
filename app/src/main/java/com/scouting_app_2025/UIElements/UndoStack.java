@@ -24,7 +24,7 @@ public class UndoStack {
     private final Stack<Long> timestamps = new Stack<Long>();
     private Stack<UIElement> redoStack = new Stack<UIElement>();
     private final Stack<Long> redoTimestamps = new Stack<Long>();
-    private final Array allElements = new HashMap<Integer, UIElement>();
+    private final HashMap<Integer, UIElement> allElements = new HashMap<>();
 
     public UndoStack() {
 
@@ -47,38 +47,25 @@ public class UndoStack {
         redoStack = new Stack<>();
     }
 
-    public JSONArray getTimestamps(JSONObject datapointTemplate) throws JSONException {
-        JSONArray jsonArr = new JSONArray();
-        JSONObject tempJson;
-
+    public JSONArray getTimestamps(JSONObject datapointTemplate) {
         JSONManager manager = new JSONManager(datapointTemplate);
 
         for(UIElement element : inputStack) {
             Log.d(TAG, String.valueOf(element.getID()));
         }
 
+        //saves each timestamped datapoint to the JSON
         for(UIElement element : inputStack) {
             manager.addDatapoint(element.getID(), element.getValue(), timestamps.pop().toString());
         }
-        for(UIElement i : allElements.values()) {
-            if(i instanceof Checkbox) {
-                if(!((Checkbox) i).isChecked()) {
-                    tempJson = reconstructJSONObject(datapointTemplate);
-                    tempJson.put("datapointID", Integer.toString(i.getID()));
-                    tempJson.put("DCValue", i.getValue());
-                    tempJson.put("DCTimestamp", "0");
-                    jsonArr.put(tempJson);
-                }
-            }
-            else if(!(i instanceof Button)) {
-                tempJson = reconstructJSONObject(datapointTemplate);
-                tempJson.put("datapointID", Integer.toString(i.getID()));
-                tempJson.put("DCValue", i.getValue());
-                tempJson.put("DCTimestamp", "0");
-                jsonArr.put(tempJson);
+
+        //saves each non-timestamped datapoint to the JSON
+        for(UIElement element : allElements.values()) {
+            if(!(element instanceof Button)) {
+                manager.addDatapoint(element.getID(), element.getValue());
             }
         }
-        return jsonArr;
+        return manager.getJSON();
     }
     /**
      * @Info:
@@ -90,29 +77,11 @@ public class UndoStack {
 
         redoStack.push(inputStack.pop());
         redoTimestamps.push(timestamps.pop());
-        /* allElements.get() might be null, so it must be checked in this way
-         * (even though this should never be the case due to how the stacks are stored)
-        */
-
-        if(allElements.get(redoStack.peek()) instanceof Button) {
-            Objects.requireNonNull((Button)allElements.get(redoStack.peek())).undo(redoStack.peek());
-        }
-        else {
-            Objects.requireNonNull(allElements.get(redoStack.peek())).undo();
-        }
     }
     public void redo() {
         if(redoStack.isEmpty()) return;
+        redoStack.peek().redo();
         inputStack.push(redoStack.pop());
         timestamps.push(redoTimestamps.pop());
-        /* allElements.get() might be null, so it must be checked in this way
-         * (even though this should never be the case due to how the stacks are stored)
-         */
-        if(allElements.get(inputStack.peek()) instanceof Button) {
-            Objects.requireNonNull((Button)allElements.get(inputStack.peek())).redo(inputStack.peek());
-        }
-        else {
-            Objects.requireNonNull(allElements.get(inputStack.peek())).redo();
-        }
     }
 }

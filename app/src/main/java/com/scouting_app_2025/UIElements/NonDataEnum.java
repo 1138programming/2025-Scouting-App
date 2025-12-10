@@ -29,5 +29,5 @@ public enum NonDataEnum {
     PostMatchSubmit,
     ConfirmSubmitCancel,
     ConfirmSubmitSubmit,
-    ButtonParent
+    ButtonStack
 }
