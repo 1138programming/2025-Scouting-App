@@ -2,13 +2,10 @@ package com.scouting_app_2025.UIElements;
 
 import static com.scouting_app_2025.MainActivity.TAG;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-
-import androidx.core.app.ActivityCompat;
 
 import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;

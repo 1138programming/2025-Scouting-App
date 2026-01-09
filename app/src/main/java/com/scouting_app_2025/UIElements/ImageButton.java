@@ -1,12 +1,6 @@
 package com.scouting_app_2025.UIElements;
 
-import static com.scouting_app_2025.MainActivity.datapointEventValue;
-import static com.scouting_app_2025.UIElements.DatapointIDs.datapointIDs;
-
 import android.content.res.ColorStateList;
-import android.widget.Toast;
-
-import com.scouting_app_2025.MainActivity;
 
 import java.util.Objects;
 

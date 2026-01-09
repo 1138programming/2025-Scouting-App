@@ -1,7 +1,7 @@
 package com.scouting_app_2025.Fragments;
 
 import static com.scouting_app_2025.MainActivity.ftm;
-import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
+import static com.scouting_app_2025.DatapointIDs.DatapointIDs.nonDataIDs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,11 +13,8 @@ import androidx.annotation.Nullable;
 
 import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
-import com.scouting_app_2025.UIElements.NonDataEnum;
+import com.scouting_app_2025.DatapointIDs.NonDataEnum;
 import com.scouting_app_2025.databinding.AutonFragmentBinding;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -5,21 +5,17 @@ import static com.scouting_app_2025.MainActivity.context;
 
 import android.util.Log;
 
-import com.scouting_app_2025.MainActivity;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class UpdateScoutingInfo {
 
@@ -89,13 +85,10 @@ public class UpdateScoutingInfo {
         }
         String[] listsSplit = fileData.split("\n");
         String[] teamList = listsSplit[1].split(",");
-            Arrays.sort(teamList, new Comparator<String>() {
-                @Override
-                public int compare(String s, String s2) {
-                    int i = Integer.parseInt(s);
-                    int i2 = Integer.parseInt(s2);
-                    return Integer.compare(i, i2);
-                }
+            Arrays.sort(teamList, (s, s2) -> {
+                int i = Integer.parseInt(s);
+                int i2 = Integer.parseInt(s2);
+                return Integer.compare(i, i2);
             });
 
         String[] scoutersWithNum = listsSplit[0].split(",");

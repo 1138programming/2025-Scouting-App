@@ -1,19 +1,13 @@
 package com.scouting_app_2025.Bluetooth;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import static com.scouting_app_2025.MainActivity.TAG;
 
 import android.Manifest;
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.util.Log;
-
-import androidx.core.app.ActivityCompat;
 
 import com.scouting_app_2025.MainActivity;
 

@@ -1,79 +1,42 @@
 package com.scouting_app_2025.UIElements;
 
+public class ButtonAlt extends Button {
+    private final String title;
 
-import java.util.ArrayList;
-
-public class ButtonAlt {
-    private final Button button;
-    private final ArrayList<Integer> datapointIDs = new ArrayList<>();
-    private final ArrayList<Integer> colors = new ArrayList<>();
-    private final ArrayList<Integer> counters = new ArrayList<>();
-    private int currentProfile = 0;
-    public ButtonAlt(Button button) {
-        this.button = button;
-        this.establishBaseProfile();
+    /**
+     * This constructor is used to create a button alt under a buttonStack
+     * and therefore does not take a binding as it is not the only datapointID
+     * for said button and the binding is managed by the buttonStack. However,
+     * it is a data button and still takes an UndoStack.
+     *
+     * @param datapointID datapointID of the specific button alt
+     * @param undoStack undoStack of the given fragment
+     * @param color color of the button alt
+     */
+    public ButtonAlt(int datapointID, UndoStack undoStack, int color, String title) {
+        super(datapointID, null, undoStack);
+        super.setColor(color);
+        this.title = title.substring(0,title.length()-1);
     }
 
-    private void establishBaseProfile() {
-        datapointIDs.add(button.getID());
-        colors.add(button.getColor());
-        if(button.isDataTracking()) {
-            counters.add(button.getCounter());
-        }
+    /**
+     * This constructor is used to create a button alt under a buttonStack
+     * and therefore does not take a binding as it is not the only datapointID
+     * for said button and the binding is managed by the buttonStack. It also
+     * doesn't take an UndoStack as it does not track data and is only for UI
+     * purposes.
+     *
+     * @param datapointID datapointID of the given button (should be negative
+     *                    given that it doesn't store data)
+     * @param color color of the given button alt
+     */
+    public ButtonAlt(int datapointID, int color, String title) {
+        super(datapointID, null);
+        super.setColor(color);
+        this.title = title;
     }
 
-    public void addProfile(int datapointID, int color) {
-        datapointIDs.add(datapointID);
-        colors.add(color);
-        if(button.isDataTracking()) {
-            counters.add(button.getCounter());
-        }
-    }
-
-    public void setProfile(int profileIndex) {
-        if(profileIndex < colors.size()) {
-            button.setColor(colors.get(profileIndex));
-            button.setID(datapointIDs.get(profileIndex));
-            if(button.isDataTracking()) {
-                counters.set(currentProfile, button.getCounter());
-                button.setCounter(counters.get(profileIndex));
-            }
-        }
-        else {
-            button.setColor(colors.get(colors.size()-1));
-            button.setID(datapointIDs.get(datapointIDs.size()-1));
-
-        }
-        currentProfile = profileIndex;
-    }
-    public void cycleProfile() {
-        currentProfile = (currentProfile < datapointIDs.size()-1) ? currentProfile + 1 : 0;
-        if(button.isDataTracking()) {
-            if(currentProfile == 0) {
-                counters.set(counters.size()-1, button.getCounter());
-                button.setCounter(counters.get(currentProfile));
-            }
-            else {
-                counters.set(currentProfile-1, button.getCounter());
-                button.setCounter(counters.get(currentProfile));
-            }
-        }
-        button.setColor(colors.get(currentProfile));
-        button.setID(datapointIDs.get(currentProfile));
-    }
-
-    public int getCurrentProfile() {
-        return currentProfile;
-    }
-    public int getIndex(int datapointID) {
-        return datapointIDs.indexOf(datapointID);
-    }
-
-    public int getCounter(int index) {
-        return counters.get(index);
-    }
-
-    public void setCounter(int index, int value) {
-        counters.set(index, value);
+    public String getLabel() {
+        return title + super.getCounter();
     }
 }

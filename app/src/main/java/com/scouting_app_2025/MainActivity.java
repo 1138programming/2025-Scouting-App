@@ -25,7 +25,6 @@ import com.scouting_app_2025.Fragments.PostMatchFragment;
 import com.scouting_app_2025.Fragments.PreAutonFragment;
 import com.scouting_app_2025.Fragments.TeleopFragment;
 import com.scouting_app_2025.JSON.FileSaver;
-import com.scouting_app_2025.JSON.JSONManager;
 import com.scouting_app_2025.JSON.UpdateScoutingInfo;
 import com.scouting_app_2025.Fragments.Popups.AutonStart;
 import com.scouting_app_2025.Fragments.Popups.ConfirmSubmit;
@@ -77,20 +76,6 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(() -> preAuton.setBtStatus(connectivity));
     }
 
-    /**
-     * @Info: Called once to instantiate {@code BluetoothReceiver()} and state
-     * all the actions it should be listening for.
-     */
-//    private void createReceiver() {
-//        BluetoothReceiver receiver = new BluetoothReceiver();
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction(BluetoothDevice.ACTION_FOUND);
-//        filter.addAction(BluetoothDevice.ACTION_UUID);
-//        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-//        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-//        this.registerReceiver(receiver, filter);
-//    }
-
     private void addFragmentsToManager() {
         fragments.add(preAuton);
         fragments.add(auton);
@@ -113,44 +98,6 @@ public class MainActivity extends AppCompatActivity {
         permissionManager.addPermission(BLUETOOTH_ADVERTISE);
     }
 
-//    public void startScan() {
-//        BluetoothAdapter adapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
-//        if (adapter == null) {
-//            Log.e(TAG, "no BT adapter");
-//        }
-//        if(adapter != null && permissionManager.checkPermission(BLUETOOTH_SCAN)) {
-//            adapter.cancelDiscovery();
-//            adapter.startDiscovery();
-//            Log.i(TAG, "should be receiving");
-//        }
-//    }
-//    public void stopScan() {
-//        BluetoothAdapter adapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
-//        if (adapter == null) {
-//            Log.e(TAG, "no BT adapter");
-//        }
-//        if(adapter != null && permissionManager.checkPermission(BLUETOOTH_SCAN)) {
-//            adapter.cancelDiscovery();
-//            Log.i(TAG, "should have stopped discovery");
-//        }
-//    }
-
-    /**
-     * @Info: Called once at the start of the program to create the receivers
-     * and begin discovery.
-     */
-//    public void createReceiverScan() {
-//        createReceiver();
-//        startScan();
-//    }
-    public void submitMatchData(byte[] data) {
-        if(connectivity) {
-            connectedThread.sendInformation(data, 1);
-        }
-        else {
-            Toast.makeText(context, "Data has not been uploaded because bluetooth isn't connected", Toast.LENGTH_LONG).show();
-        }
-    }
     public void setConnectedThread(BluetoothConnectedThread connectedThread) {
         this.connectedThread = connectedThread;
     }
@@ -221,10 +168,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Data has not been uploaded because bluetooth isn't connected", Toast.LENGTH_LONG).show();
         }
     }
-    /**
-     * @Info: Called when tablets initially connect and is used
-     * to easily detect when auton or teleop is incorrectly started.
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

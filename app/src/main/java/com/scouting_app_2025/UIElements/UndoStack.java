@@ -7,23 +7,21 @@ import android.util.Log;
 import com.scouting_app_2025.JSON.JSONManager;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Stack;
 
 /**
  * @Info:
  */
 public class UndoStack {
-    private final Stack<UIElement> inputStack = new Stack<UIElement>();
-    private final Stack<Long> timestamps = new Stack<Long>();
-    private Stack<UIElement> redoStack = new Stack<UIElement>();
-    private final Stack<Long> redoTimestamps = new Stack<Long>();
+    private final Stack<UIElement> inputStack = new Stack<>();
+    private final Stack<Long> timestamps = new Stack<>();
+    private Stack<UIElement> redoStack = new Stack<>();
+    private final Stack<Long> redoTimestamps = new Stack<>();
     private final HashMap<Integer, UIElement> allElements = new HashMap<>();
 
     public UndoStack() {

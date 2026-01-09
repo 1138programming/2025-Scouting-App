@@ -21,7 +21,7 @@ import com.scouting_app_2025.MainActivity;
 import com.scouting_app_2025.R;
 import com.scouting_app_2025.UIElements.Button;
 import com.scouting_app_2025.UIElements.Checkbox;
-import com.scouting_app_2025.UIElements.NonDataEnum;
+import com.scouting_app_2025.DatapointIDs.NonDataEnum;
 import com.scouting_app_2025.UIElements.RadioCheckboxGroup;
 import com.scouting_app_2025.UIElements.RadioGroup;
 import com.scouting_app_2025.UIElements.Spinner;
@@ -29,7 +29,7 @@ import com.scouting_app_2025.UIElements.ImageButton;
 import com.scouting_app_2025.databinding.PreAutonFragmentBinding;
 
 import static com.scouting_app_2025.MainActivity.ftm;
-import static com.scouting_app_2025.UIElements.DatapointIDs.nonDataIDs;
+import static com.scouting_app_2025.DatapointIDs.DatapointIDs.nonDataIDs;
 
 import org.json.JSONException;
 import org.json.JSONObject;

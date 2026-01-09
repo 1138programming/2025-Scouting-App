@@ -1,10 +1,12 @@
 package com.scouting_app_2025.UIElements;
 
 import static com.scouting_app_2025.MainActivity.datapointEventValue;
-import static com.scouting_app_2025.UIElements.DatapointIDs.datapointIDs;
+import static com.scouting_app_2025.DatapointIDs.DatapointIDs.datapointIDs;
 
 import android.content.res.ColorStateList;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.scouting_app_2025.MainActivity;
 
@@ -21,45 +23,6 @@ public class Button extends UIElement {
     private int color;
 
     /**
-     * This constructor is used to create a button alt under a buttonStack
-     * and therefore does not take a binding as it is not the only datapointID
-     * for said button and the binding is managed by the buttonStack. However,
-     * it is a data button and still takes an UndoStack.
-     * 
-     * @param datapointID datapointID of the specific button alt
-     * @param undoStack undoStack of the given fragment
-     * @param color color of the button alt
-     */
-    public Button(int datapointID, UndoStack undoStack, int color) {
-        super(datapointID);
-        this.binding = null;
-        this.undostack = undoStack;
-        this.dataTracking = true;
-        this.titleLength = -1;
-        this.color = color;
-    }
-
-    /**
-     * This constructor is used to create a button alt under a buttonStack
-     * and therefore does not take a binding as it is not the only datapointID
-     * for said button and the binding is managed by the buttonStack. It also
-     * doesn't take an UndoStack as it does not track data and is only for UI
-     * purposes.
-     * 
-     * @param datapointID datapointID of the given button (should be negative 
-     *                    given that it doesn't store data)
-     * @param color color of the given button alt
-     */
-    public Button(int datapointID, int color) {
-        super(datapointID);
-        this.binding = null;
-        this.undostack = null;
-        this.dataTracking = false;
-        this.titleLength = -1;
-        this.color = color;
-    }
-
-    /**
      * This constructor is used to create an independent button and takes a
      * binding since it's the only datapoint for the given button binding. It
      * is also a data button so it takes an UndoStack.
@@ -68,14 +31,19 @@ public class Button extends UIElement {
      * @param binding binding of the button
      * @param undoStack undoStack of the given fragment
      */
-    public Button(int datapointID, android.widget.Button binding, UndoStack undoStack) {
+    public Button(int datapointID, @Nullable android.widget.Button binding, UndoStack undoStack) {
         super(datapointID);
         this.binding = binding;
         this.undostack = undoStack;
         this.dataTracking = true;
-        this.titleLength = this.binding.length()-1;
-        this.color = Objects.requireNonNull(binding.getBackgroundTintList()).getDefaultColor();
-        binding.setOnClickListener(view -> clicked());
+        if(this.binding != null) {
+            this.titleLength = this.binding.length() - 1;
+            this.color = Objects.requireNonNull(this.binding.getBackgroundTintList()).getDefaultColor();
+            this.binding.setOnClickListener(view -> clicked());
+        }
+        else {
+            this.titleLength = 0;
+        }
     }
 
     /**
@@ -88,14 +56,19 @@ public class Button extends UIElement {
      *                    the button doesn't store data)
      * @param binding binding of the button
      */
-    public Button(int datapointID, android.widget.Button binding) {
+    public Button(int datapointID, @Nullable android.widget.Button binding) {
         super(datapointID);
         this.binding = binding;
         this.undostack = null;
         this.dataTracking = false;
-        this.titleLength = this.binding.length()-1;
-        this.color = Objects.requireNonNull(binding.getBackgroundTintList()).getDefaultColor();
-        binding.setOnClickListener(view -> clicked());
+        if(this.binding != null) {
+            this.titleLength = this.binding.length() - 1;
+            this.color = Objects.requireNonNull(this.binding.getBackgroundTintList()).getDefaultColor();
+            binding.setOnClickListener(view -> clicked());
+        }
+        else {
+            this.titleLength = 0;
+        }
     }
     
     @Override
@@ -134,11 +107,19 @@ public class Button extends UIElement {
         Toast.makeText((MainActivity.context), "Redid " + datapointIDs.get(datapointID), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     *
+     * @return Returns the default datapoint event value.
+     */
     @Override
     public String getValue() {
         return datapointEventValue;
     }
 
+    /**
+     *
+     * @return Returns the current value of the counter
+     */
     public int getCounter() {
         return currValue;
     }

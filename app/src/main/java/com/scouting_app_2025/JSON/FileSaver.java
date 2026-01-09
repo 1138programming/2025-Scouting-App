@@ -7,8 +7,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.scouting_app_2025.MainActivity;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

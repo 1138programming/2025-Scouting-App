@@ -1,4 +1,4 @@
-package com.scouting_app_2025.UIElements;
+package com.scouting_app_2025.DatapointIDs;
 
 public enum NonDataEnum {
     ScouterName,
